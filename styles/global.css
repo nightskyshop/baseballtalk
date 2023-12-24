@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "NotoSansKR";
+    font-weight: 400;
+    font-style: normal;
+    src: url("/fonts/NotoSansKR.ttf") format("ttf");
+}
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    font-family: NotoSansKR;
+}
+
+a {
+    text-decoration: none;
+    color: var(--clr-dark)
+}
+
+:root {
+    --clr-dark: #0B2545;
+    --clr-light: #FFFFFF;
+
+    --fs-h1: 3rem;
+    --fs-h2: 2.25rem;
+    --fs-h3: 1.5rem;
+    --fs-h4: 1.15rem;
+    --fs-input: 1.2rem;
+    --fs-body: 1rem;
+
+    --fw-reg: 300;
+    --fw-bold: 900;
+}
