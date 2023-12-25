@@ -1,9 +1,10 @@
-import PostFrom from "@/components/PostFrom";
+import PostForm from "@/components/PostForm";
+import styles from "@/styles/create.module.css";
 
 export default function PostCreate() {
   return (
-    <div>
-      <PostFrom />
-    </div>
+    <section className={styles.create}>
+      <PostForm />
+    </section>
   )
 }

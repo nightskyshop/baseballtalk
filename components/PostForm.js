@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import styles from "./PostForm.module.css";
 
-export default function PostFrom() {
+export default function PostForm() {
   const router = useRouter();
   const [ok, setOk] = useState(false);
 
@@ -21,7 +22,12 @@ export default function PostFrom() {
     const form = e.currentTarget;
     const title = form.elements.namedItem("title").value;
     const content = form.elements.namedItem("content").value;
-    await createPost(title, content, 1);
+
+    if (title == "" || content == "") {
+      window.alert("제목과 내용을 채워주세요.")
+    } else {
+      await createPost(title, content, 1);
+    }
 
     if (ok) {
       router.push("/post");
@@ -29,20 +35,22 @@ export default function PostFrom() {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className={styles.form}>
       <input
         type="text"
         placeholder="제목"
         name="title"
+        className={styles.form__title}
       />
 
-      <input
+      <textarea
         type="text"
         placeholder="내용"
         name="content"
+        className={styles.form__content}
       />
 
-      <button>입력</button>
+      <button className={styles.form__button}>글 올리기</button>
     </form>
   )
 };

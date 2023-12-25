@@ -17,8 +17,13 @@ a {
     color: var(--clr-dark)
 }
 
+input, textarea, button {
+    all: unset;
+}
+
 :root {
     --clr-dark: #0B2545;
+    --clr-background: #EEF4ED;
     --clr-light: #FFFFFF;
 
     --fs-h1: 3rem;
@@ -26,7 +31,6 @@ a {
     --fs-h3: 1.5rem;
     --fs-h4: 1.15rem;
     --fs-input: 1.2rem;
-    --fs-body: 1rem;
 
     --fw-reg: 300;
     --fw-bold: 900;
