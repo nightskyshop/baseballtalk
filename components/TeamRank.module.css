@@ -1,0 +1,42 @@
+.rank {
+    background-color: var(--clr-background);
+    padding: 1em;
+    border-radius: 15px;
+}
+
+.rank__table {
+    table-layout: fixed;
+}
+
+.rank__caption {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+}
+
+.rank__thead th:nth-child(1) {
+    width: 10%;
+}
+
+.rank__thead th:nth-child(2) {
+    width: 20%;
+}
+
+.rank__thead th:nth-child(3) {
+    width: 20%;
+}
+
+.rank__thead th:nth-child(4) {
+    width: 20%;
+}
+
+.rank__thead th:nth-child(5) {
+    width: 20%;
+}
+
+.rank__thead th, .rank__tbody th, .rank__tbody td {
+    padding: 0.2em;
+}
+
+.rank__tbody td {
+    text-align: center;
+}

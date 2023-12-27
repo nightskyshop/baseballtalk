@@ -1,0 +1,11 @@
+.post {
+    margin: 2em;
+    margin-top: 4em;
+}
+
+.post_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    max-width: 800px;
+}
