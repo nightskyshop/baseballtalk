@@ -1,5 +1,6 @@
 .header {
     display: flex;
+    position: sticky;
     align-items: center;
     background-color: var(--clr-dark);
     padding: 1.25em 1.5em;
