@@ -1,0 +1,43 @@
+.login__box {
+    width: 350px;
+    margin: 2.5em auto;
+}
+
+.login__logo {
+    font-size: var(--fs-h2);
+    text-align: center;
+    margin-bottom: .5em;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login__form > * {
+    font-size: var(--fs-input);
+}
+
+.login__form > input {
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: var(--clr-background);
+    border-radius: 15px;
+}
+
+.login__form > input::placeholder {
+    font-size: var(--fs-input);
+    color: rgba(128,128,128, 0.6);
+}
+
+.login__form > button {
+    margin: 0 auto;
+    padding: .75em;
+    color: var(--clr-light);
+    font-size: var(--fs-h4);
+    text-align: center;
+    background-color: var(--clr-dark);
+    border-radius: 20px;
+    min-width: 200px;
+    cursor: pointer;
+}
