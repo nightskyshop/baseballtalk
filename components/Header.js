@@ -23,8 +23,8 @@ export default function Header() {
       </ul>
 
       <div className={styles.header__user}>
-        <Link href="/login">로그인</Link>
-        <Link href="/signup">회원가입</Link>
+        <Link className={styles.header__login} href="/login">로그인</Link>
+        <Link className={styles.header__signup} href="/signup">회원가입</Link>
 
         {/* <Link href="/logout" className={styles.header__user}>로그아웃</Link>
         <Link href="/프로필" className={styles.header__profileimg}>
