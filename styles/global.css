@@ -23,15 +23,16 @@ input, textarea, button {
 
 :root {
     --clr-dark: #0B2545;
+    --clr-gray: #494949;
     --clr-background: #EEF4ED;
     --clr-light: #FFFFFF;
-
-    --fs-h1: 3rem;
-    --fs-h2: 2.25rem;
-    --fs-h3: 1.5rem;
-    --fs-h4: 1.15rem;
+    --clr-point: #E88168;
+    
+    --fs-h2: 1.5rem;
+    --fs-h3: 1.2rem;
+    --fs-h4: 1rem;
     --fs-input: 1.2rem;
 
     --fw-reg: 300;
-    --fw-bold: 900;
+    --fw-bold: 800;
 }
