@@ -1,0 +1,27 @@
+.user__navbar {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    margin-right: 2.35em;
+    border-right: 1px solid var(--clr-dark);
+}
+
+.navbar__heading {
+    margin-bottom: 1em;
+    font-size: var(--fs-h2);
+}
+
+.navbar__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar__list a {
+    padding: .5em 0;
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+}
+
+.navbar__selected {
+    color: var(--clr-point);
+}

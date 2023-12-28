@@ -1,0 +1,23 @@
+.info__box {
+    display: flex;
+    margin: 2em 0;
+}
+
+.info__box img {
+    border-radius: 100%;
+    margin-right: 2em;
+}
+
+.info__box div {
+    margin: auto 0;
+}
+
+.info__box div h1 {
+    font-size: var(--fs-h1);
+}
+
+.info__introduce {
+    padding: 1.5em 1em;
+    border: 1px solid var(--clr-dark);
+    font-size: var(--fs-h4);
+}
