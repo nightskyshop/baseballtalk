@@ -1,4 +1,3 @@
-import ProfilePic from "@/public/누나닮은오리프사.jpg";
 import Image from "next/image";
 import styles from "./UserInfo.module.css";
 
@@ -7,7 +6,7 @@ export default function UserInfo({ user }) {
     <div className={styles.info}>
       <div className={styles.info__box}>
         <Image
-          src={ProfilePic}
+          src={user.profile_image}
           width={130}
           height={130}
           alt="Profile Image"

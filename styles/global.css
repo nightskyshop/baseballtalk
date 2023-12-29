@@ -36,4 +36,6 @@ input, textarea, button {
 
     --fw-reg: 300;
     --fw-bold: 800;
+
+    --default-padding: 5em;
 }
