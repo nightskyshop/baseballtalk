@@ -1,0 +1,31 @@
+.postsummary {
+    height: 4.5em;
+    margin: 1em 0;
+    padding: 1em;
+    border: 1px solid var(--clr-dark);
+    border-radius: 10px;
+}
+
+.postsummary__link {
+    display: grid;
+    grid-template-columns: 100fr 1fr;
+}
+
+.postsummary__text {
+    margin-right: 3em;
+}
+
+.postsummary__text h1 {
+    font-size: var(--fs-h3);
+    margin-bottom: .25em;
+}
+
+.postsummary__text p {
+    font-size: var(--fs-h4);
+}
+
+.postsummary__link img {
+    display: block;
+    border: 1px solid var(--clr-dark);
+    border-radius: 10px;
+}

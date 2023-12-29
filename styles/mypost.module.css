@@ -1,0 +1,16 @@
+.user__post {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    padding: var(--default-padding);
+}
+
+.user__postlist > a {
+    display: block;
+    width: 50px;
+    margin-left: auto;
+    padding: .25em .5em;
+    border-radius: 15px;
+    text-align: right;
+    background-color: var(--clr-point);
+    color: var(--clr-light);
+}
