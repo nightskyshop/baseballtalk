@@ -1,0 +1,19 @@
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact__text {
+    width: 300px;
+    text-align: center;
+    font-size: var(--fs-h3);
+}
+
+.contact__link {
+    font-weight: var(--fw-bold);
+}
+
+.contact__link:hover {
+    text-decoration: underline;
+}
