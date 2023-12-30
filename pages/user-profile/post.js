@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import PostList from "@/components/PostList";
 import Link from "next/link";
 import styles from "@/styles/mypost.module.css";
+import profile__styles from "@/styles/profile.module.css";
 
 export default function MyPost() {
   const posts = [
@@ -35,7 +36,7 @@ export default function MyPost() {
   ];
 
   return (
-    <main className={styles.user__post}>
+    <main className={profile__styles.profile__main}>
       <Navbar selected_btn={2} />
       <div className={styles.user__postlist}>
         <Link href="/post/create">글쓰기</Link>

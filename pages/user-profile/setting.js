@@ -1,20 +1,21 @@
 import ProfilePic from "@/public/누나닮은오리프사.jpg";
 import Navbar from "@/components/Navbar";
-import UserInfo from "@/components/UserInfo";
-import profile_styles from "@/styles/profile.module.css";
+import SettingForm from "@/components/SettingForm";
+import profile__styles from "@/styles/profile.module.css";
 
-export default function UserProfile() {
+export default function Setting() {
   const user = {
     username: "Luna Kim",
+    email: "yeju436@gmail.com",
     team: "LG Twins",
     introduce: "야구를 알면 인생이 보인다. 인생은 홈런 한 방.",
     profile_image: ProfilePic,
   };
 
   return (
-    <main className={profile_styles.profile__main}>
-      <Navbar selected_btn={1} />
-      <UserInfo user={user} />
+    <main className={profile__styles.profile__main}>
+      <Navbar selected_btn={3} />
+      <SettingForm user={user} />
     </main>
-  );
+  )
 }

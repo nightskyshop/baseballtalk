@@ -1,5 +1,0 @@
-.user__info {
-    display: grid;
-    grid-template-columns: 210px 1fr;
-    padding: var(--default-padding);
-}

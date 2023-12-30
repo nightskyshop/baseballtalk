@@ -1,0 +1,63 @@
+.setting {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.setting__userInfo {
+    margin-bottom: 2em;
+}
+
+.setting__password {
+    margin-top: 2em;
+}
+
+.setting__userInfo, .setting__password {
+    display: flex;
+    flex-direction: column;
+}
+
+.setting__userInfo input, .setting__password input {
+    border: 1px solid var(--clr-dark);
+    border-radius: 5px;
+    font-size: var(--fs-input);
+    margin: .25em 0 .5em;
+    padding: .5em 1em;
+}
+
+.setting__userInfo button, .setting__password button {
+    color: var(--clr-light);
+    background-color: var(--clr-blue);
+    border-radius: 20px;
+    margin: 1em auto 0;
+    padding: .25em .5em;
+    width: 70px;
+    font-size: var(--fs-input);
+    text-align: center;
+}
+
+.userInfo__name_img {
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+}
+
+.userInfo__name_img div {
+    margin-top: auto;
+}
+
+.userInfo__name_img img {
+    border-radius: 100%;
+}
+
+.password__first_password {
+    margin-top: .75em;
+}
+
+.setting__password input::placeholder {
+    font-size: var(--fs-input);
+}
+
+.disabled__input {
+    color: var(--clr-gray);
+    opacity: 0.6;
+}
