@@ -1,7 +1,12 @@
+import Head from "next/head";
+
 export default function Home() {
   return (
     <>
-     <h1>Initial Setting</h1>
+      <Head>
+        <title>BaseballTalk</title>
+      </Head>
+      <h1>Initial Setting</h1>
     </>
   )
 }

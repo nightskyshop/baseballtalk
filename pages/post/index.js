@@ -3,6 +3,7 @@ import PostList from "@/components/PostList";
 import TeamRank from "@/components/TeamRank";
 import styles from "@/styles/post.module.css";
 import axios from "axios";
+import Head from "next/head";
 
 export default function Posts() {
   const teamRanking = [
@@ -111,6 +112,10 @@ export default function Posts() {
 
   return (
     <main className={styles.post}>
+      <Head>
+        <title>게시판</title>
+      </Head>
+      
       <div className={styles.post_grid}>
         <TeamRank className={styles.rank} teamRanking={teamRanking} />
         <PostList className={styles.list} posts={posts} />

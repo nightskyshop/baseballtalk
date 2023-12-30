@@ -1,5 +1,6 @@
 import Post from "@/components/Post";
 import axios from "axios";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -23,6 +24,9 @@ export default function PostDetail() {
   if (post == undefined) {
     return (
       <div>
+        <Head>
+          <title>로딩 중...</title>
+        </Head>
         <h1>로딩 중...</h1>
       </div>
     )
@@ -31,9 +35,21 @@ export default function PostDetail() {
       <div>
         {
           post == false ? (
-            <h1>글이 없습니다... :(</h1>
+            <>
+              <Head>
+                <title>글이 없습니다...</title>
+              </Head>
+
+              <h1>글이 없습니다... :(</h1>
+            </>
           ) : (
-            <Post post={post} />
+            <>
+              <Head>
+                <title>글이 없습니다...</title>
+              </Head>
+
+              <Post post={post} />
+            </>
           )
         }
       </div>

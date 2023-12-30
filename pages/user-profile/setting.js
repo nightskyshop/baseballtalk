@@ -2,6 +2,7 @@ import ProfilePic from "@/public/누나닮은오리프사.jpg";
 import Navbar from "@/components/Navbar";
 import SettingForm from "@/components/SettingForm";
 import profile__styles from "@/styles/profile.module.css";
+import Head from "next/head";
 
 export default function Setting() {
   const user = {
@@ -14,6 +15,10 @@ export default function Setting() {
 
   return (
     <main className={profile__styles.profile__main}>
+      <Head>
+        <title>내 계정 - 정보 변경</title>
+      </Head>
+
       <Navbar selected_btn={3} />
       <SettingForm user={user} />
     </main>

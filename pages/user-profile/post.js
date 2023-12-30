@@ -3,6 +3,7 @@ import PostList from "@/components/PostList";
 import Link from "next/link";
 import styles from "@/styles/mypost.module.css";
 import profile__styles from "@/styles/profile.module.css";
+import Head from "next/head";
 
 export default function MyPost() {
   const posts = [
@@ -37,6 +38,10 @@ export default function MyPost() {
 
   return (
     <main className={profile__styles.profile__main}>
+      <Head>
+        <title>내 계정 - 내가 작성한 글</title>
+      </Head>
+
       <Navbar selected_btn={2} />
       <div className={styles.user__postlist}>
         <Link href="/post/create">글쓰기</Link>
