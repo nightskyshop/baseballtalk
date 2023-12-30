@@ -52,7 +52,7 @@ export default function SettingForm({ user }) {
       <hr />
       
       <form className={styles.setting__password}  onSubmit={handlePasswordSubmit} >
-        <h1>비민번호 변경</h1>
+        <h1 className={styles.password__header}>비민번호 변경</h1>
 
         <p className={styles.password__first_password}>기존 비밀번호</p>
         <input placeholder="········" type="password" />

@@ -21,6 +21,8 @@
 }
 
 .postsummary__text p {
+    height: 40px;
+    overflow: hidden;
     font-size: var(--fs-h4);
 }
 

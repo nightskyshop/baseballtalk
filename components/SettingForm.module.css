@@ -17,6 +17,10 @@
     flex-direction: column;
 }
 
+.userInfo__header, .password__header {
+    font-size: var(--fs-h2);
+}
+
 .setting__userInfo input, .setting__password input {
     border: 1px solid var(--clr-dark);
     border-radius: 5px;

@@ -1,7 +1,7 @@
 .user__navbar {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 60vh;
     padding-right: 2.35em;
     margin-right: 2.35em;
     border-right: 1px solid var(--clr-dark);
