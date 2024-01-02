@@ -1,0 +1,71 @@
+.post__post {
+    display: flex;
+    flex-direction: column;
+}
+
+.post__team {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-reg);
+    color: var(--clr-gray);
+    opacity: 0.7;
+    margin-bottom: .3em;
+}
+
+.post__title {
+    font-size: var(--fs-h2);
+    margin-bottom: .3em;
+}
+
+.post__author {
+    display: flex;
+    margin-bottom: 1.3em;
+}
+
+.post__author img {
+    border-radius: 100%;
+    margin-right: 1em;
+}
+
+.post__author_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--clr-gray);
+    opacity: 0.7;
+}
+
+.post__author_username {
+    font-weight: var(--fw-bold);
+}
+
+.post__author button {
+    cursor: pointer;
+    margin: auto 0 auto auto;
+    font-size: var(--fs-h2);
+}
+
+.post__content {
+    font-size: var(--fs-h4);
+    line-height: 1.5;
+    margin: 1em 0;
+    white-space: pre-wrap;
+}
+
+.post__reaction {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.post__reaction p {
+    margin-right: .5em;
+    color: var(--clr-gray);
+    opacity: 0.7;
+}
+
+.post__chat {
+    margin-top: 1.3em;
+}
+
+.chat__header {
+    font-size: var(--fs-h2);
+}
