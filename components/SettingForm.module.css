@@ -49,8 +49,14 @@
     margin-top: auto;
 }
 
+.userInfo__name_img input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .userInfo__name_img img {
     border-radius: 100%;
+    margin-left: 1em;
 }
 
 .password__first_password {

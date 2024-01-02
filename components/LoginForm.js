@@ -1,21 +1,26 @@
+import Link from "next/link";
 import styles from "./LoginForm.module.css";
 
 export default function LoginForm() {
   return (
     <div className={styles.login__box}>
-      <h1 className={styles.login__logo}>로고</h1>
+      <div className={styles.login__header}>
+        <h1 className={styles.login__logo}>Login</h1>
+
+        <Link className={styles.login__signup} href="/signup">회원가입</Link>
+      </div>
 
       <form className={styles.login__form}>
+        <p>이메일</p>
         <input 
           type="email"
-          placeholder="이메일"
           name="email"
           className={styles.login__email}
         />
 
+        <p>비밀번호</p>
         <input
           type="password"
-          placeholder="비밀번호"
           name="password"
           className={styles.login__password}
         />

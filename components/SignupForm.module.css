@@ -1,47 +1,74 @@
-.login__box {
+.signup__box {
     width: 350px;
     margin: 2.5em auto;
 }
 
-.login__header {
+.signup__header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 3em;
 }
 
-.login__logo {
+.signup__logo {
     font-size: var(--fs-h2);
     color: var(--clr-blue);
 }
 
-.login__signup {
+.signup__login {
     margin: auto 0;
     color: var(--clr-blue);
 }
 
-.login__form {
+.signup__form {
     display: flex;
     flex-direction: column;
 }
 
-.login__form > * {
+.signup__form > * {
     font-size: var(--fs-input);
 }
 
-.login__form > input {
+.signup__form > input {
+    margin: .25em 0 1em;
     padding: 1em;
-    margin-bottom: 1em;
     border: 1px solid var(--clr-dark);
-    margin-top: .25em;
     border-radius: 5px;
 }
 
-.login__form > input::placeholder {
+.signup__form > input::placeholder {
     font-size: var(--fs-input);
     color: rgba(128,128,128, 0.6);
 }
 
-.login__form > button {
+.signup__team {
+    position: relative;
+}
+
+.signup__team > select {
+    width: 100%;
+    margin: .25em 0 1em;
+    padding: 1em .5em;
+    border: 1px solid var(--clr-dark);
+    border-radius: 5px;
+    padding: 1em .5em;
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* IE */
+.signup__team > select::-ms-expand { 
+	display: none;
+}
+
+.signup__team > svg {
+    position: absolute;
+    top: 30%;
+    right: 10px;
+}
+
+.signup__form > button {
     margin: .5em auto 0;
     padding: .3em .75em;
     color: var(--clr-light);
