@@ -29,18 +29,27 @@ export default function Post({ post, user }) {
 
         <div className={styles.post__reaction}>
           <p>좋아요 {post.likes}</p>
-          <p>댓글 {post.chats.length}</p>
+          { post.chats ? (
+            <p>댓글 {post.chats.length}</p>
+          ) : (
+            <p>댓글 0</p>
+          ) }
+          
         </div>
       </div>
 
       <hr />
       
-      <div className={styles.post__chat}>
-        <h1 className={styles.chat__header}>댓글</h1>
-        {post.chats.map((chat, index) => (
-          <Chat chat={chat} index={index} />
-        ))}
-      </div>
+      {
+        post.chats ? (
+          <div className={styles.post__chat}>
+            <h1 className={styles.chat__header}>댓글</h1>
+            {post.chats.map((chat, index) => (
+              <Chat chat={chat} index={index} />
+            ))}
+          </div>
+        ) : null
+      }
 
       <ChatForm user={user} />
     </div>

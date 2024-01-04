@@ -1,6 +1,8 @@
 import Post from "@/components/Post";
 import axios from "axios";
 import Head from "next/head";
+import styles from "@/styles/default.module.css";
+import ProfilePic from "@/public/누나닮은오리프사.jpg";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -11,8 +13,8 @@ export default function PostDetail() {
 
   const getPost = async() => {
     await axios.get(`http://localhost:8080/post/${id}`)
-        .catch(setPost(false))
-        .then((res) => (setPost(res.data)))
+      .catch(setPost(false))
+      .then((res) => (setPost(res.data)))
   };
 
   useEffect(() => {
@@ -20,10 +22,17 @@ export default function PostDetail() {
       getPost();
     }
   }, [id]);
+  
+
+  const user = {
+    username: "Luna Kim",
+    team: "LG Twins",
+    profile__image: ProfilePic
+  };
 
   if (post == undefined) {
     return (
-      <div>
+      <div className={styles.main}>
         <Head>
           <title>로딩 중...</title>
         </Head>
@@ -32,7 +41,7 @@ export default function PostDetail() {
     )
   } else {
     return (
-      <div>
+      <div className={styles.main}>
         {
           post == false ? (
             <>
@@ -45,10 +54,10 @@ export default function PostDetail() {
           ) : (
             <>
               <Head>
-                <title>글이 없습니다...</title>
+                <title>{post.title}</title>
               </Head>
 
-              <Post post={post} />
+              <Post post={post} user={user} />
             </>
           )
         }
