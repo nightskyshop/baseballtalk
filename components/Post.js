@@ -1,11 +1,13 @@
 import Image from "next/image.js";
 import Chat from "./Chat.js";
 import ChatForm from "./ChatForm.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Post.module.css";
 
 export default function Post({ post, user }) {
   return (
-    <div>
+    <div className={styles.post}>
       <div className={styles.post__post}>
         <h1 className={styles.post__team}>{post.author.team}</h1>
         <h1 className={styles.post__title}>{post.title}</h1>
@@ -19,7 +21,7 @@ export default function Post({ post, user }) {
           </div>
 
           <button>
-            :
+            <FontAwesomeIcon icon={faEllipsisVertical} />
           </button>
         </div>
 
