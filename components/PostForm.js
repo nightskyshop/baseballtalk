@@ -36,21 +36,24 @@ export default function PostForm() {
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
+      <div className={styles.form__header}>
+        <h1>게시판 글쓰기</h1>
+        <button>등록</button>
+      </div>
+
       <input
         type="text"
-        placeholder="제목"
+        placeholder="제목을 입력해 주세요."
         name="title"
         className={styles.form__title}
       />
 
       <textarea
         type="text"
-        placeholder="내용"
+        placeholder="내용을 입력해 주세요."
         name="content"
         className={styles.form__content}
       />
-
-      <button className={styles.form__button}>글 올리기</button>
     </form>
   )
 };

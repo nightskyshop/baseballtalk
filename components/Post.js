@@ -21,7 +21,7 @@ export default function Post({ post, user }) {
           </div>
 
           <button>
-            <FontAwesomeIcon icon={faEllipsisVertical} />
+            <FontAwesomeIcon icon={faEllipsisVertical}/>
           </button>
         </div>
 
