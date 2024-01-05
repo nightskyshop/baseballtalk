@@ -17,7 +17,7 @@ a {
     color: var(--clr-dark)
 }
 
-input, textarea, button {
+input, textarea, select, button {
     all: unset;
 }
 

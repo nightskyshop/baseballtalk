@@ -21,10 +21,10 @@
 
 .form__header button {
     margin: auto 0;
-    min-width: 60px;
+    min-width: 50px;
     height: 30px;
     color: var(--clr-light);
-    background-color: var(--clr-dark);
+    background-color: var(--clr-blue);
     border: 2px outset var(--clr-dark);
     border-radius: 15px;
     font-size: var(--fs-input);
@@ -42,6 +42,29 @@
 
 .form__title {
     padding: 0.5em 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__selects {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form__select {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+}
+
+.form__select > select {
+    width: 100%;
+    padding: 1em .5em;
+    border-bottom: 1px solid var(--clr-dark);
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .form__content {
