@@ -69,10 +69,12 @@ export default function PostForm() {
             <FontAwesomeIcon icon={faCaretDown} />
           </div>
         </div>
+
         <input
           type="text"
           placeholder="제목을 입력해 주세요."
           name="title"
+          className={styles.form__title}
         />
       </div>
 
