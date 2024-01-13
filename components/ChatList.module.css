@@ -3,5 +3,6 @@
 }
 
 .chat__header {
-    font-size: var(--fs-h2);
+    color: var(--clr-blue);
+    font-size: var(--fs-h3);
 }

@@ -18,6 +18,7 @@
 }
 
 .post__title {
+    color: var(--clr-blue);
     font-size: var(--fs-h2);
     margin-bottom: .3em;
 }
