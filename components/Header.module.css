@@ -5,6 +5,7 @@
     left: 0;
     z-index: 100;
     padding: 1.25em var(--default-padding);
+    background-color: var(--clr-light);
     border-bottom: 1px solid var(--clr-dark);
 }
 
@@ -13,7 +14,6 @@
     align-items: center;
     margin: 0 auto;
     max-width: 900px;
-    background-color: var(--clr-light);
 }
 
 .header__logo {
