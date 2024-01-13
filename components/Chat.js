@@ -1,10 +1,9 @@
-import Image from "next/image";
 import styles from "./Chat.module.css";
 
 export default function Chat({ chat, index }) {
   return (
     <div key={index} className={styles.chat}>
-      <Image src={chat.author.profile__image} width={50} height={50} alt="Profile Image" />
+      <img src={chat.author.image} width={50} height={50} alt="Profile Image" />
 
       <div className={styles.chat__text}>
         <h1 className={styles.chat__author}>{chat.author.username}</h1>

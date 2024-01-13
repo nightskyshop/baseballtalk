@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PostList from "@/components/PostList";
 import TeamRank from "@/components/TeamRank";
+import default_styles from "@/styles/default.module.css";
 import styles from "@/styles/post.module.css";
 import axios from "axios";
 import Head from "next/head";
@@ -100,10 +101,11 @@ export default function Posts() {
   ]
 
   const [posts, setPosts] = useState([]);
+  const [pageNo, setPageNo] = useState(0);
   
   async function getPosts() {
-    const p = await axios.get("http://localhost:8080/post");
-    setPosts(p.data);
+    const p = await axios.get(`http://localhost:8080/post?pageNo=${pageNo}`);
+    setPosts(p.data.content);
   }
 
   useEffect(() => {
@@ -111,15 +113,15 @@ export default function Posts() {
   }, [])
 
   return (
-    <main className={styles.post}>
+    <div className={styles.post}>
       <Head>
         <title>게시판</title>
       </Head>
-      
+
       <div className={styles.post_grid}>
         <TeamRank className={styles.rank} teamRanking={teamRanking} />
         <PostList className={styles.list} posts={posts} />
       </div>
-    </main>
+    </div>
   )
 }

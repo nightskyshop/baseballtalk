@@ -14,13 +14,13 @@ export default function Setting() {
   };
 
   return (
-    <main className={profile__styles.profile__main}>
+    <div className={profile__styles.profile__main}>
       <Head>
         <title>내 계정 - 정보 변경</title>
       </Head>
 
       <Navbar selected_btn={3} />
       <SettingForm user={user} />
-    </main>
+    </div>
   )
 }

@@ -1,6 +1,6 @@
 .rank {
-    background-color: var(--clr-background);
     padding: 1em;
+    border: 1px solid var(--clr-dark);
     border-radius: 15px;
 }
 

@@ -1,0 +1,7 @@
+.post__chat {
+    margin-top: 1.3em;
+}
+
+.chat__header {
+    font-size: var(--fs-h2);
+}

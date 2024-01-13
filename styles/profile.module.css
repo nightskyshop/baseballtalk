@@ -1,5 +1,4 @@
 .profile__main {
     display: grid;
     grid-template-columns: 210px 1fr;
-    padding: 4em var(--default-padding);
 }

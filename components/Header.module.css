@@ -1,9 +1,14 @@
+.header__border {
+    padding: 1.25em var(--default-padding);
+    border-bottom: 1px solid var(--clr-dark);
+}
+
 .header {
     display: flex;
     position: sticky;
     align-items: center;
-    padding: 1.25em var(--default-padding);
-    border-bottom: 1px solid var(--clr-dark);
+    margin: 0 auto;
+    max-width: 900px;
     background-color: var(--clr-light);
     top: 0;
     right: 0;

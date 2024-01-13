@@ -5,13 +5,13 @@ import Head from "next/head";
 
 export default function Help() {
   return (
-    <main className={profile__styles.profile__main}>
+    <div className={profile__styles.profile__main}>
       <Head>
         <title>내 계정 - Help</title>
       </Head>
 
       <Navbar selected_btn={4} />
       <Contact />
-    </main>
+    </div>
   )
 }

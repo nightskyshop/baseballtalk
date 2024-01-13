@@ -1,6 +1,6 @@
 .postsummary {
     height: 4.5em;
-    margin: 1em 0;
+    margin-bottom: 1em;
     padding: 1em;
     border: 1px solid var(--clr-dark);
     border-radius: 10px;

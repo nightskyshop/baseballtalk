@@ -1,7 +1,7 @@
 import Post from "@/components/Post";
 import axios from "axios";
 import Head from "next/head";
-import styles from "@/styles/default.module.css";
+import default_styles from "@/styles/default.module.css";
 import ProfilePic from "@/public/누나닮은오리프사.jpg";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -32,22 +32,25 @@ export default function PostDetail() {
 
   if (post == undefined) {
     return (
-      <div className={styles.main}>
+      <div>
         <Head>
           <title>로딩 중...</title>
         </Head>
+        
         <h1>로딩 중...</h1>
       </div>
     )
   } else {
     return (
-      <div className={styles.main}>
+      <div>
         {
           post == false ? (
             <>
               <Head>
                 <title>글이 없습니다...</title>
               </Head>
+
+              <div></div>
 
               <h1>글이 없습니다... :(</h1>
             </>

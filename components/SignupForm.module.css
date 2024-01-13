@@ -48,9 +48,9 @@
     width: 100%;
     margin: .25em 0 1em;
     padding: 1em .5em;
+    box-sizing: border-box;
     border: 1px solid var(--clr-dark);
     border-radius: 5px;
-    padding: 1em .5em;
     -o-appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;

@@ -21,11 +21,6 @@
     opacity: 0.7;
 }
 
-.chat__form_input:focus::placeholder {
-    color: var(--clr-dark);
-    opacity: 1;
-}
-
 .chat__form_button {
     margin-left: auto;
     font-size: var(--fs-h4);

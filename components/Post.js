@@ -1,11 +1,28 @@
-import Image from "next/image.js";
-import Chat from "./Chat.js";
 import ChatForm from "./ChatForm.js";
+import ChatList from "./ChatList.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import Image from "next/image.js";
 import styles from "./Post.module.css";
+import axios from "axios";
 
 export default function Post({ post, user }) {
+  const [chats, setChats] = useState([]);
+  const [pageNo, setPageNo] = useState(0);
+
+  const getChats = () => {
+    axios
+      .get(`http://localhost:8080/chat/post/${post.id}?pageNo=${pageNo}`)
+      .then((res) => setChats(res.data.content));
+  };
+
+  useEffect(() => {
+    if (post) {
+      getChats();
+    }
+  }, [post]);
+
   return (
     <div className={styles.post}>
       <div className={styles.post__post}>
@@ -13,7 +30,7 @@ export default function Post({ post, user }) {
         <h1 className={styles.post__title}>{post.title}</h1>
 
         <div className={styles.post__author}>
-          <Image src={post.author.profile__image} width={60} height={60} alt="Profile Image" />
+          <img src={post.author.image} width={60} height={60} alt="Profile Image" />
           
           <div className={styles.post__author_text}>
             <p className={styles.post__author_username}>{post.author.username}</p>
@@ -36,17 +53,8 @@ export default function Post({ post, user }) {
       </div>
 
       <hr />
-      
-      {
-        post.chats ? (
-          <div className={styles.post__chat}>
-            <h1 className={styles.chat__header}>댓글</h1>
-            {post.chat.map((chat, index) => (
-              <Chat key={index} chat={chat} index={index} />
-            ))}
-          </div>
-        ) : null
-      }
+
+      <ChatList chats={chats} />
 
       <ChatForm user={user} />
     </div>

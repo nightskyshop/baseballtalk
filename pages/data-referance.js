@@ -1,13 +1,13 @@
 import default_styles from "@/styles/default.module.css";
 import Head from "next/head";
 
-export default function Home() {
+export default function DataReferance() {
   return (
     <div>
       <Head>
-        <title>BaseballTalk</title>
+        <title>DataReferance</title>
       </Head>
-      <h1>Initial Setting</h1>
+      <h1>DataReferance</h1>
     </div>
   )
 }

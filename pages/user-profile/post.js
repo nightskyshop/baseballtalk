@@ -37,7 +37,7 @@ export default function MyPost() {
   ];
 
   return (
-    <main className={profile__styles.profile__main}>
+    <div className={profile__styles.profile__main}>
       <Head>
         <title>내 계정 - 내가 작성한 글</title>
       </Head>
@@ -47,6 +47,6 @@ export default function MyPost() {
         <Link href="/post/create">글쓰기</Link>
         <PostList posts={posts} />
       </div>
-    </main>
+    </div>
   )
 };
