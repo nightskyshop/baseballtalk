@@ -1,9 +1,8 @@
 .postsummary {
     height: 4.5em;
     margin-bottom: 1em;
-    padding: 1em;
-    border: 1px solid var(--clr-dark);
-    border-radius: 10px;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--clr-dark);
 }
 
 .postsummary__link {
@@ -12,7 +11,7 @@
 }
 
 .postsummary__text {
-    margin-right: 3em;
+    margin: auto 3em auto 0;
 }
 
 .postsummary__text h1 {

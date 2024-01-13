@@ -115,7 +115,7 @@ export default function Posts() {
   return (
     <div className={styles.post}>
       <Head>
-        <title>게시판</title>
+        <title>커뮤니티</title>
       </Head>
 
       <div className={styles.post_grid}>

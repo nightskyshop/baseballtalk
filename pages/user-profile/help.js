@@ -7,7 +7,7 @@ export default function Help() {
   return (
     <div className={profile__styles.profile__main}>
       <Head>
-        <title>내 계정 - Help</title>
+        <title>내 프로필 - Help</title>
       </Head>
 
       <Navbar selected_btn={4} />

@@ -1,13 +1,15 @@
 import ChatForm from "./ChatForm.js";
 import ChatList from "./ChatList.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical, faHeart as faHeartFill } from "@fortawesome/free-solid-svg-icons";
+import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, useState } from "react";
-import Image from "next/image.js";
 import styles from "./Post.module.css";
 import axios from "axios";
 
 export default function Post({ post, user }) {
+  const [likeCount, setLikeCount] = useState(post.like_count);
+  const [liked, setLiked] = useState(false);
   const [chats, setChats] = useState([]);
   const [pageNo, setPageNo] = useState(0);
 
@@ -17,11 +19,31 @@ export default function Post({ post, user }) {
       .then((res) => setChats(res.data.content));
   };
 
+  const onLikeClick = async (e) => {
+    e.preventDefault();
+
+    setLiked((prevLiked) => !prevLiked);
+  };
+
   useEffect(() => {
     if (post) {
       getChats();
     }
   }, [post]);
+
+  useEffect(() => {
+    if (liked) {
+      setLikeCount((prevLikeCount) => prevLikeCount += 1);
+    } else {
+      setLikeCount((prevLikeCount) => prevLikeCount -= 1);
+    }
+  }, [liked]);
+
+  useEffect(() => {
+    if (likeCount < 0) {
+      setLikeCount(0);
+    }
+  }, [likeCount])
 
   return (
     <div className={styles.post}>
@@ -47,8 +69,16 @@ export default function Post({ post, user }) {
         <p className={styles.post__content}>{post.content}</p>
 
         <div className={styles.post__reaction}>
-          <p>좋아요 {post.likes}</p>
-          <p>댓글 {post.chat ? post.chat.length : 0}</p>
+          <p>
+            좋아요 { liked ? (
+              <FontAwesomeIcon onClick={onLikeClick} icon={faHeartFill} />
+            ) : (
+              <FontAwesomeIcon onClick={onLikeClick} icon={faHeart} />
+            ) } {likeCount}
+          </p>
+          <p>
+            댓글 <FontAwesomeIcon icon={faComment} /> {chats ? chats.length : 0}
+          </p>
         </div>
       </div>
 

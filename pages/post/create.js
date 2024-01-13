@@ -6,7 +6,7 @@ export default function PostCreate() {
   return (
     <div>
       <Head>
-        <title>게시판 글쓰기</title>
+        <title>커뮤니티 글쓰기</title>
       </Head>
 
       <PostForm />

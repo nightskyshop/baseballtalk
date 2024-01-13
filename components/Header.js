@@ -11,11 +11,11 @@ export default function Header() {
 
         <ul className={styles.header__list}>
           <li className={styles.header__postlist}>
-            <Link href="/post">게시판</Link>
+            <Link href="/post">커뮤니티</Link>
           </li>
 
           <li className={styles.header_postcreate}>
-            <Link href="/post/create">게시판 글쓰기</Link>
+            <Link href="/post/create">커뮤니티 글쓰기</Link>
           </li>
 
           <li className={styles.header_datareferance}>

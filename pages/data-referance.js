@@ -7,6 +7,7 @@ export default function DataReferance() {
       <Head>
         <title>DataReferance</title>
       </Head>
+      
       <h1>DataReferance</h1>
     </div>
   )

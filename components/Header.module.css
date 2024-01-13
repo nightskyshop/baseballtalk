@@ -1,19 +1,19 @@
 .header__border {
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
     padding: 1.25em var(--default-padding);
     border-bottom: 1px solid var(--clr-dark);
 }
 
 .header {
     display: flex;
-    position: sticky;
     align-items: center;
     margin: 0 auto;
     max-width: 900px;
     background-color: var(--clr-light);
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 100;
 }
 
 .header__logo {
@@ -24,7 +24,7 @@
 .header__logo a {
     font-size: var(--fs-h2);
     font-weight: var(--fw-bold);
-    color: var(--clr-dark);
+    color: var(--clr-blue);
 }
 
 .header__list {

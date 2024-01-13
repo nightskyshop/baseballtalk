@@ -16,7 +16,7 @@ export default function Setting() {
   return (
     <div className={profile__styles.profile__main}>
       <Head>
-        <title>내 계정 - 정보 변경</title>
+        <title>내 프로필 - Setting</title>
       </Head>
 
       <Navbar selected_btn={3} />

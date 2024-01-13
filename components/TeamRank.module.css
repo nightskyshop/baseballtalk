@@ -1,6 +1,6 @@
 .rank {
     padding: 1em;
-    border: 1px solid var(--clr-dark);
+    border: 1px solid var(--clr-blue);
     border-radius: 15px;
 }
 
@@ -11,6 +11,7 @@
 .rank__caption {
     font-size: var(--fs-h2);
     font-weight: var(--fw-bold);
+    color: var(--clr-blue);
 }
 
 .rank__thead th:nth-child(1) {

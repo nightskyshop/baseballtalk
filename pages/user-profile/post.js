@@ -39,7 +39,7 @@ export default function MyPost() {
   return (
     <div className={profile__styles.profile__main}>
       <Head>
-        <title>내 계정 - 내가 작성한 글</title>
+        <title>내 프로필 - My Post</title>
       </Head>
 
       <Navbar selected_btn={2} />

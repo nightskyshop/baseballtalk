@@ -2,6 +2,7 @@
     display: block;
     width: 50px;
     margin-left: auto;
+    margin-bottom: 1em;
     padding: .25em .5em;
     border-radius: 15px;
     text-align: right;

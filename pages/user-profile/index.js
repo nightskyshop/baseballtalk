@@ -16,7 +16,7 @@ export default function UserProfile() {
   return (
     <div className={profile_styles.profile__main}>
       <Head>
-        <title>내 계정 - 유저 정보</title>
+        <title>내 프로필 - User Info</title>
       </Head>
 
       <Navbar selected_btn={1} />

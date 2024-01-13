@@ -1,5 +1,6 @@
 .signup__box {
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
     margin: 2.5em auto;
 }
 
@@ -22,6 +23,7 @@
 .signup__form {
     display: flex;
     flex-direction: column;
+    margin-bottom: 2em;
 }
 
 .signup__form > * {
@@ -33,6 +35,7 @@
     padding: 1em;
     border: 1px solid var(--clr-dark);
     border-radius: 5px;
+    min-width: none;
 }
 
 .signup__form > input::placeholder {
@@ -46,6 +49,7 @@
 
 .signup__team > select {
     width: 100%;
+    min-width: none;
     margin: .25em 0 1em;
     padding: 1em .5em;
     box-sizing: border-box;
@@ -78,5 +82,21 @@
     border-radius: 20px;
     max-width: 120px;
     height: 25px;
+    cursor: pointer;
+}
+
+.hr {
+    width: 70%;
+    min-width: 30px;
+    margin: 0 auto;
+}
+
+.social__login {
+    margin-top: 2em;
+}
+
+.social__kakao {
+    display: block;
+    margin: 0 auto;
     cursor: pointer;
 }

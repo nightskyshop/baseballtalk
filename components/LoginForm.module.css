@@ -1,5 +1,6 @@
 .login__box {
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
     margin: 2.5em auto;
 }
 
@@ -45,10 +46,11 @@
     margin: .5em auto 0;
     padding: .3em .75em;
     color: var(--clr-light);
-    font-size: var(--fs-h3);
+    font-size: var(--fs-h4);
     text-align: center;
     background-color: var(--clr-blue);
     border-radius: 20px;
-    min-width: 200px;
+    max-width: 120px;
+    height: 25px;
     cursor: pointer;
 }
