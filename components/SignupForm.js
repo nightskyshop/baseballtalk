@@ -4,6 +4,22 @@ import styles from "./SignupForm.module.css";
 import Link from "next/link";
 
 export default function SignupForm () {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const username = form.elements.namedItem("username").value;
+    const team = form.elements.namedItem("team").value;
+    const email = form.elements.namedItem("email").value;
+    const password = form.elements.namedItem("password").value;
+    const password_check = form.elements.namedItem("password_check").value;
+
+    if (username === "" || team === "" || email === "" || password === "" || password_check === "") {
+      window.alert("내용을 모두 적어주세요.");
+    } else if (password !== password_check) {
+      window.alert("비밀번호와 비밀번호 확인의 값이 다릅니다.");
+    }
+  }
+
   return (
     <div className={styles.signup__box}>
       <div className={styles.signup__header}>
@@ -12,7 +28,7 @@ export default function SignupForm () {
         <Link className={styles.signup__login} href="/login">로그인</Link>
       </div>
 
-      <form className={styles.signup__form}>
+      <form className={styles.signup__form} onSubmit={onSubmit}>
         <p>활동명</p>
         <input 
           type="text"
@@ -55,7 +71,7 @@ export default function SignupForm () {
         <p>비밀번호 확인</p>
         <input
           type="password"
-          name="password__check"
+          name="password_check"
           className={styles.signup__password_check}
         />
 
