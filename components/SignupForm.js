@@ -2,8 +2,13 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./SignupForm.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SignupForm () {
+  const KAKAO_API_URI = process.env.NEXT_PUBLIC_KAKAO_API_URI;
+  const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
+  const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
+
   const onSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -77,6 +82,20 @@ export default function SignupForm () {
 
         <button>회원가입</button>
       </form>
+
+      <hr className={styles.hr} />
+
+      <div className={styles.social__login}>
+        <Link href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}>
+          <Image
+            className={styles.social__kakao}
+            src="/images/kakao_login_image.png"
+            alt="카카오 로그인"
+            width={180}
+            height={50}
+          />
+        </Link>
+      </div>
     </div>
   )
 }
