@@ -48,7 +48,11 @@ export default function Post({ post, user }) {
   return (
     <div className={styles.post}>
       <div className={styles.post__post}>
-        <h1 className={styles.post__team}>{post.author.team}</h1>
+        <div className={styles.post__tc}>
+          <h1 className={styles.post__team}>{post.team}</h1>
+            -
+          <p className={styles.post__category}>{post.category}</p>
+        </div>
         <h1 className={styles.post__title}>{post.title}</h1>
 
         <div className={styles.post__author}>
@@ -56,7 +60,9 @@ export default function Post({ post, user }) {
           
           <div className={styles.post__author_text}>
             <p className={styles.post__author_username}>{post.author.username}</p>
-            <p className={styles.post__created}>2023년 12월 28일 21:04</p>
+            <p className={styles.post__created}>
+              {post.createdAt[0]}년 {post.createdAt[1]}월 {post.createdAt[2]}일 {post.createdAt[3]}:{post.createdAt[4]}
+            </p>
           </div>
 
           <button>
@@ -69,14 +75,14 @@ export default function Post({ post, user }) {
         <p className={styles.post__content}>{post.content}</p>
 
         <div className={styles.post__reaction}>
-          <p>
+          <p className={styles.post__like}>
             좋아요 { liked ? (
               <FontAwesomeIcon onClick={onLikeClick} icon={faHeartFill} />
             ) : (
               <FontAwesomeIcon onClick={onLikeClick} icon={faHeart} />
             ) } {likeCount}
           </p>
-          <p>
+          <p className={styles.post__chat}>
             댓글 <FontAwesomeIcon icon={faComment} /> {chats ? chats.length : 0}
           </p>
         </div>

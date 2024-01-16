@@ -1,7 +1,6 @@
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import styles from "./PostForm.module.css";
 import axios from "axios";
 
@@ -9,7 +8,7 @@ export default function PostForm() {
   const router = useRouter();
 
   const createPost = async (title, content, team, category, author) => {
-    await axios.post("http://localhost:8080/post/", {
+    await axios.post("http://localhost:8080/post", {
       title, content,  team, category, author
     })
       .then((res) => {
