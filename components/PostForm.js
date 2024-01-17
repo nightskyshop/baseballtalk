@@ -8,11 +8,11 @@ export default function PostForm() {
   const router = useRouter();
 
   const createPost = async (title, content, team, category, author) => {
-    await axios.post("http://localhost:8080/post", {
-      title, content,  team, category, author
-    })
+    await axios
+      .post("http://localhost:8080/post", {
+        title, content, team, category, author
+      })
       .then((res) => {
-        console.log(res.status);
         res.status == 201 ? (
           router.push("/post")
         ) : (

@@ -1,14 +1,15 @@
 import styles from "./ChatForm.module.css";
 
-export default function ChatForm({ user }) {
-  const onSubmit = (e) => {
+export default function ChatForm({ user, createChat }) {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
-    const chat = form.elements.namedItem("chat");
+    const content = form.elements.namedItem("content");
 
-    console.log(chat.value);
-    chat.value = "";
+    await createChat(content.value);
+
+    content.value = "";
   }
 
   return (
@@ -18,7 +19,7 @@ export default function ChatForm({ user }) {
         className={styles.chat__form_input}
         type="text"
         placeholder="댓글을 남겨보세요."
-        name="chat"
+        name="content"
       />
       <button className={styles.chat__form_button}>등록</button>
     </form>

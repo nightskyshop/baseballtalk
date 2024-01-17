@@ -1,7 +1,6 @@
 import Post from "@/components/Post";
 import axios from "axios";
 import Head from "next/head";
-import default_styles from "@/styles/default.module.css";
 import ProfilePic from "@/public/누나닮은오리프사.jpg";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -25,7 +24,8 @@ export default function PostDetail() {
   
 
   const user = {
-    username: "Luna Kim",
+    id: 1,
+    username: "Kim Haju",
     team: "LG Twins",
     profile__image: ProfilePic
   };

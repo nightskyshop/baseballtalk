@@ -25,11 +25,24 @@ export default function Post({ post, user }) {
     setLiked((prevLiked) => !prevLiked);
   };
 
+  const createChat = async (content) => {
+    console.log({ content, post: post.id, author: user.id });
+    await axios
+      .post("http://localhost:8080/chat", {
+        content, post: post.id, author: user.id
+      })
+      .then((res) => {
+        if (res.status == 201) {
+          getChats();
+        }
+      })
+  }
+
   useEffect(() => {
     if (post) {
       getChats();
     }
-  }, [post]);
+  }, [post.id]);
 
   useEffect(() => {
     if (liked) {
@@ -92,7 +105,7 @@ export default function Post({ post, user }) {
 
       <ChatList chats={chats} />
 
-      <ChatForm user={user} />
+      <ChatForm user={user} createChat={createChat} />
     </div>
   )
 }
