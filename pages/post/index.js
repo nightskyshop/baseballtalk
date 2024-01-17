@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PostList from "@/components/PostList";
 import TeamRank from "@/components/TeamRank";
-import default_styles from "@/styles/default.module.css";
 import styles from "@/styles/post.module.css";
 import axios from "axios";
 import Head from "next/head";
@@ -15,7 +14,7 @@ export default function Posts() {
       win: 86,
       lose: 56,
       tie: 2,
-      winavg: 0.606
+      winavg: 0.606,
     },
     {
       rank: 2,
@@ -24,7 +23,7 @@ export default function Posts() {
       win: 79,
       lose: 56,
       tie: 2,
-      winavg: 0.560
+      winavg: 0.56,
     },
     {
       rank: 3,
@@ -33,7 +32,7 @@ export default function Posts() {
       win: 76,
       lose: 65,
       tie: 3,
-      winavg: 0.539
+      winavg: 0.539,
     },
     {
       rank: 4,
@@ -42,7 +41,7 @@ export default function Posts() {
       win: 75,
       lose: 67,
       tie: 2,
-      winavg: 0.528
+      winavg: 0.528,
     },
     {
       rank: 5,
@@ -51,7 +50,7 @@ export default function Posts() {
       win: 74,
       lose: 68,
       tie: 2,
-      winavg: 0.521
+      winavg: 0.521,
     },
     {
       rank: 6,
@@ -60,7 +59,7 @@ export default function Posts() {
       win: 73,
       lose: 69,
       tie: 2,
-      winavg: 0.514
+      winavg: 0.514,
     },
     {
       rank: 7,
@@ -69,16 +68,16 @@ export default function Posts() {
       win: 68,
       lose: 76,
       tie: 0,
-      winavg: 0.472
+      winavg: 0.472,
     },
     {
       rank: 8,
       name: "삼성",
       game: 144,
-      win: 611,
+      win: 61,
       lose: 82,
       tie: 1,
-      winavg: 0.427
+      winavg: 0.427,
     },
     {
       rank: 9,
@@ -87,7 +86,7 @@ export default function Posts() {
       win: 58,
       lose: 80,
       tie: 6,
-      winavg: 0.420
+      winavg: 0.42,
     },
     {
       rank: 10,
@@ -96,13 +95,13 @@ export default function Posts() {
       win: 58,
       lose: 83,
       tie: 4,
-      winavg: 0.411
+      winavg: 0.411,
     },
-  ]
+  ];
 
   const [posts, setPosts] = useState([]);
   const [pageNo, setPageNo] = useState(0);
-  
+
   async function getPosts() {
     const p = await axios.get(`http://localhost:8080/post?pageNo=${pageNo}`);
     setPosts(p.data.content);
@@ -110,7 +109,7 @@ export default function Posts() {
 
   useEffect(() => {
     getPosts();
-  }, [])
+  }, []);
 
   return (
     <div className={styles.post}>
@@ -123,5 +122,5 @@ export default function Posts() {
         <PostList className={styles.list} posts={posts} />
       </div>
     </div>
-  )
+  );
 }
