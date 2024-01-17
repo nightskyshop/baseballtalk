@@ -1,15 +1,16 @@
 import ChatForm from "./ChatForm.js";
 import ChatList from "./ChatList.js";
+import Reaction from "./Reaction.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical, faHeart as faHeartFill } from "@fortawesome/free-solid-svg-icons";
-import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import getUser from "@/lib/getUser.js";
+import { useQuery } from "@tanstack/react-query";
 import styles from "./Post.module.css";
 import axios from "axios";
 
-export default function Post({ post, user }) {
-  const [likeCount, setLikeCount] = useState(post.like_count);
-  const [liked, setLiked] = useState(false);
+export default function Post({ post }) {
+  const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
   const [chats, setChats] = useState([]);
   const [pageNo, setPageNo] = useState(0);
 
@@ -19,24 +20,19 @@ export default function Post({ post, user }) {
       .then((res) => setChats(res.data.content));
   };
 
-  const onLikeClick = async (e) => {
-    e.preventDefault();
-
-    setLiked((prevLiked) => !prevLiked);
-  };
-
   const createChat = async (content) => {
-    console.log({ content, post: post.id, author: user.id });
     await axios
       .post("http://localhost:8080/chat", {
-        content, post: post.id, author: user.id
+        content,
+        post: post.id,
+        author: user.id,
       })
       .then((res) => {
         if (res.status == 201) {
           getChats();
         }
-      })
-  }
+      });
+  };
 
   useEffect(() => {
     if (post) {
@@ -44,42 +40,35 @@ export default function Post({ post, user }) {
     }
   }, [post.id]);
 
-  useEffect(() => {
-    if (liked) {
-      setLikeCount((prevLikeCount) => prevLikeCount += 1);
-    } else {
-      setLikeCount((prevLikeCount) => prevLikeCount -= 1);
-    }
-  }, [liked]);
-
-  useEffect(() => {
-    if (likeCount < 0) {
-      setLikeCount(0);
-    }
-  }, [likeCount])
-
   return (
     <div className={styles.post}>
       <div className={styles.post__post}>
         <div className={styles.post__tc}>
-          <h1 className={styles.post__team}>{post.team}</h1>
-            -
+          <h1 className={styles.post__team}>{post.team}</h1>-
           <p className={styles.post__category}>{post.category}</p>
         </div>
         <h1 className={styles.post__title}>{post.title}</h1>
 
         <div className={styles.post__author}>
-          <img src={post.author.image} width={60} height={60} alt="Profile Image" />
-          
+          <img
+            src={post.author.image}
+            width={60}
+            height={60}
+            alt="Profile Image"
+          />
+
           <div className={styles.post__author_text}>
-            <p className={styles.post__author_username}>{post.author.username}</p>
+            <p className={styles.post__author_username}>
+              {post.author.username}
+            </p>
             <p className={styles.post__created}>
-              {post.createdAt[0]}년 {post.createdAt[1]}월 {post.createdAt[2]}일 {post.createdAt[3]}:{post.createdAt[4]}
+              {post.createdAt[0]}년 {post.createdAt[1]}월 {post.createdAt[2]}일{" "}
+              {post.createdAt[3]}:{post.createdAt[4]}
             </p>
           </div>
 
           <button>
-            <FontAwesomeIcon icon={faEllipsisVertical}/>
+            <FontAwesomeIcon icon={faEllipsisVertical} />
           </button>
         </div>
 
@@ -87,25 +76,14 @@ export default function Post({ post, user }) {
 
         <p className={styles.post__content}>{post.content}</p>
 
-        <div className={styles.post__reaction}>
-          <p className={styles.post__like}>
-            좋아요 { liked ? (
-              <FontAwesomeIcon onClick={onLikeClick} icon={faHeartFill} />
-            ) : (
-              <FontAwesomeIcon onClick={onLikeClick} icon={faHeart} />
-            ) } {likeCount}
-          </p>
-          <p className={styles.post__chat}>
-            댓글 <FontAwesomeIcon icon={faComment} /> {chats ? chats.length : 0}
-          </p>
-        </div>
+        <Reaction post={post} chat_count={chats.length} />
       </div>
 
       <hr />
 
       <ChatList chats={chats} />
 
-      <ChatForm user={user} createChat={createChat} />
+      {user ? <ChatForm user={user} createChat={createChat} /> : null}
     </div>
-  )
+  );
 }

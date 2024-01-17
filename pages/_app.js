@@ -9,13 +9,12 @@ export default function App({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Header />
-      
+
       <main className={default_styles.main}>
         <div className={default_styles.main__box}>
           <Component {...pageProps} />
         </div>
       </main>
     </QueryClientProvider>
-    
-  )
+  );
 }
