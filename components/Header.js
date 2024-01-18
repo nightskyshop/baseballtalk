@@ -1,7 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
+import getUser from "@/lib/getUser";
 import Link from "next/link";
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
+
   return (
     <header className={styles.header__border}>
       <div className={styles.header}>
@@ -24,13 +28,19 @@ export default function Header() {
         </ul>
 
         <div className={styles.header__user}>
-          <Link className={styles.header__login} href="/login">로그인</Link>
-          <Link className={styles.header__signup} href="/signup">회원가입</Link>
-
-          {/* <Link href="/logout" className={styles.header__user}>로그아웃</Link>
-          <Link href="/프로필" className={styles.header__profileimg}>
-            프로필 이미지
-          </Link> */}
+          { user ? (
+            <>
+              <Link href="/logout" className={styles.header__logout}>로그아웃</Link>
+              <Link href="/user-profile" className={styles.header__profile}>
+                <img src={`data:image/png;base64,${user.data.image}`} width={35} height={35} />
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link className={styles.header__login} href="/login">로그인</Link>
+              <Link className={styles.header__signup} href="/signup">회원가입</Link>
+            </>
+          ) }
         </div>
       </div>
 

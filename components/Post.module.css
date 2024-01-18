@@ -1,7 +1,10 @@
 .post {
+  max-width: 700px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 3em 4em;
   border: 1.4px solid var(--clr-gray);
   border-radius: 10px;
-  padding: 3em 4em;
 }
 
 .post__post {

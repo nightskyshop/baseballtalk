@@ -51,7 +51,7 @@ export default function Post({ post }) {
 
         <div className={styles.post__author}>
           <img
-            src={post.author.image}
+            src={`data:image/png;base64,${post.author.image}`}
             width={60}
             height={60}
             alt="Profile Image"
