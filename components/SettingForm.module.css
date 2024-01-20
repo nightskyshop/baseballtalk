@@ -8,6 +8,22 @@
     margin-bottom: 2em;
 }
 
+.userInfo__profileimg {
+    position: relative;
+}
+
+.userInfo__profileimg svg {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    right: 0;
+    color: var(--clr-light);
+    background-color: var(--clr-dark);
+    padding: 0.5em;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
 .setting__password {
     margin-top: 2em;
 }

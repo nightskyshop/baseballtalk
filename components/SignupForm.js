@@ -86,7 +86,7 @@ export default function SignupForm () {
       <hr className={styles.hr} />
 
       <div className={styles.social__login}>
-        <Link href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}>
+        <a href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}>
           <Image
             className={styles.social__kakao}
             src="/images/kakao_login_image.png"
@@ -94,7 +94,7 @@ export default function SignupForm () {
             width={180}
             height={50}
           />
-        </Link>
+        </a>
       </div>
     </div>
   )

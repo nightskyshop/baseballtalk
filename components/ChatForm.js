@@ -1,20 +1,30 @@
+import { useQuery } from "@tanstack/react-query";
+import getUser from "@/lib/getUser";
 import styles from "./ChatForm.module.css";
 
-export default function ChatForm({ user, createChat }) {
+export default function ChatForm({ createChat }) {
+  const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const content = form.elements.namedItem("content");
 
-    await createChat(content.value);
+    if (!user) {
+      alert("로그인 하세요");
+    } else if (content.value.trim() == "") {
+      alert("글을 작성해주세요.")
+    } else {
+      await createChat(content.value);
+    }
 
     content.value = "";
   }
 
   return (
     <form onSubmit={onSubmit} className={styles.chat__form}>
-      <h1 className={styles.chat__form_header}>{user.username}</h1>
+      <h1 className={styles.chat__form_header}>{user.data.username}</h1>
       <input
         className={styles.chat__form_input}
         type="text"

@@ -8,6 +8,7 @@ import getUser from "@/lib/getUser.js";
 import { useQuery } from "@tanstack/react-query";
 import styles from "./Post.module.css";
 import axios from "axios";
+import ProfileImage from "./ProfileImage.js";
 
 export default function Post({ post }) {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
@@ -25,7 +26,7 @@ export default function Post({ post }) {
       .post("http://localhost:8080/chat", {
         content,
         post: post.id,
-        author: user.id,
+        author: user.data.id,
       })
       .then((res) => {
         if (res.status == 201) {
@@ -50,12 +51,7 @@ export default function Post({ post }) {
         <h1 className={styles.post__title}>{post.title}</h1>
 
         <div className={styles.post__author}>
-          <img
-            src={`data:image/png;base64,${post.author.image}`}
-            width={60}
-            height={60}
-            alt="Profile Image"
-          />
+          <ProfileImage url={post.author.image} width={60} height={60} />
 
           <div className={styles.post__author_text}>
             <p className={styles.post__author_username}>

@@ -20,4 +20,10 @@
     padding: 1.5em 1em;
     border: 1px solid var(--clr-dark);
     font-size: var(--fs-h4);
+    word-wrap: break-word;
+}
+
+.nocontent {
+    color: var(--clr-gray);
+    opacity: 0.7;
 }

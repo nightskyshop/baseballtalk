@@ -23,7 +23,6 @@ export default function PostForm() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target.name);
     const form = e.currentTarget;
     const title = form.elements.namedItem("title").value;
     const content = form.elements.namedItem("content").value;

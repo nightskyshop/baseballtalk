@@ -102,7 +102,7 @@ export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [pageNo, setPageNo] = useState(0);
 
-  async function getPosts() {
+  const getPosts = async () => {
     const p = await axios.get(`http://localhost:8080/post?pageNo=${pageNo}`);
     setPosts(p.data.content);
   }

@@ -1,14 +1,19 @@
-import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
+import getUser from "@/lib/getUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import styles from "./SettingForm.module.css";
+import ProfileImage from "./ProfileImage";
 
-export default function SettingForm({ user }) {
+export default function SettingForm() {
+  const user = useQuery({ queryKey: ["user"], queryFn: getUser}).data;
+
   const handleUserInfoSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const username = form.elements.namedItem("username").value;
     const email = form.elements.namedItem("email").value;
     const introduce = form.elements.namedItem("introduce").value;
-    console.log(username, email, introduce);
   };
 
   const handlePasswordSubmit = (e) => {
@@ -24,17 +29,20 @@ export default function SettingForm({ user }) {
           <div>
             <p>활동명</p>
             <input
-              defaultValue={user.username}
+              defaultValue={user.data.username}
               name="username"
             />
           </div>
 
-          <Image src={user.profile_image} width={80} height={80} alt="Profile Image" />
+          <div className={styles.userInfo__profileimg}>
+            <ProfileImage url={user.data.image} width={80} height={80} />
+            <FontAwesomeIcon icon={faPen} />
+          </div>
         </div>
 
         <p>이메일 정보</p>
         <input
-          defaultValue={user.email}
+          defaultValue={user.data.email}
           className={styles.disabled__input}
           disabled
           name="email"
@@ -42,7 +50,7 @@ export default function SettingForm({ user }) {
 
         <p>소개글</p>
         <input
-          defaultValue={user.introduce}
+          defaultValue={user.data.introduce}
           name="introduce"
         />
 

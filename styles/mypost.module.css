@@ -5,7 +5,7 @@
     margin-bottom: 1em;
     padding: .25em .5em;
     border-radius: 15px;
-    text-align: right;
+    text-align: center;
     background-color: var(--clr-blue);
     color: var(--clr-light);
 }
