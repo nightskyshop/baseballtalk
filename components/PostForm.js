@@ -2,9 +2,12 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import styles from "./PostForm.module.css";
+import { useQuery } from "@tanstack/react-query";
+import getUser from "@/lib/getUser";
 import axios from "axios";
 
 export default function PostForm() {
+  const user = useQuery({ queryKey: ["user"], queryFn: getUser}).data;
   const router = useRouter();
 
   const createPost = async (title, content, team, category, author) => {
@@ -32,7 +35,7 @@ export default function PostForm() {
     if (title == "" || content == "" || team == "" || category == "") {
       window.alert("제목과 내용을 채워주세요.")
     } else {
-      await createPost(title, content, team, category, 1);
+      await createPost(title, content, team, category, user.data.id);
     }
   };
 

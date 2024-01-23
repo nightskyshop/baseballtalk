@@ -12,6 +12,10 @@
     position: relative;
 }
 
+.userInfo__profileimg input {
+    display: none;
+}
+
 .userInfo__profileimg svg {
     position: absolute;
     top: 50px;

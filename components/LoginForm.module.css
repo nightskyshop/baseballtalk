@@ -23,6 +23,7 @@
 .login__form {
     display: flex;
     flex-direction: column;
+    margin-bottom: 2em;
 }
 
 .login__form > * {
@@ -52,5 +53,21 @@
     border-radius: 20px;
     max-width: 120px;
     height: 25px;
+    cursor: pointer;
+}
+
+.hr {
+    width: 70%;
+    min-width: 30px;
+    margin: 0 auto;
+}
+
+.social__login {
+    margin-top: 2em;
+}
+
+.social__kakao {
+    display: block;
+    margin: 0 auto;
     cursor: pointer;
 }

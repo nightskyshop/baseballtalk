@@ -1,11 +1,14 @@
 import Post from "@/components/Post";
+import getUser from "@/lib/getUser";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Head from "next/head";
-import ProfilePic from "@/public/누나닮은오리프사.jpg";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function PostDetail() {
+  const user = useQuery({ queryKey: ["user"], queryFn: getUser });
+
   const router = useRouter();
   const { id } = router.query;
   const [post, setPost] = useState(undefined);
@@ -21,14 +24,6 @@ export default function PostDetail() {
       getPost();
     }
   }, [id]);
-  
-
-  const user = {
-    id: 1,
-    username: "Kim Haju",
-    team: "LG Twins",
-    profile__image: ProfilePic
-  };
 
   if (post == undefined) {
     return (

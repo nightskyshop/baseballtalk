@@ -1,8 +1,16 @@
 import PostForm from "@/components/PostForm";
-import default_styles from "@/styles/default.module.css";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function PostCreate() {
+  const router = useRouter();
+
+  if (typeof window !== "undefined") {
+    if (!localStorage.getItem("accessToken")) {
+      router.push("/login");
+    }
+  }
+  
   return (
     <div>
       <Head>
