@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import styles from "@/styles/redirect.module.css";
 
 export default function KakaoLogin() {
+  const [ok, setOk] = useState(false);
   const router = useRouter();
 
   const { code } = router.query;
@@ -13,18 +14,27 @@ export default function KakaoLogin() {
   const sendCode = async () => {
     await axios
     .get(`http://localhost:8080/kakao/${code}`)
-    .then((res) => localStorage.setItem("accessToken", res.data));
+    .then((res) => {
+      localStorage.setItem("accessToken", res.data);
+      setOk(true);
+    });
   }
 
   useEffect(() => {
     if (code) {
-      console.log(code);
       sendCode();
+    }
+  }, [code]);
+
+  useEffect(() => {
+    if (ok) {
       router.push("/");
     }
-  }, [code])
+  }, [ok])
   
   return (
-    <div>kakaologin</div>
+    <div className={styles.login__redirect}>
+      <h1>로그인 중...</h1>
+    </div>
   )
 }
