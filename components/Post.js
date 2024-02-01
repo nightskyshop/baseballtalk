@@ -45,7 +45,7 @@ export default function Post({ post }) {
     <div className={styles.post}>
       <div className={styles.post__post}>
         <div className={styles.post__tc}>
-          <h1 className={styles.post__team}>{post.team}</h1>-
+          <h1 className={styles.post__team}>{post.team.teamname}</h1>-
           <p className={styles.post__category}>{post.category}</p>
         </div>
         <h1 className={styles.post__title}>{post.title}</h1>

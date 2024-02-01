@@ -17,7 +17,7 @@ export default function UserInfo() {
         </div>
       </div>
 
-      <p className={`${user.data.introduce == null ? styles.nocontent : ""} ${styles.info__introduce}`}>{user.data.introduce == null ? "아직 소개글이 없습니다..." : user.data.introduce}</p>
+      <p className={`${user.data.introduce == null || user.data.introduce.trim() == "" ? styles.nocontent : ""} ${styles.info__introduce}`}>{user.data.introduce == null || user.data.introduce.trim() == "" ? "아직 소개글이 없습니다..." : user.data.introduce}</p>
     </div>
   )
 };

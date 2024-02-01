@@ -51,16 +51,17 @@ export default function PostForm() {
           <div className={styles.form__select}>
             <select name="team">
               <option value="">팀를 선택해주세요.</option>
-              <option vlaue="LG Twins">LG Twins</option>
-              <option vlaue="KT Wiz">KT Wiz</option>
-              <option vlaue="SSG Landers">SSG Landers</option>
-              <option vlaue="NC Dinos">NC Dinos</option>
-              <option vlaue="Doosan Bears">Doosan Bears</option>
-              <option vlaue="KIA Tigers">KIA Tigers</option>
-              <option vlaue="Lotte Giants">Lotte Giants</option>
-              <option vlaue="Samsung Lions">Samsung Lions</option>
-              <option vlaue="Hanwha Eagles">Hanwha Eagles</option>
-              <option vlaue="Kiwoom Heros">Kiwoom Heros</option>
+              <option value={1}>LG Twins</option>
+              <option value={2}>KT Wiz</option>
+              <option value={3}>SSG Landers</option>
+              <option value={4}>NC Dinos</option>
+              <option value={5}>Doosan Bears</option>
+              <option value={6}>KIA Tigers</option>
+              <option value={7}>Lotte Giants</option>
+              <option value={8}>Samsung Lions</option>
+              <option value={9}>Hanwha Eagles</option>
+              <option value={10}>Kiwoom Heros</option>
+              <option value={11}>관련 없음</option>
             </select>
             <FontAwesomeIcon icon={faCaretDown} />
           </div>
