@@ -4,6 +4,7 @@ import TeamRank from "@/components/TeamRank";
 import styles from "@/styles/post.module.css";
 import axios from "axios";
 import Head from "next/head";
+import TeamList from "@/components/TeamList";
 
 export default function Posts() {
   const teamRanking = [
@@ -100,15 +101,22 @@ export default function Posts() {
   ];
 
   const [posts, setPosts] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [pageNo, setPageNo] = useState(0);
 
   const getPosts = async () => {
     const p = await axios.get(`http://localhost:8080/post?pageNo=${pageNo}`);
     setPosts(p.data.content);
+  };
+
+  const getTeams = async () => {
+    const t = await axios.get(`http://localhost:8080/team`);
+    setTeams(t.data);
   }
 
   useEffect(() => {
     getPosts();
+    getTeams();
   }, []);
 
   return (
@@ -121,6 +129,8 @@ export default function Posts() {
         <TeamRank className={styles.rank} teamRanking={teamRanking} />
         <PostList className={styles.list} posts={posts} />
       </div>
+
+      <TeamList teams={teams} />
     </div>
   );
 }

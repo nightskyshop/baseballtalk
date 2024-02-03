@@ -1,0 +1,28 @@
+.team {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.team__info {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.team__name {
+    font-size: var(--fs-h1);
+    margin-right: .5em;
+}
+
+.team__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.team__rank {
+    font-size: var(--fs-h4);
+}
+
+.team__wlt{
+    font-size: var(--fs-h4);
+}

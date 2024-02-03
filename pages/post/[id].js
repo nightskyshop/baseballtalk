@@ -11,6 +11,7 @@ export default function PostDetail() {
 
   const router = useRouter();
   const { id } = router.query;
+  
   const [post, setPost] = useState(undefined);
 
   const getPost = async() => {
