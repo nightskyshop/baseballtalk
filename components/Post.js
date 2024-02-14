@@ -9,21 +9,23 @@ import { useQuery } from "@tanstack/react-query";
 import styles from "./Post.module.css";
 import axios from "axios";
 import ProfileImage from "./ProfileImage.js";
+import Link from "next/link.js";
 
 export default function Post({ post }) {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
   const [chats, setChats] = useState([]);
   const [pageNo, setPageNo] = useState(0);
+  const [clicked, setClicked] = useState(false);
 
   const getChats = () => {
     axios
-      .get(`http://localhost:8080/chat/post/${post.id}?pageNo=${pageNo}`)
+      .get(`chat/post/${post.id}?pageNo=${pageNo}`)
       .then((res) => setChats(res.data.content));
   };
 
   const createChat = async (content) => {
     await axios
-      .post("http://localhost:8080/chat", {
+      .post("/chat", {
         content,
         post: post.id,
         author: user.data.id,
@@ -34,6 +36,13 @@ export default function Post({ post }) {
         }
       });
   };
+
+  const onClick = (e) => {
+    e.preventDefault();
+    setClicked((prevClicked) => !prevClicked);
+  };
+
+  useEffect(() => console.log(clicked), [clicked]);
 
   useEffect(() => {
     if (post) {
@@ -59,13 +68,21 @@ export default function Post({ post }) {
             </p>
             <p className={styles.post__created}>
               {post.createdAt[0]}년 {post.createdAt[1]}월 {post.createdAt[2]}일{" "}
-              {post.createdAt[3]}:{post.createdAt[4]}
+              { String(post.createdAt[3]).padStart(2, "0")}:{String(post.createdAt[4]).padStart(2, "0") }
             </p>
           </div>
+            { 
+            user ? (
+              <button onClick={onClick}>
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </button>
+            ) : null
+          }
 
-          <button>
-            <FontAwesomeIcon icon={faEllipsisVertical} />
-          </button>
+          <div className={`${styles.post__dropdown} ${clicked ? styles.focus : ""}`}>
+            <Link href={`/post/create?update=${true}&id=${post.id}&team=${post.team.id}&category=${post.category}&title=${post.title}&content=${post.content}`}>수정하기</Link>
+            <Link href="/post/create">삭제하기</Link>
+          </div>
         </div>
 
         <hr />
