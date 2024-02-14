@@ -6,7 +6,7 @@ export default function Team({ team }) {
     <div className={styles.team__info}>
       <Image src={`/images/${team.teamname}.png`} width={90} height={90} />
 
-      <h1 className={styles.team__name}>{team.teamname}</h1>
+      <h1 className={styles.team__name}>{team.teamname} 갤러리</h1>
       
       <div className={styles.team__text}>
         <p className={styles.team__rank}>{team.rank_num}위</p>

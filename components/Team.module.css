@@ -4,9 +4,9 @@
 }
 
 .team__name {
-    margin: auto 0;
     font-size: var(--fs-h1);
     margin: auto .5em auto .3em;
+    word-break: break-all;
 }
 
 .team__text {

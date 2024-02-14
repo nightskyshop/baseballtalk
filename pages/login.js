@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import LoginForm from "@/components/LoginForm";
 import styles from "@/styles/login.module.css";
+import Head from "next/head";
 
 export default function Login() {
   const router = useRouter();
@@ -13,6 +14,10 @@ export default function Login() {
 
   return (
     <main className={styles.login}>
+      <Head>
+        <title>로그인</title>
+      </Head>
+
       <LoginForm />
     </main>
   )

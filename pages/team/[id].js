@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import getUser from "@/lib/getUser";
 import Team from "@/components/Team";
+import Head from "next/head";
 
 export default function TeamDetail() {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser}).data;
@@ -40,10 +41,19 @@ export default function TeamDetail() {
 
   return (
     <div className={styles.team}>
+
       {
         team ? (
-          <Team team={team} />
-        ) : <div>글이 없습니다.</div>
+          <>
+            <Head>
+              <title>{team.teamname} 갤러리</title>
+            </Head>
+
+            <Team team={team} />
+          </>
+        ) : (
+          <div>글이 없습니다.</div>
+        )
       }
       {
         posts ? (
