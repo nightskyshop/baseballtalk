@@ -13,7 +13,7 @@ export default function KakaoLogin() {
 
   const sendCode = async () => {
     await axios
-    .get(`http://localhost:8080/kakao/${code}`)
+    .get(`/kakao/${code}`)
     .then((res) => {
       localStorage.setItem("accessToken", res.data);
       setOk(true);

@@ -105,12 +105,12 @@ export default function Posts() {
   const [pageNo, setPageNo] = useState(0);
 
   const getPosts = async () => {
-    const p = await axios.get(`http://localhost:8080/post?pageNo=${pageNo}`);
+    const p = await axios.get(`/post?pageNo=${pageNo}`);
     setPosts(p.data.content);
   };
 
   const getTeams = async () => {
-    const t = await axios.get(`http://localhost:8080/team`);
+    const t = await axios.get(`/team`);
     setTeams(t.data);
   }
 

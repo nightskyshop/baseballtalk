@@ -18,10 +18,10 @@ export default function Reaction({ post, chat_count }) {
 
     if (liked) {
       await axios.delete(
-        `http://localhost:8080/like/${user.data.id}?type=0&post_id=${post.id}&chat_id=0`
+        `/like/${user.data.id}?type=0&post_id=${post.id}&chat_id=0`
       );
     } else {
-      await axios.post("http://localhost:8080/like", {
+      await axios.post("/like", {
         user: user.data.id,
         type: 0,
         post: post.id,

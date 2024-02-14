@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "@/lib/axiosSetting";
 import default_styles from "@/styles/default.module.css";
 import "@/styles/global.css";
 

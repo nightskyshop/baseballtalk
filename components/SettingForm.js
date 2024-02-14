@@ -28,7 +28,7 @@ export default function SettingForm() {
     }
     
     if (user) {
-      await axios.patch(`http://localhost:8080/user/${user.data.id}`, {
+      await axios.patch(`/user/${user.data.id}`, {
         username, email, introduce, image
       });
       router.push("/user-profile");

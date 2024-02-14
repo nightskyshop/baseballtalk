@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import getUser from "@/lib/getUser";
 import Link from "next/link";
 import styles from "./Header.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProfileImage from "./ProfileImage";
 import { useRouter } from "next/router";
 

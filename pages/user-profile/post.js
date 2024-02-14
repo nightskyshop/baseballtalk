@@ -16,7 +16,7 @@ export default function MyPost() {
 
   const  getPosts = async () => {
     await axios
-      .get(`http://localhost:8080/post/user/${user.data.id}?pageNo=${pageNo}`)
+      .get(`/post/user/${user.data.id}?pageNo=${pageNo}`)
       .then((res) => setPosts(res.data.content))
   }
 

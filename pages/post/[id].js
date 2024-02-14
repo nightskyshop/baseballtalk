@@ -15,7 +15,7 @@ export default function PostDetail() {
   const [post, setPost] = useState(undefined);
 
   const getPost = async() => {
-    await axios.get(`http://localhost:8080/post/${id}`)
+    await axios.get(`/post/${id}`)
       .catch(setPost(false))
       .then((res) => (setPost(res.data)))
   };

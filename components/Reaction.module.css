@@ -1,18 +1,18 @@
 .post__reaction {
-  display: flex;
-  margin-bottom: 1em;
+    display: flex;
+    margin-bottom: 1em;
 }
 
 .post__reaction p {
-  margin-right: 1em;
-  color: var(--clr-gray);
-  opacity: 0.7;
+    margin-right: 1em;
+    color: var(--clr-gray);
+    opacity: 0.7;
 }
 
 .post__like svg {
-  color: var(--clr-point);
+    color: var(--clr-point);
 }
 
 .post__chat svg {
-  color: var(--clr-blue);
+    color: var(--clr-blue);
 }
