@@ -1,15 +1,14 @@
-import Link from "next/link"
+import TeamSummary from "./TeamSummary";
+import styles from "./TeamList.module.css";
 
 export default function TeamList({ teams }) {
   console.log(teams);
 
   return(
-    <div>
+    <div className={styles.team__list}>
       {
         teams.map((team) => (
-          <Link href={`/team/${team.id}`}>
-            <h1>{team.teamname}</h1>
-          </Link>
+          <TeamSummary team={team} />
         ))
       }
     </div>

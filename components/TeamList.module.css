@@ -1,0 +1,6 @@
+.team__list {
+    display: grid;
+    grid-auto-rows: 170px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    margin-top: 1.5em;
+}
