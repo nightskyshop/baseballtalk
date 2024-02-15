@@ -3,7 +3,7 @@
     display: flex;
 }
 
-.chat img {
+.chat > img {
     border-radius: 100%;
     margin-right: 1em;
     object-fit: cover;

@@ -10,7 +10,8 @@ export default function Chat({ chat, index }) {
         <h1 className={styles.chat__author}>{chat.author.username}</h1>
         <p className={styles.chat__content}>{chat.content}</p>
         <p className={styles.chat__created}>
-        {chat.createdAt[0]}년 {chat.createdAt[1]}월 {chat.createdAt[2]}일 {chat.createdAt[3]}:{chat.createdAt[4]}
+        {chat.createdAt[0]}년 {chat.createdAt[1]}월 
+        {chat.createdAt[2]}일 {String(chat.createdAt[3]).padStart(2, "0")}:{String(chat.createdAt[4]).padStart(2, "0")}
         </p>
       </div>
     </div>

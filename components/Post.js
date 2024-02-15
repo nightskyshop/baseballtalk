@@ -10,8 +10,10 @@ import styles from "./Post.module.css";
 import axios from "axios";
 import ProfileImage from "./ProfileImage.js";
 import Link from "next/link.js";
+import { useRouter } from "next/router.js";
 
 export default function Post({ post }) {
+  const router = useRouter();
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
   const [chats, setChats] = useState([]);
   const [pageNo, setPageNo] = useState(0);
@@ -37,10 +39,20 @@ export default function Post({ post }) {
       });
   };
 
-  const onClick = (e) => {
+  const onDropdownClick = (e) => {
     e.preventDefault();
     setClicked((prevClicked) => !prevClicked);
   };
+
+  const onDeleteClick = async (e) => {
+    e.preventDefault();
+
+    if (post) {
+      await axios
+        .delete(`/post/${post.id}`)
+        .then(() => router.push("/post"));
+    }
+  }
 
   useEffect(() => console.log(clicked), [clicked]);
 
@@ -73,15 +85,15 @@ export default function Post({ post }) {
           </div>
             { 
             user ? (
-              <button onClick={onClick}>
+              <button onClick={onDropdownClick}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </button>
             ) : null
           }
 
           <div className={`${styles.post__dropdown} ${clicked ? styles.focus : ""}`}>
-            <Link href={`/post/create?update=${true}&id=${post.id}&team=${post.team.id}&category=${post.category}&title=${post.title}&content=${post.content}`}>수정하기</Link>
-            <Link href="/post/create">삭제하기</Link>
+            <Link className={styles.dropdown__update} href={`/post/create?update=${true}&id=${post.id}&team=${post.team.id}&category=${post.category}&title=${post.title}&content=${post.content}`}>수정하기</Link>
+            <button className={styles.dropdown__delete} onClick={onDeleteClick}>삭제하기</button>
           </div>
         </div>
 

@@ -9,15 +9,13 @@ export default function KakaoLogin() {
 
   const { code } = router.query;
 
-  console.log(code);
-
   const sendCode = async () => {
     await axios
-    .get(`/kakao/${code}`)
-    .then((res) => {
-      localStorage.setItem("accessToken", res.data);
-      setOk(true);
-    });
+      .get(`/kakao/${code}`)
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data);
+        setOk(true);
+      });
   }
 
   useEffect(() => {
@@ -30,7 +28,7 @@ export default function KakaoLogin() {
     if (ok) {
       router.push("/");
     }
-  }, [ok])
+  }, [ok]);
   
   return (
     <div className={styles.login__redirect}>
