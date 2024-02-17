@@ -1,23 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import getUser from "@/lib/getUser";
 import styles from "./UserInfo.module.css";
 import ProfileImage from "./ProfileImage";
 
-export default function UserInfo() {
-  const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
-
+export default function UserInfo({ user }) {
   return (
     <div className={styles.info}>
       <div className={styles.info__box}>
-        <ProfileImage url={user.data.image} width={130} height={130} />
+        <ProfileImage url={user.image} width={130} height={130} />
 
         <div>
-          <h1>{user.data.username}</h1>
-          <p>{user.data.team}</p>
+          <h1>{user.username}</h1>
+          <p>{user.team}</p>
         </div>
       </div>
 
-      <p className={`${user.data.introduce == null || user.data.introduce.trim() == "" ? styles.nocontent : ""} ${styles.info__introduce}`}>{user.data.introduce == null || user.data.introduce.trim() == "" ? "아직 소개글이 없습니다..." : user.data.introduce}</p>
+      <p className={`${user.introduce == null || user.introduce.trim() == "" ? styles.nocontent : ""} ${styles.info__introduce}`}>{user.introduce == null || user.introduce.trim() == "" ? "아직 소개글이 없습니다..." : user.introduce}</p>
     </div>
   )
 };

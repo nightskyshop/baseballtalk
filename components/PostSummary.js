@@ -1,7 +1,6 @@
-import PostImage from "@/public/white.png";
 import styles from "./PostSummary.module.css";
 import Link from "next/link";
-import Image from "next/image";
+import ProfileImage from "./ProfileImage";
 
 export default function PostSummary({ post, index }) {
   return (
@@ -11,7 +10,22 @@ export default function PostSummary({ post, index }) {
           <h1>{post.title}</h1>
           <p>{post.content}</p>
         </div>
-        <Image className={styles.postsummary__img} src={PostImage} width={100} height={70} alt="Post Image" />
+        
+        <div className={styles.postsummary__author}>
+          <div className={styles.postsummary__author_top}>
+            <p className={styles.postsummary__author_username}>
+              {post.author.username}
+            </p>
+
+            <ProfileImage url={post.author.image} width={50} height={50} />
+          </div>
+
+          
+          <p className={styles.postsummary__created}>
+            {post.createdAt[0]}.{post.createdAt[1]}.{post.createdAt[2]}{" "}
+            { String(post.createdAt[3]).padStart(2, "0")}:{String(post.createdAt[4]).padStart(2, "0") }
+          </p>
+        </div>
       </Link>
     </div>
   )

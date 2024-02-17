@@ -15,7 +15,7 @@ export default function UserProfile() {
       </Head>
 
       <Navbar selected_btn={1} />
-      {user ? <UserInfo /> : null}
+      {user ? <UserInfo user={user} /> : null}
     </div>
   );
 }

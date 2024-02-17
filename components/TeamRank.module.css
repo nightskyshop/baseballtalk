@@ -6,6 +6,7 @@
 
 .rank__table {
     table-layout: fixed;
+    margin: 0 auto;
 }
 
 .rank__caption {
