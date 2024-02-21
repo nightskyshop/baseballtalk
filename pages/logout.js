@@ -6,6 +6,7 @@ export default function Logout() {
   if (typeof window !== "undefined") {
     if (localStorage.getItem("accessToken")) {
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("tokenExpiresIn");
       router.reload();
     }
 

@@ -47,9 +47,7 @@
 }
 
 .post__author > img {
-    border-radius: 100%;
     margin-right: 1em;
-    object-fit: cover;
 }
 
 .post__author_text {

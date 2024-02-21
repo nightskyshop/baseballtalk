@@ -56,7 +56,7 @@ export default function PostForm() {
     const team = form.elements.namedItem("team").value;
     const category = form.elements.namedItem("category").value;
 
-    if (title == "" || content == "" || team == "" || category == "") {
+    if (title.trim() == "" || content.trim() == "" || team == "" || category == "") {
       window.alert("모든 항목을 입력해주세요.")
     } else {
       await createPost(title, content, team, category, user.data.id);
@@ -73,32 +73,33 @@ export default function PostForm() {
       <div className={styles.form__team}>
         <div className={styles.form__selects}>
           <div className={styles.form__select}>
-            <select name="team">
+            <select name="team" value={default_team ? default_team : ""}>
               <option value="">팀를 선택해주세요.</option>
-              <option value={1} selected={default_team == 1}>LG Twins</option>
-              <option value={2} selected={default_team == 2}>KT Wiz</option>
-              <option value={3} selected={default_team == 3}>SSG Landers</option>
-              <option value={4} selected={default_team == 4}>NC Dinos</option>
-              <option value={5} selected={default_team == 5}>Doosan Bears</option>
-              <option value={6} selected={default_team == 6}>KIA Tigers</option>
-              <option value={7} selected={default_team == 7}>Lotte Giants</option>
-              <option value={8} selected={default_team == 8}>Samsung Lions</option>
-              <option value={9} selected={default_team == 9}>Hanwha Eagles</option>
-              <option value={10} selected={default_team == 10}>Kiwoom Heros</option>
+              <option value={1}>LG Twins</option>
+              <option value={2}>KT Wiz</option>
+              <option value={3}>SSG Landers</option>
+              <option value={4}>NC Dinos</option>
+              <option value={5}>Doosan Bears</option>
+              <option value={6}>KIA Tigers</option>
+              <option value={7}>Lotte Giants</option>
+              <option value={8}>Samsung Lions</option>
+              <option value={9}>Hanwha Eagles</option>
+              <option value={10}>Kiwoom Heros</option>
               <option value={11}>관련 없음</option>
             </select>
             <FontAwesomeIcon icon={faCaretDown} />
           </div>
           
           <div className={styles.form__select}>
-            <select name="category">
+            <select name="category" value={default_category ? default_category : ""} >
               <option value="">주제를 선택해주세요.</option>
-              <option value="팀/선수" selected={default_category == "팀/선수"}>팀/선수</option>
-              <option value="경기" selected={default_category == "경기"}>경기</option>
-              <option value="플레이" selected={default_category == "플레이"}>플레이</option>
-              <option value="국제대회" selected={default_category == "국제대회"}>국제대회</option>
-              <option value="기타" selected={default_category == "기타"}>기타</option>
+              <option value="팀/선수">팀/선수</option>
+              <option value="경기">경기</option>
+              <option value="플레이">플레이</option>
+              <option value="국제대회">국제대회</option>
+              <option value="기타">기타</option>
             </select>
+
             <FontAwesomeIcon icon={faCaretDown} />
           </div>
         </div>

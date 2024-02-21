@@ -1,11 +1,38 @@
 import styles from "./LoginForm.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function LoginForm() {
   const KAKAO_API_URI = process.env.NEXT_PUBLIC_KAKAO_API_URI;
   const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
   const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
+
+  const router = useRouter();
+
+  const login = async (email, password) => {
+    await axios
+      .post("/auth/login", { email, password })
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
+        router.push("/");
+      })
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const email = form.elements.namedItem("email").value;
+    const password = form.elements.namedItem("password").value;
+  
+    if (email.trim() == "" || password.trim() == "") {
+      window.alert("모든 항목을 입력해주세요.");
+    } else {
+      await login(email, password);
+    }
+  };
 
   return (
     <div className={styles.login__box}>
@@ -15,7 +42,7 @@ export default function LoginForm() {
         <Link className={styles.login__signup} href="/signup">회원가입</Link>
       </div>
 
-      <form className={styles.login__form}>
+      <form className={styles.login__form} onSubmit={onSubmit}>
         <p>이메일</p>
         <input 
           type="email"

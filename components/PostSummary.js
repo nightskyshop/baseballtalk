@@ -11,7 +11,7 @@ export default function PostSummary({ post, index }) {
           <p>{post.content}</p>
         </div>
         
-        <div className={styles.postsummary__author}>
+        <Link href={`/user/${post.author.id}`} className={styles.postsummary__author}>
           <div className={styles.postsummary__author_top}>
             <p className={styles.postsummary__author_username}>
               {post.author.username}
@@ -22,10 +22,10 @@ export default function PostSummary({ post, index }) {
 
           
           <p className={styles.postsummary__created}>
-            {post.createdAt[0]}.{post.createdAt[1]}.{post.createdAt[2]}{" "}
+            { post.createdAt[0]}.{post.createdAt[1]}.{post.createdAt[2] }{" "}
             { String(post.createdAt[3]).padStart(2, "0")}:{String(post.createdAt[4]).padStart(2, "0") }
           </p>
-        </div>
+        </Link>
       </Link>
     </div>
   )

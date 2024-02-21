@@ -19,6 +19,8 @@ export default function Post({ post }) {
   const [pageNo, setPageNo] = useState(0);
   const [clicked, setClicked] = useState(false);
 
+  console.log(post);
+
   const getChats = () => {
     axios
       .get(`chat/post/${post.id}?pageNo=${pageNo}`)

@@ -37,9 +37,7 @@
 }
 
 .postsummary__author_top > img {
-  border-radius: 100%;
   margin-left: .75em;
-  object-fit: cover;
 }
 
 .postsummary__author_username {

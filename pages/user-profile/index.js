@@ -8,6 +8,11 @@ import Head from "next/head";
 export default function UserProfile() {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
 
+  if (user) {
+    console.log(user.data);
+    
+  }
+
   return (
     <div className={profile_styles.profile__main}>
       <Head>
@@ -15,7 +20,7 @@ export default function UserProfile() {
       </Head>
 
       <Navbar selected_btn={1} />
-      {user ? <UserInfo user={user} /> : null}
+      {user ? <UserInfo user={user.data} /> : null}
     </div>
   );
 }

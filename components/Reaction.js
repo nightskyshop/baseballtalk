@@ -59,6 +59,10 @@ export default function Reaction({ post, chat_count }) {
     }
   }, [user]);
 
+  useEffect(() => {
+    setLikeCount((prevLikeCount) => (prevLikeCount += 1));
+  }, []);
+
   return (
     <div className={styles.post__reaction}>
       <p className={styles.post__like}>

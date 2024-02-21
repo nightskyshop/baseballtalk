@@ -14,7 +14,7 @@ export default function ChatForm({ createChat }) {
     if (!user) {
       alert("로그인 하세요");
     } else if (content.value.trim() == "") {
-      alert("글을 작성해주세요.")
+      alert("내용을 작성해주세요.")
     } else {
       await createChat(content.value);
     }

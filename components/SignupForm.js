@@ -3,13 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./SignupForm.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function SignupForm () {
   const KAKAO_API_URI = process.env.NEXT_PUBLIC_KAKAO_API_URI;
   const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
   const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 
-  const onSubmit = (e) => {
+  const router = useRouter();
+
+  const [signuped, setSignuped] = useState(false);
+  const [emailCache, setEmailCache] = useState("");
+  const [passwordCache, setPasswordCache] = useState("");
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const username = form.elements.namedItem("username").value;
@@ -22,8 +31,35 @@ export default function SignupForm () {
       window.alert("내용을 모두 적어주세요.");
     } else if (password !== password_check) {
       window.alert("비밀번호와 비밀번호 확인의 값이 다릅니다.");
+    } else {
+      await axios
+        .post("/auth/signup", { username, team, email, password })
+        .then((res) => {
+          if (res.status == 201) {
+            setSignuped(true);
+          }
+        });
+
+      setEmailCache(email);
+      setPasswordCache(password);
     }
   }
+
+  const login = async () => {
+    await axios
+      .post("/auth/login", { email: emailCache, password: passwordCache })
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
+        router.push("/");
+      });
+  };
+
+  useEffect(() => {
+    if (signuped && emailCache !== "" && passwordCache !== "") {
+      login();
+    }
+  }, [signuped]);
 
   return (
     <div className={styles.signup__box}>

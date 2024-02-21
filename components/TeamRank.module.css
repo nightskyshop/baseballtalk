@@ -1,4 +1,7 @@
 .rank {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 1em;
     border: 1px solid var(--clr-blue);
     border-radius: 15px;
@@ -13,6 +16,7 @@
     font-size: var(--fs-h2);
     font-weight: var(--fw-bold);
     color: var(--clr-blue);
+    margin-bottom: .5em;
 }
 
 .rank__thead th:nth-child(1) {

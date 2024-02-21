@@ -38,6 +38,7 @@ input, textarea, select, button {
     --fs-h2: 1.5rem;
     --fs-h3: 1.2rem;
     --fs-h4: 1rem;
+    --fs-h5: .9rem;
     --fs-input: .9rem;
 
     --fw-reg: 300;
