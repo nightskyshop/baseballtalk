@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import getUser from "@/lib/getUser";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
+import uuid from "react-uuid"
 
 export default function PostForm() {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser}).data;
@@ -73,7 +74,7 @@ export default function PostForm() {
       <div className={styles.form__team}>
         <div className={styles.form__selects}>
           <div className={styles.form__select}>
-            <select name="team" value={default_team ? default_team : ""}>
+            <select name="team" key={uuid()} defaultValue={default_team ? default_team : ""}>
               <option value="">팀를 선택해주세요.</option>
               <option value={1}>LG Twins</option>
               <option value={2}>KT Wiz</option>
@@ -91,7 +92,7 @@ export default function PostForm() {
           </div>
           
           <div className={styles.form__select}>
-            <select name="category" value={default_category ? default_category : ""} >
+            <select name="category" key={uuid()} defaultValue={default_category ? default_category : ""} >
               <option value="">주제를 선택해주세요.</option>
               <option value="팀/선수">팀/선수</option>
               <option value="경기">경기</option>

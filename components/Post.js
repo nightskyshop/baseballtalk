@@ -85,12 +85,12 @@ export default function Post({ post }) {
               { String(post.createdAt[3]).padStart(2, "0")}:{String(post.createdAt[4]).padStart(2, "0") }
             </p>
           </div>
-            { 
-            user ? (
+          {
+            user ? user.data.id == post.author.id ? (
               <button onClick={onDropdownClick}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </button>
-            ) : null
+            ) : null : null
           }
 
           <div className={`${styles.post__dropdown} ${clicked ? styles.focus : ""}`}>

@@ -6,8 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import styles from "./Reaction.module.css";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Reaction({ post, chat_count }) {
+  const router = useRouter();
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
 
   const [likeCount, setLikeCount] = useState(post.like_count);
@@ -20,12 +22,21 @@ export default function Reaction({ post, chat_count }) {
       await axios.delete(
         `/like/${user.data.id}?type=0&post_id=${post.id}&chat_id=0`
       );
+
+      setLikeCount((prevLikeCount) => (prevLikeCount -= 1));
     } else {
-      await axios.post("/like", {
-        user: user.data.id,
-        type: 0,
-        post: post.id,
-      });
+      if (!user) {
+        router.push("/login");
+      } else {
+        await axios.post("/like", {
+          user: user.data.id,
+          type: 0,
+          post: post.id,
+        });
+
+      }
+
+      setLikeCount((prevLikeCount) => (prevLikeCount += 1));
     }
 
     setLiked((prevLiked) => !prevLiked);
@@ -40,14 +51,6 @@ export default function Reaction({ post, chat_count }) {
   };
 
   useEffect(() => {
-    if (liked) {
-      setLikeCount((prevLikeCount) => (prevLikeCount += 1));
-    } else {
-      setLikeCount((prevLikeCount) => (prevLikeCount -= 1));
-    }
-  }, [liked]);
-
-  useEffect(() => {
     if (likeCount < 0) {
       setLikeCount(0);
     }
@@ -58,10 +61,6 @@ export default function Reaction({ post, chat_count }) {
       getLiked();
     }
   }, [user]);
-
-  useEffect(() => {
-    setLikeCount((prevLikeCount) => (prevLikeCount += 1));
-  }, []);
 
   return (
     <div className={styles.post__reaction}>
