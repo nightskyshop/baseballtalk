@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import getUser from "@/lib/getUser";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import uuid from "react-uuid"
+import uuid from "react-uuid";
 
 export default function PostForm() {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser}).data;
@@ -26,6 +26,9 @@ export default function PostForm() {
       await axios
         .post("/post", {
           title, content, team, category, author
+        },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
         })
         .then((res) => {
           res.status == 201 ? (
@@ -38,6 +41,9 @@ export default function PostForm() {
       await axios
         .patch(`/post/${id}`, {
           title, content, team, category
+        },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
         })
         .then((res) => {
           res.status == 200 ? (

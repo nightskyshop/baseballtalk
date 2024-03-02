@@ -33,7 +33,7 @@ export default function SignupForm () {
       window.alert("비밀번호와 비밀번호 확인의 값이 다릅니다.");
     } else {
       await axios
-        .post("/auth/signup", { username, team, email, password })
+        .post("/auth/signup", { id:0, username, team, email, password })
         .then((res) => {
           if (res.status == 201) {
             setSignuped(true);

@@ -6,8 +6,8 @@ import styles from "./SettingForm.module.css";
 import ProfileImage from "./ProfileImage";
 import { useEffect, useState } from "react";
 import FiletoBase64 from "@/lib/FiletoBase64";
-import axios from "axios";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function SettingForm() {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser}).data;
@@ -28,9 +28,13 @@ export default function SettingForm() {
     }
     
     if (user) {
-      await axios.patch(`/user/${user.data.id}`, {
-        username, email, introduce, image
-      });
+      await axios
+        .patch(`/user/${user.data.id}`, {
+          username, email, introduce, image
+        },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
+        });
       router.push("/user-profile");
     }
   };
