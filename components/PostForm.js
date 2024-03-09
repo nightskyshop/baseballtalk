@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import uuid from "react-uuid";
 
 export default function PostForm() {
-  const user = useQuery({ queryKey: ["user"], queryFn: getUser}).data;
+  const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
   const router = useRouter();
   const params = useSearchParams();
   const update = params.get("update");
@@ -24,33 +24,46 @@ export default function PostForm() {
   const createPost = async (title, content, team, category, author) => {
     if (!update) {
       await axios
-        .post("/post", {
-          title, content, team, category, author
-        },
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
-        })
+        .post(
+          "/post",
+          {
+            title,
+            content,
+            team,
+            category,
+            author,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
         .then((res) => {
-          res.status == 201 ? (
-            router.push("/post")
-          ) : (
-            window.alert("문제가 생겼습니다. 잠시후 시도해주세요.")
-          )
+          res.status == 201
+            ? router.push("/post")
+            : window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
         });
     } else {
       await axios
-        .patch(`/post/${id}`, {
-          title, content, team, category
-        },
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` }
-        })
+        .patch(
+          `/post/${id}`,
+          {
+            title,
+            content,
+            team,
+            category,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
         .then((res) => {
-          res.status == 200 ? (
-            router.push("/post")
-          ) : (
-            window.alert("문제가 생겼습니다. 잠시후 시도해주세요.")
-          )
+          res.status == 200
+            ? router.push("/post")
+            : window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
         });
     }
   };
@@ -63,8 +76,13 @@ export default function PostForm() {
     const team = form.elements.namedItem("team").value;
     const category = form.elements.namedItem("category").value;
 
-    if (title.trim() == "" || content.trim() == "" || team == "" || category == "") {
-      window.alert("모든 항목을 입력해주세요.")
+    if (
+      title.trim() == "" ||
+      content.trim() == "" ||
+      team == "" ||
+      category == ""
+    ) {
+      window.alert("모든 항목을 입력해주세요.");
     } else {
       await createPost(title, content, team, category, user.data.id);
     }
@@ -80,7 +98,11 @@ export default function PostForm() {
       <div className={styles.form__team}>
         <div className={styles.form__selects}>
           <div className={styles.form__select}>
-            <select name="team" key={uuid()} defaultValue={default_team ? default_team : ""}>
+            <select
+              name="team"
+              key={uuid()}
+              defaultValue={default_team ? default_team : ""}
+            >
               <option value="">팀를 선택해주세요.</option>
               <option value={1}>LG Twins</option>
               <option value={2}>KT Wiz</option>
@@ -96,9 +118,13 @@ export default function PostForm() {
             </select>
             <FontAwesomeIcon icon={faCaretDown} />
           </div>
-          
+
           <div className={styles.form__select}>
-            <select name="category" key={uuid()} defaultValue={default_category ? default_category : ""} >
+            <select
+              name="category"
+              key={uuid()}
+              defaultValue={default_category ? default_category : ""}
+            >
               <option value="">주제를 선택해주세요.</option>
               <option value="팀/선수">팀/선수</option>
               <option value="경기">경기</option>
@@ -130,5 +156,5 @@ export default function PostForm() {
         />
       </div>
     </form>
-  )
-};
+  );
+}

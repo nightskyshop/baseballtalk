@@ -1,29 +1,30 @@
 .chat__form {
-    display: flex;
-    flex-direction: column;
-    margin-top: .75em;
-    padding: 1em;
-    border: 1px solid var(--clr-dark);
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.75em;
+  padding: 1em;
+  border: 1px solid var(--clr-dark);
+  border-radius: 10px;
 }
 
 .chat__form_header {
-    font-size: var(--fs-h3);
+  font-size: var(--fs-h3);
 }
 
 .chat__form_input {
-    font-size: var(--fs-input);
-    margin: .4em 0;
+  font-size: var(--fs-input);
+  margin: 0.4em 0;
+  overflow: hidden;
 }
 
 .chat__form_input::placeholder {
-    color: var(--clr-gray);
-    opacity: 0.7;
+  color: var(--clr-gray);
+  opacity: 0.7;
 }
 
 .chat__form_button {
-    margin-left: auto;
-    font-size: var(--fs-h4);
-    font-weight: var(--fw-bold);
-    cursor: pointer;
+  margin-left: auto;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
 }

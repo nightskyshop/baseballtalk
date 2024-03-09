@@ -29,11 +29,19 @@ export default function Post({ post }) {
 
   const createChat = async (content) => {
     await axios
-      .post("/chat", {
-        content,
-        post: post.id,
-        author: user.data.id,
-      })
+      .post(
+        "/chat",
+        {
+          content,
+          post: post.id,
+          author: user.data.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
       .then((res) => {
         if (res.status == 201) {
           getChats();
@@ -51,10 +59,16 @@ export default function Post({ post }) {
 
     if (post) {
       await axios
-        .delete(`/post/${post.id}`)
+        .delete(`/post/${post.id}`, {
+          headers: {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          },
+        })
         .then(() => router.push("/post"));
     }
-  }
+  };
 
   useEffect(() => console.log(clicked), [clicked]);
 
@@ -82,20 +96,36 @@ export default function Post({ post }) {
             </p>
             <p className={styles.post__created}>
               {post.createdAt[0]}년 {post.createdAt[1]}월 {post.createdAt[2]}일{" "}
-              { String(post.createdAt[3]).padStart(2, "0")}:{String(post.createdAt[4]).padStart(2, "0") }
+              {String(post.createdAt[3]).padStart(2, "0")}:
+              {String(post.createdAt[4]).padStart(2, "0")}
             </p>
           </div>
-          {
-            user ? user.data.id == post.author.id ? (
+          {user ? (
+            user.data.id == post.author.id ? (
               <button onClick={onDropdownClick}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </button>
-            ) : null : null
-          }
+            ) : null
+          ) : null}
 
-          <div className={`${styles.post__dropdown} ${clicked ? styles.focus : ""}`}>
-            <Link className={styles.dropdown__update} href={`/post/create?update=${true}&id=${post.id}&team=${post.team.id}&category=${post.category}&title=${post.title}&content=${post.content}`}>수정하기</Link>
-            <button className={styles.dropdown__delete} onClick={onDeleteClick}>삭제하기</button>
+          <div
+            className={`${styles.post__dropdown} ${
+              clicked ? styles.focus : ""
+            }`}
+          >
+            <Link
+              className={styles.dropdown__update}
+              href={`/post/create?update=${true}&id=${post.id}&team=${
+                post.team.id
+              }&category=${post.category}&title=${post.title}&content=${
+                post.content
+              }`}
+            >
+              수정하기
+            </Link>
+            <button className={styles.dropdown__delete} onClick={onDeleteClick}>
+              삭제하기
+            </button>
           </div>
         </div>
 

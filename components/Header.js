@@ -37,6 +37,10 @@ export default function Header() {
         setNav(true);
       }
     });
+    if (window.innerWidth < 560) {
+      setHamberger(true);
+      setNav(false);
+    }
   }, []);
 
   return (
