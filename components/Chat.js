@@ -4,14 +4,15 @@ import ProfileImage from "./ProfileImage";
 import getUser from "@/lib/getUser.js";
 import { useQuery } from "@tanstack/react-query";
 import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { GlobalContext } from "@/pages/_app";
+import Link from "next/link";
 
 export default function Chat({ chat, index }) {
   const router = useRouter();
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
+
   const [clicked, setClicked] = useState(false);
   const [isUpdating, setIsUpdating] = useState();
 
@@ -44,6 +45,12 @@ export default function Chat({ chat, index }) {
     router.reload();
   };
 
+  const handleBlur = () => {
+    setTimeout(() => {
+      setIsUpdating(false);
+    }, 1000);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -71,7 +78,12 @@ export default function Chat({ chat, index }) {
 
   return (
     <div key={index} className={styles.chat}>
-      <ProfileImage url={chat.author.image} width={50} height={50} />
+      <Link
+        href={`/user/${chat.author.id}`}
+        className={styles.chat__author_link}
+      >
+        <ProfileImage url={chat.author.image} width={50} height={50} />
+      </Link>
 
       <div className={styles.chat__text}>
         <div className={styles.chat__author}>
@@ -88,8 +100,11 @@ export default function Chat({ chat, index }) {
               type="text"
               placeholder="댓글을 수정해주세요."
               rows={1}
-              defaultValue={chat.content}
               onChange={handleResizeHeight}
+              onFocus={handleResizeHeight}
+              onBlur={handleBlur}
+              autoFocus
+              defaultValue={chat.content}
               name="content"
             />
             <button className={styles.chat__form_button}>

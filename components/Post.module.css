@@ -46,7 +46,7 @@
   position: relative;
 }
 
-.post__author > img {
+.post__author_link {
   margin-right: 1em;
 }
 

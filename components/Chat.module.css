@@ -4,7 +4,7 @@
   position: relative;
 }
 
-.chat > img {
+.chat__author_link {
   margin-right: 1em;
 }
 
@@ -41,6 +41,19 @@
 .chat__update_form {
   display: flex;
   justify-content: center;
+}
+
+.chat__form_input {
+  border: 1px solid var(--clr-dark);
+  border-radius: 10px;
+  padding: 0.5em;
+  margin: 0.5em 0.5em 0.5em 0;
+  height: auto;
+  word-break: break-all;
+}
+
+.chat__form_button > svg {
+  font-size: var(--fs-h3);
 }
 
 .chat__created {

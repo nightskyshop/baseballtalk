@@ -4,13 +4,11 @@ import styles from "./TeamList.module.css";
 export default function TeamList({ teams }) {
   console.log(teams);
 
-  return(
+  return (
     <div className={styles.team__list}>
-      {
-        teams.map((team) => (
-          <TeamSummary team={team} />
-        ))
-      }
+      {teams.map((team) => (
+        <TeamSummary team={team} key={team.id} />
+      ))}
     </div>
-  )
+  );
 }

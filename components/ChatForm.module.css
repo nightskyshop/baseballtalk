@@ -15,6 +15,7 @@
   font-size: var(--fs-input);
   margin: 0.4em 0;
   overflow: hidden;
+  word-break: break-all;
 }
 
 .chat__form_input::placeholder {

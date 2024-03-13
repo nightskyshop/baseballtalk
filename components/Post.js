@@ -88,7 +88,12 @@ export default function Post({ post }) {
         <h1 className={styles.post__title}>{post.title}</h1>
 
         <div className={styles.post__author}>
-          <ProfileImage url={post.author.image} width={60} height={60} />
+          <Link
+            href={`/user/${post.author.id}`}
+            className={styles.post__author_link}
+          >
+            <ProfileImage url={post.author.image} width={60} height={60} />
+          </Link>
 
           <div className={styles.post__author_text}>
             <p className={styles.post__author_username}>
