@@ -38,6 +38,11 @@
   font-size: var(--fs-h4);
 }
 
+.chat__update_form {
+  display: flex;
+  justify-content: center;
+}
+
 .chat__created {
   color: var(--clr-gray);
   opacity: 0.7;

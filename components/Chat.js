@@ -3,15 +3,22 @@ import styles from "./Chat.module.css";
 import ProfileImage from "./ProfileImage";
 import getUser from "@/lib/getUser.js";
 import { useQuery } from "@tanstack/react-query";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { GlobalContext } from "@/pages/_app";
 
 export default function Chat({ chat, index }) {
   const router = useRouter();
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
   const [clicked, setClicked] = useState(false);
+  const [isUpdating, setIsUpdating] = useState();
+
+  const handleResizeHeight = (e) => {
+    e.target.style.height = "auto";
+    e.target.style.height = e.target.scrollHeight + "px";
+  };
 
   const onDropdownClick = (e) => {
     e.preventDefault();
@@ -20,6 +27,8 @@ export default function Chat({ chat, index }) {
 
   const onUpdateClick = async (e) => {
     e.preventDefault();
+
+    setIsUpdating((prevClicked) => !prevClicked);
   };
 
   const onDeleteClick = async (e) => {
@@ -35,6 +44,31 @@ export default function Chat({ chat, index }) {
     router.reload();
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const content = form.elements.namedItem("content").value;
+
+    if (!user) {
+      alert("로그인 하세요");
+    } else if (content.trim() == "") {
+      alert("내용을 작성해주세요.");
+    } else {
+      await axios.patch(
+        `/chat/${chat.id}`,
+        { content },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+    }
+
+    router.reload();
+  };
+
   return (
     <div key={index} className={styles.chat}>
       <ProfileImage url={chat.author.image} width={50} height={50} />
@@ -45,7 +79,24 @@ export default function Chat({ chat, index }) {
           <p className={styles.chat__authorteam}> - {chat.author.team}</p>
         </div>
 
-        <p className={styles.chat__content}>{chat.content}</p>
+        {!isUpdating ? (
+          <p className={styles.chat__content}>{chat.content}</p>
+        ) : (
+          <form onSubmit={onSubmit} className={styles.chat__update_form}>
+            <textarea
+              className={styles.chat__form_input}
+              type="text"
+              placeholder="댓글을 수정해주세요."
+              rows={1}
+              defaultValue={chat.content}
+              onChange={handleResizeHeight}
+              name="content"
+            />
+            <button className={styles.chat__form_button}>
+              <FontAwesomeIcon icon={faCheck} />
+            </button>
+          </form>
+        )}
 
         <p className={styles.chat__created}>
           {chat.createdAt[0]}년 {chat.createdAt[1]}월 {chat.createdAt[2]}일{" "}
