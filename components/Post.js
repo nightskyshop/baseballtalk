@@ -96,9 +96,12 @@ export default function Post({ post }) {
           </Link>
 
           <div className={styles.post__author_text}>
-            <p className={styles.post__author_username}>
-              {post.author.username}
-            </p>
+            <div className={styles.post__author_names}>
+              <p className={styles.post__author_username}>
+                {post.author.username}
+              </p>
+              <p className={styles.post__author_team}> - {post.author.team}</p>
+            </div>
             <p className={styles.post__created}>
               {post.createdAt[0]}년 {post.createdAt[1]}월 {post.createdAt[2]}일{" "}
               {String(post.createdAt[3]).padStart(2, "0")}:

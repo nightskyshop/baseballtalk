@@ -20,7 +20,12 @@ export default function Reaction({ post, chat_count }) {
 
     if (liked) {
       await axios.delete(
-        `/like/${user.data.id}?type=0&post_id=${post.id}&chat_id=0`
+        `/like/${user.data.id}?type=0&post_id=${post.id}&chat_id=0`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
       );
 
       setLikeCount((prevLikeCount) => (prevLikeCount -= 1));
@@ -33,7 +38,6 @@ export default function Reaction({ post, chat_count }) {
           type: 0,
           post: post.id,
         });
-
       }
 
       setLikeCount((prevLikeCount) => (prevLikeCount += 1));
