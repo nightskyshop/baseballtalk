@@ -83,7 +83,7 @@ export default function SettingForm() {
     }
   };
 
-  const onImageChange = async (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     const base64Image = await FiletoBase64(file);
     console.log(base64Image);
@@ -119,7 +119,7 @@ export default function SettingForm() {
             <input
               name="image"
               id="image"
-              onChange={onImageChange}
+              onChange={handleImageChange}
               type="file"
             />
           </div>

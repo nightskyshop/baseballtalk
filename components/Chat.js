@@ -21,18 +21,19 @@ export default function Chat({ chat, index }) {
     e.target.style.height = e.target.scrollHeight + "px";
   };
 
-  const onDropdownClick = (e) => {
+  const handleDropdownClick = (e) => {
     e.preventDefault();
     setClicked((prevClicked) => !prevClicked);
   };
 
-  const onUpdateClick = async (e) => {
+  const handleUpdateClick = async (e) => {
     e.preventDefault();
 
-    setIsUpdating((prevClicked) => !prevClicked);
+    setIsUpdating(true);
+    setClicked(false);
   };
 
-  const onDeleteClick = async (e) => {
+  const handleDeleteClick = async (e) => {
     e.preventDefault();
 
     if (chat && user) {
@@ -51,7 +52,7 @@ export default function Chat({ chat, index }) {
     }, 1000);
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -76,6 +77,12 @@ export default function Chat({ chat, index }) {
     router.reload();
   };
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode == 13 && e.shiftKey) {
+      form.submit();
+    }
+  };
+
   return (
     <div key={index} className={styles.chat}>
       <Link
@@ -94,13 +101,14 @@ export default function Chat({ chat, index }) {
         {!isUpdating ? (
           <p className={styles.chat__content}>{chat.content}</p>
         ) : (
-          <form onSubmit={onSubmit} className={styles.chat__update_form}>
+          <form onSubmit={handleSubmit} className={styles.chat__update_form}>
             <textarea
               className={styles.chat__form_input}
               type="text"
               placeholder="댓글을 수정해주세요."
               rows={1}
               onChange={handleResizeHeight}
+              onKeyDown={handleKeyDown}
               onFocus={handleResizeHeight}
               onBlur={handleBlur}
               autoFocus
@@ -122,7 +130,7 @@ export default function Chat({ chat, index }) {
 
       {user ? (
         user.data.id == chat.author.id ? (
-          <button onClick={onDropdownClick}>
+          <button onClick={handleDropdownClick}>
             <FontAwesomeIcon icon={faEllipsisVertical} />
           </button>
         ) : null
@@ -131,10 +139,10 @@ export default function Chat({ chat, index }) {
       <div
         className={`${styles.chat__dropdown} ${clicked ? styles.focus : ""}`}
       >
-        <button className={styles.dropdown__update} onClick={onUpdateClick}>
+        <button className={styles.dropdown__update} onClick={handleUpdateClick}>
           수정하기
         </button>
-        <button className={styles.dropdown__delete} onClick={onDeleteClick}>
+        <button className={styles.dropdown__delete} onClick={handleDeleteClick}>
           삭제하기
         </button>
       </div>

@@ -1,15 +1,16 @@
 .team__summary {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .team__summary img {
-    display: block;
-    margin: 0 auto .5em;
+  display: block;
+  margin: 0 auto 0.5em;
 }
 
-.team__summary h1 {
-    font-size: var(--fs-h);
+.team__name {
+  font-size: var(--fs-h2);
+  text-align: center;
 }

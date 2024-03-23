@@ -21,10 +21,10 @@ export default function Header() {
   const [hamburger, setHamberger] = useState(false);
   const [nav, setNav] = useState(true);
 
-  const onMouseEnter = () => setDropdown(true);
-  const onMouseLeave = () => setDropdown(false);
+  const handleMouseEnter = () => setDropdown(true);
+  const handleMouseLeave = () => setDropdown(false);
 
-  const onNavClick = () => {
+  const handleNavClick = () => {
     setNav((prevNav) => !prevNav);
   };
 
@@ -53,7 +53,7 @@ export default function Header() {
         {hamburger ? (
           <FontAwesomeIcon
             icon={faBars}
-            onClick={onNavClick}
+            onClick={handleNavClick}
             className={styles.header__hamberger}
           />
         ) : null}
@@ -81,8 +81,8 @@ export default function Header() {
                     로그아웃
                   </Link>
                   <div
-                    onMouseEnter={onMouseEnter}
-                    onMouseLeave={onMouseLeave}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                     className={styles.header__profile}
                   >
                     <ProfileImage

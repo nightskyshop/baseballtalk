@@ -12,21 +12,19 @@ export default function LoginForm() {
   const router = useRouter();
 
   const login = async (email, password) => {
-    await axios
-      .post("/auth/login", { email, password })
-      .then((res) => {
-        localStorage.setItem("accessToken", res.data.accessToken);
-        localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
-        router.push("/");
-      })
+    await axios.post("/auth/login", { email, password }).then((res) => {
+      localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
+      router.push("/");
+    });
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const email = form.elements.namedItem("email").value;
     const password = form.elements.namedItem("password").value;
-  
+
     if (email.trim() == "" || password.trim() == "") {
       window.alert("모든 항목을 입력해주세요.");
     } else {
@@ -39,16 +37,14 @@ export default function LoginForm() {
       <div className={styles.login__header}>
         <h1 className={styles.login__logo}>Login</h1>
 
-        <Link className={styles.login__signup} href="/signup">회원가입</Link>
+        <Link className={styles.login__signup} href="/signup">
+          회원가입
+        </Link>
       </div>
 
-      <form className={styles.login__form} onSubmit={onSubmit}>
+      <form className={styles.login__form} onSubmit={handleSubmit}>
         <p>이메일</p>
-        <input 
-          type="email"
-          name="email"
-          className={styles.login__email}
-        />
+        <input type="email" name="email" className={styles.login__email} />
 
         <p>비밀번호</p>
         <input
@@ -63,7 +59,9 @@ export default function LoginForm() {
       <hr className={styles.hr} />
 
       <div className={styles.social__login}>
-        <a href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}>
+        <a
+          href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}
+        >
           <Image
             className={styles.social__kakao}
             src="/images/kakao_login_image.png"
@@ -74,5 +72,5 @@ export default function LoginForm() {
         </a>
       </div>
     </div>
-  )
-};
+  );
+}

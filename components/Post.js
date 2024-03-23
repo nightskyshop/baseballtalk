@@ -49,12 +49,12 @@ export default function Post({ post }) {
       });
   };
 
-  const onDropdownClick = (e) => {
+  const handleDropdownClick = (e) => {
     e.preventDefault();
     setClicked((prevClicked) => !prevClicked);
   };
 
-  const onDeleteClick = async (e) => {
+  const handleDeleteClick = async (e) => {
     e.preventDefault();
 
     if (post) {
@@ -82,7 +82,7 @@ export default function Post({ post }) {
     <div className={styles.post}>
       <div className={styles.post__post}>
         <div className={styles.post__tc}>
-          <h1 className={styles.post__team}>{post.team.teamname}</h1>-
+          <h1 className={styles.post__team}>{post.team.teamnameEn}</h1>-
           <p className={styles.post__category}>{post.category}</p>
         </div>
         <h1 className={styles.post__title}>{post.title}</h1>
@@ -110,7 +110,7 @@ export default function Post({ post }) {
           </div>
           {user ? (
             user.data.id == post.author.id ? (
-              <button onClick={onDropdownClick}>
+              <button onClick={handleDropdownClick}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </button>
             ) : null
@@ -131,7 +131,10 @@ export default function Post({ post }) {
             >
               수정하기
             </Link>
-            <button className={styles.dropdown__delete} onClick={onDeleteClick}>
+            <button
+              className={styles.dropdown__delete}
+              onClick={handleDeleteClick}
+            >
               삭제하기
             </button>
           </div>

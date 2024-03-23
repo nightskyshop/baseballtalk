@@ -15,7 +15,6 @@ export default function OtherUserProfile() {
     await axios
       .get(`/user/${id}`)
       .then((res) => {
-        console.log(res);
         setUser(res.data);
       })
       .catch((err) => {

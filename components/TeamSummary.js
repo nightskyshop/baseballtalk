@@ -13,7 +13,7 @@ export default function TeamSummary({ team }) {
           alt="Team Image"
           priority
         />
-        <h1>{team.teamname}</h1>
+        <h1 className={styles.team__name}>{team.teamnameEn}</h1>
       </Link>
     </div>
   );

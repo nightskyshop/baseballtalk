@@ -15,7 +15,7 @@ export default function Reaction({ post, chat_count }) {
   const [likeCount, setLikeCount] = useState(post.like_count);
   const [liked, setLiked] = useState(false);
 
-  const onLikeClick = async (e) => {
+  const handleLikeClick = async (e) => {
     e.preventDefault();
 
     if (liked) {
@@ -71,9 +71,9 @@ export default function Reaction({ post, chat_count }) {
       <p className={styles.post__like}>
         좋아요{" "}
         {liked ? (
-          <FontAwesomeIcon onClick={onLikeClick} icon={faHeartFill} />
+          <FontAwesomeIcon onClick={handleLikeClick} icon={faHeartFill} />
         ) : (
-          <FontAwesomeIcon onClick={onLikeClick} icon={faHeart} />
+          <FontAwesomeIcon onClick={handleLikeClick} icon={faHeart} />
         )}{" "}
         {likeCount}
       </p>

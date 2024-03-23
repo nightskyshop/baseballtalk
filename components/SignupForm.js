@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-export default function SignupForm () {
+export default function SignupForm() {
   const KAKAO_API_URI = process.env.NEXT_PUBLIC_KAKAO_API_URI;
   const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
   const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
@@ -18,7 +18,7 @@ export default function SignupForm () {
   const [emailCache, setEmailCache] = useState("");
   const [passwordCache, setPasswordCache] = useState("");
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const username = form.elements.namedItem("username").value;
@@ -27,13 +27,19 @@ export default function SignupForm () {
     const password = form.elements.namedItem("password").value;
     const password_check = form.elements.namedItem("password_check").value;
 
-    if (username === "" || team === "" || email === "" || password === "" || password_check === "") {
+    if (
+      username === "" ||
+      team === "" ||
+      email === "" ||
+      password === "" ||
+      password_check === ""
+    ) {
       window.alert("내용을 모두 적어주세요.");
     } else if (password !== password_check) {
       window.alert("비밀번호와 비밀번호 확인의 값이 다릅니다.");
     } else {
       await axios
-        .post("/auth/signup", { id:0, username, team, email, password })
+        .post("/auth/signup", { id: 0, username, team, email, password })
         .then((res) => {
           if (res.status == 201) {
             setSignuped(true);
@@ -43,7 +49,7 @@ export default function SignupForm () {
       setEmailCache(email);
       setPasswordCache(password);
     }
-  }
+  };
 
   const login = async () => {
     await axios
@@ -66,12 +72,14 @@ export default function SignupForm () {
       <div className={styles.signup__header}>
         <h1 className={styles.signup__logo}>Signup</h1>
 
-        <Link className={styles.signup__login} href="/login">로그인</Link>
+        <Link className={styles.signup__login} href="/login">
+          로그인
+        </Link>
       </div>
 
-      <form className={styles.signup__form} onSubmit={onSubmit}>
+      <form className={styles.signup__form} onSubmit={handleSubmit}>
         <p>활동명</p>
-        <input 
+        <input
           type="text"
           name="username"
           className={styles.signup__username}
@@ -96,11 +104,7 @@ export default function SignupForm () {
         </div>
 
         <p>이메일</p>
-        <input 
-          type="email"
-          name="email"
-          className={styles.signup__email}
-        />
+        <input type="email" name="email" className={styles.signup__email} />
 
         <p>비밀번호</p>
         <input
@@ -122,7 +126,9 @@ export default function SignupForm () {
       <hr className={styles.hr} />
 
       <div className={styles.social__login}>
-        <a href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}>
+        <a
+          href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}
+        >
           <Image
             className={styles.social__kakao}
             src="/images/kakao_login_image.png"
@@ -133,5 +139,5 @@ export default function SignupForm () {
         </a>
       </div>
     </div>
-  )
+  );
 }

@@ -1,48 +1,52 @@
 @font-face {
-    font-family: "NotoSansKR";
-    font-weight: 400;
-    font-style: normal;
-    src: url("/fonts/NotoSansKR.ttf") format("truetype");
+  font-family: "NotoSansKR";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/NotoSansKR.ttf") format("truetype");
 }
 
-*, *::after, *::before {
-    margin: 0;
-    padding: 0;
-    top: 0;
-    font-family: -apple-system, NotoSansKR, sans-serif;
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  font-family: -apple-system, NotoSansKR, sans-serif;
 }
 
 body {
-    font-family: NotoSansKR;
+  font-family: NotoSansKR;
 }
 
 a {
-    text-decoration: none;
-    color: var(--clr-dark)
+  text-decoration: none;
+  color: var(--clr-dark);
 }
 
-input, textarea, select, button {
-    all: unset;
+input,
+textarea,
+select,
+button {
+  all: unset;
 }
 
 :root {
-    --clr-dark: #0B2545;
-    --clr-gray: #494949;
-    --clr-background: #EEF4ED;
-    --clr-light: #FFFFFF;
-    --clr-point: #E88168;
-    --clr-blue: #134074;
-    
-    --fs-h1: 2.35rem;
-    --fs-h: 1.8rem;
-    --fs-h2: 1.5rem;
-    --fs-h3: 1.2rem;
-    --fs-h4: 1rem;
-    --fs-h5: .9rem;
-    --fs-input: .9rem;
+  --clr-dark: #0b2545;
+  --clr-gray: #494949;
+  --clr-background: #eef4ed;
+  --clr-light: #ffffff;
+  --clr-point: #e88168;
+  --clr-blue: #134074;
 
-    --fw-reg: 300;
-    --fw-bold: 800;
+  --fs-h1: 2.35rem;
+  --fs-h2: 1.5rem;
+  --fs-h3: 1.2rem;
+  --fs-h4: 1rem;
+  --fs-h5: 0.9rem;
+  --fs-input: 0.9rem;
 
-    --default-padding: 1em;
+  --fw-reg: 300;
+  --fw-bold: 800;
+
+  --default-padding: 1em;
 }

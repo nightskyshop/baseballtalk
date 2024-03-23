@@ -43,6 +43,10 @@
   justify-content: center;
 }
 
+.chat__update_form > textarea {
+  width: 100%;
+}
+
 .chat__form_input {
   border: 1px solid var(--clr-dark);
   border-radius: 10px;

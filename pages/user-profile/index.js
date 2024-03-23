@@ -8,11 +8,6 @@ import Head from "next/head";
 export default function UserProfile() {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
 
-  if (user) {
-    console.log(user.data);
-    
-  }
-
   return (
     <div className={profile_styles.profile__main}>
       <Head>

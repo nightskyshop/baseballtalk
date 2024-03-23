@@ -10,7 +10,7 @@ export default function ChatForm({ createChat }) {
     e.target.style.height = e.target.scrollHeight + "px";
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -28,7 +28,7 @@ export default function ChatForm({ createChat }) {
   };
 
   return (
-    <form onSubmit={onSubmit} className={styles.chat__form}>
+    <form onSubmit={handleSubmit} className={styles.chat__form}>
       <h1 className={styles.chat__form_header}>{user.data.username}</h1>
       <textarea
         className={styles.chat__form_input}

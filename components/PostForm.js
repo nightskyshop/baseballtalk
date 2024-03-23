@@ -7,11 +7,14 @@ import getUser from "@/lib/getUser";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import uuid from "react-uuid";
+import { useEffect, useState } from "react";
 
 export default function PostForm() {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
   const router = useRouter();
   const params = useSearchParams();
+
+  const [teams, setTeams] = useState([]);
   const update = params.get("update");
   const id = params.get("id");
   const default_team = params.get("team");
@@ -20,6 +23,11 @@ export default function PostForm() {
   const default_content = params.get("content");
 
   console.log(default_team);
+
+  const getTeams = async () => {
+    const t = await axios.get(`/team`);
+    setTeams(t.data);
+  };
 
   const createPost = async (title, content, team, category, author) => {
     if (!update) {
@@ -68,7 +76,7 @@ export default function PostForm() {
     }
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     const title = form.elements.namedItem("title").value;
@@ -88,8 +96,12 @@ export default function PostForm() {
     }
   };
 
+  useEffect(() => {
+    getTeams();
+  }, []);
+
   return (
-    <form onSubmit={onSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.form__header}>
         <h1>게시판 글쓰기</h1>
         <button>등록</button>
@@ -104,7 +116,7 @@ export default function PostForm() {
               defaultValue={default_team ? default_team : ""}
             >
               <option value="">팀를 선택해주세요.</option>
-              <option value={1}>LG Twins</option>
+              {/* <option value={1}>LG Twins</option>
               <option value={2}>KT Wiz</option>
               <option value={3}>SSG Landers</option>
               <option value={4}>NC Dinos</option>
@@ -113,7 +125,12 @@ export default function PostForm() {
               <option value={7}>Lotte Giants</option>
               <option value={8}>Samsung Lions</option>
               <option value={9}>Hanwha Eagles</option>
-              <option value={10}>Kiwoom Heros</option>
+              <option value={10}>Kiwoom Heros</option> */}
+              {teams.map((team) => (
+                <option key={team.id} value={team.id}>
+                  {team.teamnameEn}
+                </option>
+              ))}
               <option value={11}>관련 없음</option>
             </select>
             <FontAwesomeIcon icon={faCaretDown} />

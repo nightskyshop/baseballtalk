@@ -4,9 +4,7 @@ export default function TeamRank({ teamRanking }) {
   return (
     <div className={styles.rank}>
       <table className={styles.rank__table}>
-        <caption className={styles.rank__caption}>
-          TEAM RANKING
-        </caption>
+        <caption className={styles.rank__caption}>TEAM RANKING</caption>
 
         <thead className={styles.rank__thead}>
           <tr>
@@ -21,15 +19,17 @@ export default function TeamRank({ teamRanking }) {
         <tbody className={styles.rank__tbody}>
           {teamRanking.map((team, index) => (
             <tr key={index}>
-              <th scope="row">{team.rank}.</th>
-              <td>{team.name}</td>
+              <th scope="row">{team.ranknum}.</th>
+              <td>{team.teamname}</td>
               <td>{team.game}</td>
-              <td>{team.win}/{team.lose}/{team.tie}</td>
-              <td>{team.winavg.toFixed(3)}</td>
+              <td>
+                {team.win}/{team.lose}/{team.tie}
+              </td>
+              <td>{(team.winavg / 1000).toFixed(3)}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  )
-};
+  );
+}

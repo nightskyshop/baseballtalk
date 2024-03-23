@@ -112,7 +112,7 @@ export default function Posts() {
   const getTeams = async () => {
     const t = await axios.get(`/team`);
     setTeams(t.data);
-  }
+  };
 
   useEffect(() => {
     getPosts();
@@ -126,7 +126,7 @@ export default function Posts() {
       </Head>
 
       <div className={styles.post_grid}>
-        <TeamRank className={styles.rank} teamRanking={teamRanking} />
+        <TeamRank className={styles.rank} teamRanking={teams} />
         <PostList className={styles.list} posts={posts} />
       </div>
 
