@@ -79,7 +79,7 @@ export default function Chat({ chat, index }) {
 
   const handleKeyDown = (e) => {
     if (e.keyCode == 13 && e.shiftKey) {
-      form.submit();
+      e.preventDefault();
     }
   };
 
