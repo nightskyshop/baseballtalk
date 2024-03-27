@@ -13,7 +13,7 @@ export default function Chat({ chat, index }) {
   const router = useRouter();
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
 
-  const [clicked, setClicked] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
   const [isUpdating, setIsUpdating] = useState();
 
   const handleResizeHeight = (e) => {
@@ -23,14 +23,26 @@ export default function Chat({ chat, index }) {
 
   const handleDropdownClick = (e) => {
     e.preventDefault();
-    setClicked((prevClicked) => !prevClicked);
+    setDropdown((prevDropdown) => !prevDropdown);
+  };
+
+  const handleDropdownBlur = () => {
+    setTimeout(() => {
+      setDropdown(false);
+    }, 100);
   };
 
   const handleUpdateClick = async (e) => {
     e.preventDefault();
 
     setIsUpdating(true);
-    setClicked(false);
+    setDropdown(false);
+  };
+
+  const handleUpdateBlur = () => {
+    setTimeout(() => {
+      setIsUpdating(false);
+    }, 100);
   };
 
   const handleDeleteClick = async (e) => {
@@ -44,12 +56,6 @@ export default function Chat({ chat, index }) {
       });
     }
     router.reload();
-  };
-
-  const handleBlur = () => {
-    setTimeout(() => {
-      setIsUpdating(false);
-    }, 1000);
   };
 
   const handleSubmit = async (e) => {
@@ -110,7 +116,7 @@ export default function Chat({ chat, index }) {
               onChange={handleResizeHeight}
               onKeyDown={handleKeyDown}
               onFocus={handleResizeHeight}
-              onBlur={handleBlur}
+              onBlur={handleUpdateBlur}
               autoFocus
               defaultValue={chat.content}
               name="content"
@@ -130,14 +136,14 @@ export default function Chat({ chat, index }) {
 
       {user ? (
         user.data.id == chat.author.id ? (
-          <button onClick={handleDropdownClick}>
+          <button onClick={handleDropdownClick} onBlur={handleDropdownBlur}>
             <FontAwesomeIcon icon={faEllipsisVertical} />
           </button>
         ) : null
       ) : null}
 
       <div
-        className={`${styles.chat__dropdown} ${clicked ? styles.focus : ""}`}
+        className={`${styles.chat__dropdown} ${dropdown ? styles.focus : ""}`}
       >
         <button className={styles.dropdown__update} onClick={handleUpdateClick}>
           수정하기

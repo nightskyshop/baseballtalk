@@ -15,16 +15,16 @@ import { useRouter } from "next/router.js";
 export default function Post({ post }) {
   const router = useRouter();
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
+
   const [chats, setChats] = useState([]);
   const [pageNo, setPageNo] = useState(0);
-  const [clicked, setClicked] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
 
-  console.log(post);
-
-  const getChats = () => {
-    axios
-      .get(`chat/post/${post.id}?pageNo=${pageNo}`)
-      .then((res) => setChats(res.data.content));
+  const getChats = async () => {
+    const { data: chats } = await axios.get(
+      `/chat/post/${post.id}?pageNo=${pageNo}`
+    );
+    setChats(chats.content);
   };
 
   const createChat = async (content) => {
@@ -51,7 +51,13 @@ export default function Post({ post }) {
 
   const handleDropdownClick = (e) => {
     e.preventDefault();
-    setClicked((prevClicked) => !prevClicked);
+    setDropdown((prevdropdown) => !prevdropdown);
+  };
+
+  const handleDropdownBlur = () => {
+    setTimeout(() => {
+      setDropdown(false);
+    }, 100);
   };
 
   const handleDeleteClick = async (e) => {
@@ -70,13 +76,9 @@ export default function Post({ post }) {
     }
   };
 
-  useEffect(() => console.log(clicked), [clicked]);
-
   useEffect(() => {
-    if (post) {
-      getChats();
-    }
-  }, [post.id]);
+    getChats();
+  }, []);
 
   return (
     <div className={styles.post}>
@@ -110,7 +112,7 @@ export default function Post({ post }) {
           </div>
           {user ? (
             user.data.id == post.author.id ? (
-              <button onClick={handleDropdownClick}>
+              <button onClick={handleDropdownClick} onBlur={handleDropdownBlur}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </button>
             ) : null
@@ -118,7 +120,7 @@ export default function Post({ post }) {
 
           <div
             className={`${styles.post__dropdown} ${
-              clicked ? styles.focus : ""
+              dropdown ? styles.focus : ""
             }`}
           >
             <Link
@@ -149,7 +151,7 @@ export default function Post({ post }) {
 
       <hr />
 
-      <ChatList chats={chats} />
+      {chats ? chats.length > 0 ? <ChatList chats={chats} /> : null : null}
 
       {user ? <ChatForm user={user} createChat={createChat} /> : null}
     </div>
