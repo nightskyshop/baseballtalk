@@ -9,21 +9,33 @@ import getUser from "@/lib/getUser";
 import Team from "@/components/Team";
 import Head from "next/head";
 
-export default function TeamDetail() {
-  const user = useQuery({ queryKey: ["user"], queryFn: getUser}).data;
-  const router = useRouter();
-  const { id } = router.query;
+export async function getServerSideProps(context) {
+  const id = context.params["id"];
 
-  const [team, setTeam] = useState({});
+  let team;
+  try {
+    const res = await axios.get(`/team/${id}`);
+    team = res.data;
+  } catch {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      team,
+    },
+  };
+}
+
+export default function TeamDetail({ team }) {
+  const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
+  const router = useRouter();
+
+  const { id } = router.query;
   const [posts, setPosts] = useState([]);
   const [pageNo, setPageNo] = useState(0);
-
-  const getTeam = async () => {
-    await axios
-      .get(`/team/${id}`)
-      .catch(setTeam(false))
-      .then((res) => setTeam(res.data));
-  }
 
   const getPosts = async () => {
     await axios
@@ -35,36 +47,27 @@ export default function TeamDetail() {
   useEffect(() => {
     if (id) {
       getPosts();
-      getTeam();
     }
   }, [id]);
 
+  if (!team || !posts) return <div>로딩 중...</div>;
+
   return (
     <div className={styles.team}>
+      <Head>
+        <title>{team.teamname} 갤러리</title>
+      </Head>
 
-      {
-        team ? (
-          <>
-            <Head>
-              <title>{team.teamname} 갤러리</title>
-            </Head>
+      <Team team={team} />
 
-            <Team team={team} />
-          </>
-        ) : (
-          <div>글이 없습니다.</div>
-        )
-      }
-      {
-        posts ? (
-          <div className={styles.team__postlist}>
-            { user ? team ? <Link href={`/post/create?team=${team.id}`}>글쓰기</Link> : null : null }
-            <PostList posts={posts} />
-          </div>
-          ) : (
-          <div>ERROR</div>
-        )
-      }
+      <div className={styles.team__postlist}>
+        {user ? (
+          team ? (
+            <Link href={`/post/create?team=${team.id}`}>글쓰기</Link>
+          ) : null
+        ) : null}
+        <PostList posts={posts} />
+      </div>
     </div>
-  )
+  );
 }

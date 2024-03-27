@@ -5,41 +5,36 @@ import styles from "@/styles/otherprofile.module.css";
 import axios from "axios";
 import Head from "next/head";
 
-export default function OtherUserProfile() {
-  const [user, setUser] = useState(undefined);
+export async function getServerSideProps(context) {
+  const id = context.params["id"];
 
-  const router = useRouter();
-  const { id } = router.query;
+  let user;
+  try {
+    const res = await axios.get(`/user/${id}`);
+    user = res.data;
+  } catch {
+    return {
+      notFound: true,
+    };
+  }
 
-  const getUser = async () => {
-    await axios
-      .get(`/user/${id}`)
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        window.alert("잘못된 접근입니다.");
-        router.push("/post");
-      });
+  return {
+    props: {
+      user,
+    },
   };
+}
 
-  useEffect(() => {
-    if (id) {
-      getUser();
-    }
-  }, [id]);
+export default function OtherUserProfile({ user }) {
+  if (!user) return <div>로딩 중...</div>;
 
   return (
     <div className={styles.otheruserprofile}>
-      {user ? (
-        <>
-          <Head>
-            <title>{user.username}</title>
-          </Head>
+      <Head>
+        <title>{user.username}</title>
+      </Head>
 
-          <UserInfo user={user} />
-        </>
-      ) : null}
+      <UserInfo user={user} />
     </div>
   );
 }
