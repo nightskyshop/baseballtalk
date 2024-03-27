@@ -22,8 +22,6 @@ export default function PostForm() {
   const default_title = params.get("title");
   const default_content = params.get("content");
 
-  console.log(default_team);
-
   const getTeams = async () => {
     const t = await axios.get(`/team`);
     setTeams(t.data);
@@ -133,7 +131,10 @@ export default function PostForm() {
               ))}
               <option value={11}>관련 없음</option>
             </select>
-            <FontAwesomeIcon icon={faCaretDown} />
+            <FontAwesomeIcon
+              icon={faCaretDown}
+              className={styles.form__select_btn}
+            />
           </div>
 
           <div className={styles.form__select}>
@@ -150,7 +151,10 @@ export default function PostForm() {
               <option value="기타">기타</option>
             </select>
 
-            <FontAwesomeIcon icon={faCaretDown} />
+            <FontAwesomeIcon
+              icon={faCaretDown}
+              className={styles.form__select_btn}
+            />
           </div>
         </div>
 

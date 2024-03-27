@@ -86,7 +86,6 @@ export default function SettingForm() {
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     const base64Image = await FiletoBase64(file);
-    console.log(base64Image);
     setProfileImage(base64Image);
   };
 

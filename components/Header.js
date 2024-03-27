@@ -15,7 +15,6 @@ export default function Header() {
     queryKey: ["user"],
     queryFn: getUser,
   });
-  console.log(data, isLoading, error);
 
   const [dropdown, setDropdown] = useState(false);
   const [hamburger, setHamberger] = useState(false);
@@ -26,6 +25,12 @@ export default function Header() {
 
   const handleNavClick = () => {
     setNav((prevNav) => !prevNav);
+  };
+
+  const handleClick = () => {
+    if (hamburger) {
+      setNav(false);
+    }
   };
 
   useEffect(() => {
@@ -54,7 +59,7 @@ export default function Header() {
           <FontAwesomeIcon
             icon={faBars}
             onClick={handleNavClick}
-            className={styles.header__hamberger}
+            className={`${styles.header__hamberger} fa-2xl`}
           />
         ) : null}
 
@@ -62,22 +67,32 @@ export default function Header() {
           <div className={styles.header__nav}>
             <ul className={styles.header__list}>
               <li className={styles.header__postlist}>
-                <Link href="/post">커뮤니티</Link>
+                <Link onClick={handleClick} href="/post">
+                  커뮤니티
+                </Link>
               </li>
 
               <li className={styles.header_postcreate}>
-                <Link href="/post/create">커뮤니티 글쓰기</Link>
+                <Link onClick={handleClick} href="/post/create">
+                  커뮤니티 글쓰기
+                </Link>
               </li>
 
               <li className={styles.header_datareferance}>
-                <Link href="/data-referance">데이터 자료실</Link>
+                <Link onClick={handleClick} href="/data-referance">
+                  데이터 자료실
+                </Link>
               </li>
             </ul>
 
             <div className={styles.header__user}>
               {data ? (
                 <>
-                  <Link href="/logout" className={styles.header__logout}>
+                  <Link
+                    onClick={handleClick}
+                    href="/logout"
+                    className={styles.header__logout}
+                  >
                     로그아웃
                   </Link>
                   <div
@@ -96,16 +111,26 @@ export default function Header() {
                         styles.header__dropdown
                       }`}
                     >
-                      <Link href="/user-profile">내 프로필</Link>
+                      <Link onClick={handleClick} href="/user-profile">
+                        내 프로필
+                      </Link>
                     </div>
                   </div>
                 </>
               ) : (
                 <>
-                  <Link className={styles.header__login} href="/login">
+                  <Link
+                    onClick={handleClick}
+                    className={styles.header__login}
+                    href="/login"
+                  >
                     로그인
                   </Link>
-                  <Link className={styles.header__signup} href="/signup">
+                  <Link
+                    onClick={handleClick}
+                    className={styles.header__signup}
+                    href="/signup"
+                  >
                     회원가입
                   </Link>
                 </>
