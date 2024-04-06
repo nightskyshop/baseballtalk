@@ -12,11 +12,15 @@ import ProfileImage from "./ProfileImage.js";
 import Link from "next/link.js";
 import { useRouter } from "next/router.js";
 
-export default function Post({ post }) {
+export default function Post({
+  post,
+  chats: default_chats = [],
+  totalPages = 1,
+}) {
   const router = useRouter();
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
 
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState(default_chats);
   const [pageNo, setPageNo] = useState(0);
   const [dropdown, setDropdown] = useState(false);
 
@@ -76,9 +80,13 @@ export default function Post({ post }) {
     }
   };
 
+  const handlePageChange = ({ selected }) => {
+    setPageNo(selected);
+  };
+
   useEffect(() => {
     getChats();
-  }, []);
+  }, [pageNo]);
 
   return (
     <div className={styles.post}>
@@ -151,7 +159,16 @@ export default function Post({ post }) {
 
       <hr />
 
-      {chats ? chats.length > 0 ? <ChatList chats={chats} /> : null : null}
+      {chats ? (
+        chats.length > 0 ? (
+          <ChatList
+            chats={chats}
+            totalPages={totalPages}
+            handlePageChange={handlePageChange}
+            pageNo={pageNo}
+          />
+        ) : null
+      ) : null}
 
       {user ? <ChatForm user={user} createChat={createChat} /> : null}
     </div>

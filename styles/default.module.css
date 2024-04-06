@@ -1,8 +1,8 @@
 .main {
-    padding: 4em var(--default-padding);
+  padding: 4em var(--default-padding);
 }
 
 .main__box {
-    max-width: 900px;
-    margin: 0 auto;
+  max-width: 900px;
+  margin: 0 auto;
 }

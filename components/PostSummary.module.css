@@ -1,13 +1,10 @@
 .postsummary {
+  display: grid;
+  grid-template-columns: 5fr 3fr;
   height: 4.5em;
   margin-bottom: 1em;
   padding-bottom: 1em;
   border-bottom: 1px solid var(--clr-dark);
-}
-
-.postsummary__link {
-  display: grid;
-  grid-template-columns: 5fr 3fr;
 }
 
 .postsummary__text {

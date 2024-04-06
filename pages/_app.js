@@ -18,8 +18,8 @@ export default function App({ Component, pageProps }) {
       localStorage.getItem("tokenExpiresIn") &&
       localStorage.getItem("tokenExpiresIn") < Date.now()
     ) {
-      localStorage.deleteItem("tokenExpiresIn");
-      localStorage.deleteItem("accessToken");
+      localStorage.removeItem("tokenExpiresIn");
+      localStorage.removeItem("accessToken");
     }
   }
   return (

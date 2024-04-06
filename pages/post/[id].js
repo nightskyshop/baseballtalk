@@ -8,9 +8,15 @@ export async function getServerSideProps(context) {
   const id = context.params["id"];
 
   let post;
+  let chats;
+  let totalPages;
   try {
     const res = await axios.get(`/post/${id}`);
     post = res.data;
+
+    const chats_res = await axios.get(`/chat/post/${id}?pageNo=0`);
+    chats = chats_res.data.content;
+    totalPages = chats_res.data.totalPages;
   } catch {
     return {
       notFound: true,
@@ -20,11 +26,13 @@ export async function getServerSideProps(context) {
   return {
     props: {
       post,
+      chats,
+      totalPages,
     },
   };
 }
 
-export default function PostDetail({ post }) {
+export default function PostDetail({ post, chats, totalPages }) {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser });
 
   if (!post) {
@@ -45,7 +53,7 @@ export default function PostDetail({ post }) {
         <title>{post.title}</title>
       </Head>
 
-      <Post post={post} />
+      <Post post={post} chats={chats} totalPages={totalPages} />
     </div>
   );
 }

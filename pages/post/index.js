@@ -7,27 +7,40 @@ import Head from "next/head";
 import TeamList from "@/components/TeamList";
 
 export async function getServerSideProps() {
+  const {
+    data: { content: default_posts, totalPages },
+  } = await axios.get(`/post?pageNo=0&pageSize=5`);
   const { data: teams } = await axios.get(`/team`);
 
   return {
     props: {
+      default_posts,
+      totalPages,
       teams,
     },
   };
 }
 
-export default function Posts({ teams }) {
-  const [posts, setPosts] = useState([]);
+export default function Posts({ default_posts, totalPages, teams }) {
+  const [posts, setPosts] = useState(default_posts);
   const [pageNo, setPageNo] = useState(0);
 
   const getPosts = async () => {
-    const p = await axios.get(`/post?pageNo=${pageNo}`);
-    setPosts(p.data.content);
+    const {
+      data: { content },
+    } = await axios.get(`/post?pageNo=${pageNo}&pageSize=5`);
+    setPosts(content);
+  };
+
+  const handlePageChange = ({ selected }) => {
+    setPageNo(selected);
   };
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [pageNo]);
+
+  if (!posts || !teams) return <div>로딩 중...</div>;
 
   return (
     <div className={styles.post}>
@@ -37,7 +50,13 @@ export default function Posts({ teams }) {
 
       <div className={styles.post_grid}>
         <TeamRank className={styles.rank} teamRanking={teams} />
-        <PostList className={styles.list} posts={posts} />
+        <PostList
+          className={styles.list}
+          posts={posts}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+          pageNo={pageNo}
+        />
       </div>
 
       <TeamList teams={teams} />

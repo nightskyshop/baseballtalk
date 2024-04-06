@@ -11,7 +11,11 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 export default function Header() {
   const router = useRouter();
 
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
   });
@@ -86,7 +90,7 @@ export default function Header() {
             </ul>
 
             <div className={styles.header__user}>
-              {data ? (
+              {user ? (
                 <>
                   <Link
                     onClick={handleClick}
@@ -101,7 +105,7 @@ export default function Header() {
                     className={styles.header__profile}
                   >
                     <ProfileImage
-                      url={data.data.image}
+                      url={user.data.image}
                       width={35}
                       height={35}
                     />
@@ -111,7 +115,7 @@ export default function Header() {
                         styles.header__dropdown
                       }`}
                     >
-                      <Link onClick={handleClick} href="/user-profile">
+                      <Link onClick={handleClick} href={"/user-profile"}>
                         내 프로필
                       </Link>
                     </div>

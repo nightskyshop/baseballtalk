@@ -13,9 +13,17 @@ export async function getServerSideProps(context) {
   const id = context.params["id"];
 
   let team;
+  let default_posts;
+  let totalPages;
   try {
     const res = await axios.get(`/team/${id}`);
     team = res.data;
+
+    const posts_res = await axios.get(
+      `http://localhost:8080/post/team/${id}?pageNo=0&pageSize=5`
+    );
+    default_posts = posts_res.data.content;
+    totalPages = posts_res.data.totalPages;
   } catch {
     return {
       notFound: true,
@@ -25,30 +33,36 @@ export async function getServerSideProps(context) {
   return {
     props: {
       team,
+      default_posts,
+      totalPages,
     },
   };
 }
 
-export default function TeamDetail({ team }) {
+export default function TeamDetail({ team, default_posts, totalPages }) {
   const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
   const router = useRouter();
 
   const { id } = router.query;
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(default_posts);
   const [pageNo, setPageNo] = useState(0);
 
   const getPosts = async () => {
-    await axios
-      .get(`http://localhost:8080/post/team/${id}?pageNo=${pageNo}`)
-      .catch(setPosts(false))
-      .then((res) => setPosts(res.data.content));
+    const {
+      data: { content },
+    } = await axios.get(
+      `http://localhost:8080/post/team/${id}?pageNo=${pageNo}&pageSize=5`
+    );
+    setPosts(content);
+  };
+
+  const handlePageChange = ({ selected }) => {
+    setPageNo(selected);
   };
 
   useEffect(() => {
-    if (id) {
-      getPosts();
-    }
-  }, [id]);
+    getPosts();
+  }, [pageNo]);
 
   if (!team || !posts) return <div>로딩 중...</div>;
 
@@ -66,7 +80,12 @@ export default function TeamDetail({ team }) {
             <Link href={`/post/create?team=${team.id}`}>글쓰기</Link>
           ) : null
         ) : null}
-        <PostList posts={posts} />
+        <PostList
+          posts={posts}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+          currentPage={pageNo}
+        />
       </div>
     </div>
   );
