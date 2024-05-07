@@ -1,3 +1,9 @@
 .list > div:last-child {
-    border: none;
+	border: none;
+}
+
+.list__no_post {
+	font-size: var(--fs-h3);
+	color: var(--clr-gray);
+	opacity: 0.7;
 }

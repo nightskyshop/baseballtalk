@@ -1,48 +1,51 @@
 .rank {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 1em;
-    border: 1px solid var(--clr-blue);
-    border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 1em;
+	border: 1px solid var(--clr-blue);
+	border-radius: 15px;
+	max-height: 400px;
 }
 
 .rank__table {
-    table-layout: fixed;
-    margin: 0 auto;
+	table-layout: fixed;
+	margin: 0 auto;
 }
 
 .rank__caption {
-    font-size: var(--fs-h2);
-    font-weight: var(--fw-bold);
-    color: var(--clr-blue);
-    margin-bottom: .5em;
+	font-size: var(--fs-h2);
+	font-weight: var(--fw-bold);
+	color: var(--clr-blue);
+	margin-bottom: 0.5em;
 }
 
 .rank__thead th:nth-child(1) {
-    width: 10%;
+	width: 10%;
 }
 
 .rank__thead th:nth-child(2) {
-    width: 20%;
+	width: 20%;
 }
 
 .rank__thead th:nth-child(3) {
-    width: 20%;
+	width: 20%;
 }
 
 .rank__thead th:nth-child(4) {
-    width: 20%;
+	width: 20%;
 }
 
 .rank__thead th:nth-child(5) {
-    width: 20%;
+	width: 20%;
 }
 
-.rank__thead th, .rank__tbody th, .rank__tbody td {
-    padding: 0.2em;
+.rank__thead th,
+.rank__tbody th,
+.rank__tbody td {
+	padding: 0.2em;
 }
 
 .rank__tbody td {
-    text-align: center;
+	text-align: center;
 }
