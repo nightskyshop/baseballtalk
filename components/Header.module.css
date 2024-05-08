@@ -1,153 +1,153 @@
 .header__border {
-  position: sticky;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 100;
-  padding: 1.25em var(--default-padding);
-  background-color: var(--clr-light);
-  border-bottom: 1px solid var(--clr-dark);
+	position: sticky;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 100;
+	padding: 1.25em var(--default-padding);
+	background-color: var(--clr-light);
+	border-bottom: 1px solid var(--clr-dark);
 }
 
 .header {
-  display: flex;
-  position: relative;
-  margin: 0 auto;
-  max-width: 900px;
+	display: flex;
+	position: relative;
+	margin: 0 auto;
+	max-width: 900px;
 }
 
 .header__logo {
-  margin: auto 0;
-  width: 50px;
-  margin-right: 2em;
+	margin: auto 0.25em auto 0;
+	width: 80px;
 }
 
-.header__logo a {
+/* .header__logo a {
   font-size: var(--fs-h2);
   font-weight: var(--fw-bold);
   color: var(--clr-blue);
-}
+} */
 
 .header__hamberger {
-  margin: auto 0 auto auto;
-  cursor: pointer;
+	margin: auto 0 auto auto;
+	cursor: pointer;
 }
 
 .header__nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
 }
 
 .header__list {
-  display: flex;
-  justify-content: flex-start;
-  list-style: none;
+	display: flex;
+	justify-content: flex-start;
+	list-style: none;
 }
 
 .header__list li {
-  font-size: var(--fs-h4);
-  color: var(--clr-gray);
-  padding: 0 0.6em;
+	font-size: var(--fs-h4);
+	color: var(--clr-gray);
+	padding: 0 0.6em;
 }
 
 .header__list li a {
-  color: var(--clr-gray);
+	color: var(--clr-gray);
 }
 
 .header__user {
-  display: flex;
-  margin-left: auto;
-  font-size: var(--fs-h4);
-  color: var(--clr-gray);
-  padding-bottom: 2px;
+	display: flex;
+	margin-left: auto;
+	font-size: var(--fs-h4);
+	color: var(--clr-gray);
+	padding-bottom: 2px;
 }
 
 .header__user a {
-  display: block;
-  color: var(--clr-gray);
+	display: block;
+	color: var(--clr-gray);
 }
 
 .header__login {
-  margin: auto 0;
-  margin-right: 1.25em;
+	margin: auto 0;
+	margin-right: 1.25em;
 }
 
 .header__signup {
-  border: 1px solid var(--clr-dark);
-  border-radius: 15px;
-  padding: 0.25em 0.5em;
+	border: 1px solid var(--clr-dark);
+	border-radius: 15px;
+	padding: 0.25em 0.5em;
 }
 
 .header__logout {
-  position: relative;
-  top: 1px;
-  margin: auto 0;
-  margin-right: 1.25em;
+	position: relative;
+	top: 1px;
+	margin: auto 0;
+	margin-right: 1.25em;
 }
 
 .header__profile {
-  position: relative;
+	position: relative;
 }
 
 .header__profile img {
-  display: block;
-  margin: auto 0;
-  border-radius: 100%;
-  object-fit: cover;
+	display: block;
+	margin: auto 0;
+	padding: 0.5em 0;
+	border-radius: 100%;
+	object-fit: cover;
 }
 
 .header__dropdown {
-  display: none;
-  position: absolute;
-  width: 100px;
-  right: 0px;
-  top: 35px;
-  padding: 1em 0.5em;
-  background-color: var(--clr-light);
-  border: 1px solid var(--clr-dark);
-  border-radius: 10px;
-  z-index: 200;
+	display: none;
+	position: absolute;
+	width: 100px;
+	right: 0px;
+	top: 50px;
+	padding: 1em 0.5em;
+	background-color: var(--clr-light);
+	border: 1px solid var(--clr-dark);
+	border-radius: 10px;
+	z-index: 200;
 }
 
 .header__dropdown a {
-  text-align: center;
+	text-align: center;
 }
 
 .show {
-  display: block;
+	display: block;
 }
 
 @media (max-width: 560px) {
-  .header__nav {
-    width: calc(100% + 2.5em);
-    position: absolute;
-    top: 56px;
-    right: -1.5em;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5em;
+	.header__nav {
+		width: calc(100% + 2.5em);
+		position: absolute;
+		top: 56px;
+		right: -1.5em;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5em;
 
-    background-color: white;
-    border-bottom: 1px solid var(--clr-dark);
-    padding: 1em 0;
-  }
+		background-color: white;
+		border-bottom: 1px solid var(--clr-dark);
+		padding: 1em 0;
+	}
 
-  .header__list {
-    flex-direction: column;
-    gap: 1em;
-  }
+	.header__list {
+		flex-direction: column;
+		gap: 1em;
+	}
 
-  .header__list li {
-    font-size: var(--fs-h4);
-  }
+	.header__list li {
+		font-size: var(--fs-h4);
+	}
 
-  .header__user {
-    padding: 0 0.6em;
-  }
+	.header__user {
+		padding: 0 0.6em;
+	}
 
-  .header__logout {
-    margin-right: 0.5em;
-  }
+	.header__logout {
+		margin-right: 0.5em;
+	}
 }

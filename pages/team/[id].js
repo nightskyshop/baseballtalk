@@ -64,8 +64,6 @@ export default function TeamDetail({ team, default_posts, totalPages }) {
 		getPosts();
 	}, [pageNo]);
 
-	console.log(posts, [], posts == []);
-
 	if (!team || !posts) return <div>로딩 중...</div>;
 
 	return (

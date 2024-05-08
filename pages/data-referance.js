@@ -36,7 +36,7 @@ const data = {
 		},
 		{
 			type: "bar",
-			backgroundColor: "#FDA403",
+			backgroundColor: "#134074CC",
 			data: [142, 132, 165, 138],
 		},
 	],

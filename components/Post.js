@@ -13,164 +13,166 @@ import Link from "next/link.js";
 import { useRouter } from "next/router.js";
 
 export default function Post({
-  post,
-  chats: default_chats = [],
-  totalPages = 1,
+	post,
+	chats: default_chats = [],
+	totalPages = 1,
 }) {
-  const router = useRouter();
-  const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
+	const router = useRouter();
+	const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
 
-  const [chats, setChats] = useState(default_chats);
-  const [pageNo, setPageNo] = useState(0);
-  const [dropdown, setDropdown] = useState(false);
+	const [chats, setChats] = useState(default_chats);
+	const [pageNo, setPageNo] = useState(0);
+	const [dropdown, setDropdown] = useState(false);
 
-  const getChats = async () => {
-    const { data: chats } = await axios.get(
-      `/chat/post/${post.id}?pageNo=${pageNo}`
-    );
-    setChats(chats.content);
-  };
+	const getChats = async () => {
+		const { data: chats } = await axios.get(
+			`/chat/post/${post.id}?pageNo=${pageNo}`
+		);
+		setChats(chats.content);
+	};
 
-  const createChat = async (content) => {
-    await axios
-      .post(
-        "/chat",
-        {
-          content,
-          post: post.id,
-          author: user.data.id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
-      .then((res) => {
-        if (res.status == 201) {
-          getChats();
-        }
-      });
-  };
+	const createChat = async (content) => {
+		await axios
+			.post(
+				"/chat",
+				{
+					content,
+					post: post.id,
+					author: user.data.id,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+					},
+				}
+			)
+			.then((res) => {
+				if (res.status == 201) {
+					getChats();
+				}
+			});
+	};
 
-  const handleDropdownClick = (e) => {
-    e.preventDefault();
-    setDropdown((prevdropdown) => !prevdropdown);
-  };
+	const handleDropdownClick = (e) => {
+		e.preventDefault();
+		setDropdown((prevdropdown) => !prevdropdown);
+	};
 
-  const handleDropdownBlur = () => {
-    setTimeout(() => {
-      setDropdown(false);
-    }, 100);
-  };
+	const handleDropdownBlur = () => {
+		setTimeout(() => {
+			setDropdown(false);
+		}, 100);
+	};
 
-  const handleDeleteClick = async (e) => {
-    e.preventDefault();
+	const handleDeleteClick = async (e) => {
+		e.preventDefault();
 
-    if (post) {
-      await axios
-        .delete(`/post/${post.id}`, {
-          headers: {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-          },
-        })
-        .then(() => router.push("/post"));
-    }
-  };
+		if (post) {
+			await axios
+				.delete(`/post/${post.id}`, {
+					headers: {
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+						},
+					},
+				})
+				.then(() => router.push("/post"));
+		}
+	};
 
-  const handlePageChange = ({ selected }) => {
-    setPageNo(selected);
-  };
+	const handlePageChange = ({ selected }) => {
+		setPageNo(selected);
+	};
 
-  useEffect(() => {
-    getChats();
-  }, [pageNo]);
+	useEffect(() => {
+		getChats();
+	}, [pageNo]);
 
-  return (
-    <div className={styles.post}>
-      <div className={styles.post__post}>
-        <div className={styles.post__tc}>
-          <h1 className={styles.post__team}>{post.team.teamnameEn}</h1>-
-          <p className={styles.post__category}>{post.category}</p>
-        </div>
-        <h1 className={styles.post__title}>{post.title}</h1>
+	return (
+		<div className={styles.post}>
+			<div className={styles.post__post}>
+				<div className={styles.post__tc}>
+					<Link href={`/team/${post.team.id}`} className={styles.post__team}>
+						{post.team.teamnameEn}
+					</Link>
+					-<p className={styles.post__category}>{post.category}</p>
+				</div>
+				<h1 className={styles.post__title}>{post.title}</h1>
 
-        <div className={styles.post__author}>
-          <Link
-            href={`/user/${post.author.id}`}
-            className={styles.post__author_link}
-          >
-            <ProfileImage url={post.author.image} width={60} height={60} />
-          </Link>
+				<div className={styles.post__author}>
+					<Link
+						href={`/user/${post.author.id}`}
+						className={styles.post__author_link}
+					>
+						<ProfileImage url={post.author.image} width={60} height={60} />
+					</Link>
 
-          <div className={styles.post__author_text}>
-            <div className={styles.post__author_names}>
-              <p className={styles.post__author_username}>
-                {post.author.username}
-              </p>
-              <p className={styles.post__author_team}> - {post.author.team}</p>
-            </div>
-            <p className={styles.post__created}>
-              {post.createdAt[0]}년 {post.createdAt[1]}월 {post.createdAt[2]}일{" "}
-              {String(post.createdAt[3]).padStart(2, "0")}:
-              {String(post.createdAt[4]).padStart(2, "0")}
-            </p>
-          </div>
-          {user ? (
-            user.data.id == post.author.id ? (
-              <button onClick={handleDropdownClick} onBlur={handleDropdownBlur}>
-                <FontAwesomeIcon icon={faEllipsisVertical} />
-              </button>
-            ) : null
-          ) : null}
+					<div className={styles.post__author_text}>
+						<div className={styles.post__author_names}>
+							<p className={styles.post__author_username}>
+								{post.author.username}
+							</p>
+							<p className={styles.post__author_team}> - {post.author.team}</p>
+						</div>
+						<p className={styles.post__created}>
+							{post.createdAt[0]}년 {post.createdAt[1]}월 {post.createdAt[2]}일{" "}
+							{String(post.createdAt[3]).padStart(2, "0")}:
+							{String(post.createdAt[4]).padStart(2, "0")}
+						</p>
+					</div>
+					{user ? (
+						user.data.id == post.author.id ? (
+							<button onClick={handleDropdownClick} onBlur={handleDropdownBlur}>
+								<FontAwesomeIcon icon={faEllipsisVertical} />
+							</button>
+						) : null
+					) : null}
 
-          <div
-            className={`${styles.post__dropdown} ${
-              dropdown ? styles.focus : ""
-            }`}
-          >
-            <Link
-              className={styles.dropdown__update}
-              href={`/post/create?update=${true}&id=${post.id}&team=${
-                post.team.id
-              }&category=${post.category}&title=${post.title}&content=${
-                post.content
-              }`}
-            >
-              수정하기
-            </Link>
-            <button
-              className={styles.dropdown__delete}
-              onClick={handleDeleteClick}
-            >
-              삭제하기
-            </button>
-          </div>
-        </div>
+					<div
+						className={`${styles.post__dropdown} ${
+							dropdown ? styles.focus : ""
+						}`}
+					>
+						<Link
+							className={styles.dropdown__update}
+							href={`/post/create?update=${true}&id=${post.id}&team=${
+								post.team.id
+							}&category=${post.category}&title=${post.title}&content=${
+								post.content
+							}`}
+						>
+							수정하기
+						</Link>
+						<button
+							className={styles.dropdown__delete}
+							onClick={handleDeleteClick}
+						>
+							삭제하기
+						</button>
+					</div>
+				</div>
 
-        <hr />
+				<hr />
 
-        <p className={styles.post__content}>{post.content}</p>
+				<p className={styles.post__content}>{post.content}</p>
 
-        <Reaction post={post} chat_count={chats.length} />
-      </div>
+				<Reaction post={post} chat_count={chats.length} />
+			</div>
 
-      <hr />
+			<hr />
 
-      {chats ? (
-        chats.length > 0 ? (
-          <ChatList
-            chats={chats}
-            totalPages={totalPages}
-            handlePageChange={handlePageChange}
-            pageNo={pageNo}
-          />
-        ) : null
-      ) : null}
+			{chats ? (
+				chats.length > 0 ? (
+					<ChatList
+						chats={chats}
+						totalPages={totalPages}
+						handlePageChange={handlePageChange}
+						pageNo={pageNo}
+					/>
+				) : null
+			) : null}
 
-      {user ? <ChatForm user={user} createChat={createChat} /> : null}
-    </div>
-  );
+			{user ? <ChatForm user={user} createChat={createChat} /> : null}
+		</div>
+	);
 }
