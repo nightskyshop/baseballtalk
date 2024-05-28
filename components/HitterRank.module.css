@@ -1,0 +1,50 @@
+.hitter__rank_table {
+	table-layout: fixed;
+	margin: 0 auto;
+	max-width: 320px;
+}
+
+.hitter__rank_caption {
+	font-size: var(--fs-h2);
+	font-weight: var(--fw-bold);
+	color: var(--clr-blue);
+	margin-bottom: 0.5em;
+}
+
+.hitter__rank_thead th:nth-child(1) {
+	width: 10%;
+}
+
+.hitter__rank_thead th:nth-child(2) {
+	width: 20%;
+}
+
+.hitter__rank_thead th:nth-child(3) {
+	width: 20%;
+}
+
+.hitter__rank_thead th:nth-child(4) {
+	width: 20%;
+}
+
+.hitter__rank_thead th:nth-child(5) {
+	width: 20%;
+}
+
+.hitter__rank_thead th,
+.hitter__rank_tbody th,
+.hitter__rank_tbody td {
+	font-size: 1rem;
+}
+
+.hitter__rank_image {
+	border-radius: 100%;
+	object-fit: cover;
+	object-position: center top;
+	width: 50px;
+	height: 50px;
+}
+
+.hitter__rank_tbody td {
+	text-align: center;
+}

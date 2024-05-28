@@ -1,27 +1,37 @@
 import { useEffect, useState } from "react";
 import PostList from "@/components/PostList";
-import TeamRank from "@/components/TeamRank";
 import styles from "@/styles/post.module.css";
 import axios from "axios";
 import Head from "next/head";
 import TeamList from "@/components/TeamList";
+import Rank from "@/components/Rank";
 
 export async function getServerSideProps() {
 	const {
 		data: { content: default_posts, totalPages },
 	} = await axios.get(`/post?pageNo=0&pageSize=5`);
 	const { data: teams } = await axios.get(`/team`);
+	const { data: hitters } = await axios.get(`/hitter/avg?pageNo=0`);
+	const { data: pitchers } = await axios.get(`/pitcher/era?pageNo=0`);
 
 	return {
 		props: {
 			default_posts,
 			totalPages,
 			teams,
+			hitters,
+			pitchers,
 		},
 	};
 }
 
-export default function Posts({ default_posts, totalPages, teams }) {
+export default function Posts({
+	default_posts,
+	totalPages,
+	teams,
+	hitters,
+	pitchers,
+}) {
 	const [posts, setPosts] = useState(default_posts);
 	const [pageNo, setPageNo] = useState(0);
 
@@ -40,7 +50,7 @@ export default function Posts({ default_posts, totalPages, teams }) {
 		getPosts();
 	}, [pageNo]);
 
-	if (!posts || !teams) return <div>로딩 중...</div>;
+	if (!posts || !teams || !hitters || !pitchers) return <div>로딩 중...</div>;
 
 	return (
 		<div className={styles.post}>
@@ -49,7 +59,12 @@ export default function Posts({ default_posts, totalPages, teams }) {
 			</Head>
 
 			<div className={styles.post_grid}>
-				<TeamRank className={styles.rank} teamRanking={teams} />
+				<Rank
+					className={styles.rank}
+					teamRanking={teams}
+					hitterRanking={hitters.content}
+					pitcherRanking={pitchers.content}
+				/>
 				<PostList
 					className={styles.list}
 					posts={posts}

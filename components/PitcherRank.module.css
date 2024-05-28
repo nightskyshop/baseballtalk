@@ -1,0 +1,50 @@
+.pitcher__rank_table {
+	table-layout: fixed;
+	margin: 0 auto;
+	max-width: 320px;
+}
+
+.pitcher__rank_caption {
+	font-size: var(--fs-h2);
+	font-weight: var(--fw-bold);
+	color: var(--clr-blue);
+	margin-bottom: 0.5em;
+}
+
+.pitcher__rank_thead th:nth-child(1) {
+	width: 10%;
+}
+
+.pitcher__rank_thead th:nth-child(2) {
+	width: 20%;
+}
+
+.pitcher__rank_thead th:nth-child(3) {
+	width: 16%;
+}
+
+.pitcher__rank_thead th:nth-child(4) {
+	width: 18%;
+}
+
+.pitcher__rank_thead th:nth-child(5) {
+	width: 25%;
+}
+
+.pitcher__rank_thead th,
+.pitcher__rank_tbody th,
+.pitcher__rank_tbody td {
+	font-size: 1rem;
+}
+
+.pitcher__rank_image {
+	border-radius: 100%;
+	object-fit: cover;
+	object-position: center top;
+	width: 50px;
+	height: 50px;
+}
+
+.pitcher__rank_tbody td {
+	text-align: center;
+}

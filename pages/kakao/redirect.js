@@ -5,37 +5,38 @@ import styles from "@/styles/redirect.module.css";
 import Head from "next/head";
 
 export default function KakaoLogin() {
-  const [ok, setOk] = useState(false);
-  const router = useRouter();
+	const [ok, setOk] = useState(false);
+	const router = useRouter();
 
-  const { code } = router.query;
+	const { code } = router.query;
 
-  const sendCode = async () => {
-    await axios.get(`/kakao/${code}`).then((res) => {
-      localStorage.setItem("accessToken", res.data);
-      setOk(true);
-    });
-  };
+	const sendCode = async () => {
+		const { data } = await axios.get(`/kakao/${code}`);
 
-  useEffect(() => {
-    if (code) {
-      sendCode();
-    }
-  }, [code]);
+		localStorage.setItem("accessToken", data.accessToken);
+		localStorage.setItem("tokenExpiresIn", data.tokenExpiresIn);
+		setOk(true);
+	};
 
-  useEffect(() => {
-    if (ok) {
-      router.push("/");
-    }
-  }, [ok]);
+	useEffect(() => {
+		if (code) {
+			sendCode();
+		}
+	}, [code]);
 
-  return (
-    <div className={styles.login__redirect}>
-      <Head>
-        <title>로그인 중...</title>
-      </Head>
+	useEffect(() => {
+		if (ok) {
+			router.push("/");
+		}
+	}, [ok]);
 
-      <h1>로그인 중...</h1>
-    </div>
-  );
+	return (
+		<div className={styles.login__redirect}>
+			<Head>
+				<title>로그인 중...</title>
+			</Head>
+
+			<h1>로그인 중...</h1>
+		</div>
+	);
 }

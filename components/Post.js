@@ -71,9 +71,7 @@ export default function Post({
 			await axios
 				.delete(`/post/${post.id}`, {
 					headers: {
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-						},
+						Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
 					},
 				})
 				.then(() => router.push("/post"));
