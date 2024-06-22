@@ -1,110 +1,116 @@
 .post {
-  max-width: 700px;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding: 3em 4em;
-  border: 1.4px solid var(--clr-gray);
-  border-radius: 10px;
+	max-width: 700px;
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 3em 4em;
+	border: 1.4px solid var(--clr-gray);
+	border-radius: 10px;
+}
+
+@media (max-width: 530px) {
+	.post {
+		padding: 1.5em 2em;
+	}
 }
 
 .post__post {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .post__tc {
-  display: flex;
-  align-items: flex-end;
-  opacity: 0.7;
-  margin-bottom: 0.3em;
+	display: flex;
+	align-items: flex-end;
+	opacity: 0.7;
+	margin-bottom: 0.3em;
 }
 
 .post__team {
-  font-size: var(--fs-h3);
-  font-weight: var(--fw-reg);
-  color: var(--clr-gray);
-  margin-right: 0.5em;
+	font-size: var(--fs-h3);
+	font-weight: var(--fw-reg);
+	color: var(--clr-gray);
+	margin-right: 0.5em;
 }
 
 .post__category {
-  font-size: var(--fs-h4);
-  font-weight: var(--fw-reg);
-  color: var(--clr-gray);
-  margin-left: 0.5em;
+	font-size: var(--fs-h4);
+	font-weight: var(--fw-reg);
+	color: var(--clr-gray);
+	margin-left: 0.5em;
 }
 
 .post__title {
-  color: var(--clr-blue);
-  font-size: var(--fs-h2);
-  word-break: break-all;
-  margin-bottom: 0.3em;
+	color: var(--clr-blue);
+	font-size: var(--fs-h2);
+	word-break: break-all;
+	margin-bottom: 0.3em;
 }
 
 .post__author {
-  display: flex;
-  margin-bottom: 1.3em;
-  position: relative;
+	display: flex;
+	margin-bottom: 1.3em;
+	position: relative;
 }
 
 .post__author_link {
-  margin-right: 1em;
+	margin-right: 1em;
 }
 
 .post__author_text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: var(--clr-gray);
-  opacity: 0.7;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: var(--clr-gray);
+	opacity: 0.7;
 }
 
 .post__author_names {
-  display: flex;
+	display: flex;
 }
 
 .post__author_username {
-  font-weight: var(--fw-bold);
+	font-weight: var(--fw-bold);
 }
 
 .post__author > button {
-  cursor: pointer;
-  margin: auto 0 auto auto;
-  font-size: var(--fs-h2);
+	cursor: pointer;
+	margin: auto 0 auto auto;
+	font-size: var(--fs-h2);
 }
 
 .post__dropdown {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.3em;
-  position: absolute;
-  top: 48px;
-  right: -5px;
-  padding: 1em;
-  background-color: var(--clr-light);
-  border: 1px solid var(--clr-dark);
-  border-radius: 10px;
-  z-index: 200;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.3em;
+	position: absolute;
+	top: 48px;
+	right: -5px;
+	padding: 1em;
+	background-color: var(--clr-light);
+	border: 1px solid var(--clr-dark);
+	border-radius: 10px;
+	z-index: 200;
 }
 
 .dropdown__update,
 .dropdown__delete {
-  cursor: pointer;
-  font-size: var(--fs-h4);
+	cursor: pointer;
+	font-size: var(--fs-h4);
 }
 
 .dropdown__delete {
-  color: var(--clr-point);
+	color: var(--clr-point);
 }
 
 .focus {
-  display: flex;
+	display: flex;
 }
 
 .post__content {
-  font-size: var(--fs-h4);
-  line-height: 1.5;
-  word-break: break-all;
-  margin: 2em 0;
-  white-space: pre-wrap;
+	font-size: var(--fs-h4);
+	line-height: 1.5;
+	word-break: break-all;
+	margin: 2em 0;
+	white-space: pre-wrap;
 }

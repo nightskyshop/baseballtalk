@@ -1,0 +1,15 @@
+.loginFailure {
+	margin: 2em;
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto 2.5em;
+	word-break: break-all;
+}
+
+.loginFailure > a {
+	color: var(--clr-blue);
+}
+
+.loginFailure > a:hover {
+	text-decoration: underline;
+}

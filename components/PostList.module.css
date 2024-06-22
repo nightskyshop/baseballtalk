@@ -1,3 +1,7 @@
+.list {
+	width: 100%;
+}
+
 .list > div:last-child {
 	border: none;
 }

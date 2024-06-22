@@ -4,9 +4,10 @@
 	flex-direction: column;
 	justify-content: center;
 	padding: 1em;
+	box-sizing: border-box;
 	border: 1px solid var(--clr-blue);
 	border-radius: 15px;
-	max-height: 400px;
+	width: 100%;
 }
 
 .slider__btn {
