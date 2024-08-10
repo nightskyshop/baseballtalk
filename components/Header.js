@@ -40,14 +40,14 @@ export default function Header() {
 
 	useEffect(() => {
 		window.addEventListener("resize", () => {
-			if (window.innerWidth < 560) {
+			if (window.innerWidth < 615) {
 				setHamberger(true);
 			} else {
 				setHamberger(false);
 				setNav(true);
 			}
 		});
-		if (window.innerWidth < 560) {
+		if (window.innerWidth < 615) {
 			setHamberger(true);
 			setNav(false);
 		}

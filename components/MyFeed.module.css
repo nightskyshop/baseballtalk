@@ -1,0 +1,44 @@
+.myfeed__grid {
+	display: grid;
+	grid-auto-rows: 250px;
+	grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+	gap: 2em;
+	margin: 1em 0;
+}
+
+.myfeed__card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1em;
+	width: 100%;
+	padding: 2em;
+	border: 1px solid var(--clr-dark);
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+
+.myfeed__card > h2 {
+	font-size: 1.7rem;
+}
+
+.myfeed__card_box {
+	display: flex;
+	gap: 1em;
+}
+
+.myfeed__card_text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+}
+
+.myfeed__card_text h3 {
+	font-size: var(--fs-h3);
+}
+
+.myfeed__card_text p {
+	font-size: var(--fs-h4);
+}

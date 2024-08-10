@@ -11,8 +11,10 @@ export async function getServerSideProps() {
 		data: { content: default_posts, totalPages },
 	} = await axios.get(`/post?pageNo=0&pageSize=5`);
 	const { data: teams } = await axios.get(`/team`);
-	const { data: hitters } = await axios.get(`/hitter/avg?pageNo=0`);
-	const { data: pitchers } = await axios.get(`/pitcher/era?pageNo=0`);
+	const { data: hitters } = await axios.get(`/hitter/avg?pageNo=0&pageSize=5`);
+	const { data: pitchers } = await axios.get(
+		`/pitcher/era?pageNo=0&pageSize=5`
+	);
 
 	return {
 		props: {
@@ -65,13 +67,15 @@ export default function Posts({
 					hitterRanking={hitters.content}
 					pitcherRanking={pitchers.content}
 				/>
-				<PostList
-					className={styles.list}
-					posts={posts}
-					totalPages={totalPages}
-					handlePageChange={handlePageChange}
-					pageNo={pageNo}
-				/>
+				<div className={styles.list}>
+					<h1 className={styles.list__header}>최근 게시글</h1>
+					<PostList
+						posts={posts}
+						totalPages={totalPages}
+						handlePageChange={handlePageChange}
+						pageNo={pageNo}
+					/>
+				</div>
 			</div>
 
 			<TeamList teams={teams} />

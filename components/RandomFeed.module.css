@@ -1,0 +1,59 @@
+.randomfeed__grid {
+	display: grid;
+	grid-auto-rows: 250px;
+	grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+	grid-template-areas:
+		"a a b"
+		"c d d";
+	gap: 2em;
+	margin: 1em 0;
+}
+
+.randomfeed__card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1em;
+	width: 100%;
+	padding: 2em;
+	border: 1px solid var(--clr-dark);
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+
+.randomfeed__card_box {
+	display: flex;
+	gap: 1em;
+}
+
+.randomfeed__card_text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+}
+
+.randomfeed__card_text h3 {
+	font-size: var(--fs-h3);
+}
+
+.randomfeed__card_text p {
+	font-size: var(--fs-h4);
+}
+
+.all__team {
+	grid-area: a;
+}
+
+.random__hitter {
+	grid-area: b;
+}
+
+.random__pitcher {
+	grid-area: c;
+}
+
+.random__team {
+	grid-area: d;
+}

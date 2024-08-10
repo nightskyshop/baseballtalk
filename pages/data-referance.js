@@ -1,68 +1,53 @@
 import Head from "next/head";
-import {
-	Chart as ChartJS,
-	CategoryScale,
-	LinearScale,
-	PointElement,
-	LineElement,
-	Title,
-	Tooltip,
-	Legend,
-	BarElement,
-	BarController,
-} from "chart.js";
-import { Chart, Line } from "react-chartjs-2";
+import TeamRank from "@/components/TeamRank";
+import HitterRank from "@/components/HitterRank";
+import PitcherRank from "@/components/PitcherRank";
+import styles from "@/styles/data-referance.module.css";
+import Rank from "@/components/Rank";
+import axios from "axios";
+import RankList from "@/components/RankList";
+import Feed from "@/components/Feed";
+import SearchForm from "@/components/SearchForm";
 
-ChartJS.register(
-	CategoryScale,
-	LinearScale,
-	PointElement,
-	LineElement,
-	BarElement,
-	BarController,
-	Title,
-	Tooltip,
-	Legend
-);
+export async function getServerSideProps() {
+	const { data: teamRanking } = await axios.get(`/team`);
+	const { data: hitterRanking } = await axios.get(
+		`/hitter/avg?pageNo=0&pageSize=10`
+	);
+	const { data: pitcherRanking } = await axios.get(
+		`/pitcher/era?pageNo=0&pageSize=10`
+	);
 
-const data = {
-	labels: ["2020 시즌", "2021 시즌", "2022 시즌", "2023 시즌"],
-	datasets: [
-		{
-			type: "line",
-			borderColor: "#898121",
-			borderWidth: 2,
-			data: [142, 132, 165, 138],
+	return {
+		props: {
+			teamRanking,
+			hitterRanking,
+			pitcherRanking,
 		},
-		{
-			type: "bar",
-			backgroundColor: "#134074CC",
-			data: [142, 132, 165, 138],
-		},
-	],
-};
+	};
+}
 
-const options = {
-	plugins: {
-		legend: {
-			display: false,
-		},
-	},
-};
-
-export default function DataReferance() {
+export default function DataReferance({
+	teamRanking,
+	hitterRanking,
+	pitcherRanking,
+}) {
 	return (
 		<div>
 			<Head>
-				<title>DataReferance</title>
+				<title>데이터 자료실</title>
 			</Head>
 
-			<h1>DataReferance</h1>
+			<SearchForm />
 
-			<div style={{ width: "450px", marginTop: "1em" }}>
-				<h3>박해민 통산 안타</h3>
-				<Line type="line" data={data} options={options} />
-			</div>
+			<Feed />
+
+			<RankList
+				defaultHitterRanking={hitterRanking.content}
+				hitterPage={hitterRanking.totalPages}
+				defaultPitcherRanking={pitcherRanking.content}
+				pitcherPage={pitcherRanking.totalPages}
+			/>
 		</div>
 	);
 }

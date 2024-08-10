@@ -1,0 +1,11 @@
+.hitter {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.hitter__info {
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+	margin: 0 auto 2em;
+}
