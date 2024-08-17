@@ -1,0 +1,5 @@
+.list__no_player {
+	font-size: var(--fs-h3);
+	color: var(--clr-gray);
+	opacity: 0.7;
+}

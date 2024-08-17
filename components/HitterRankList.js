@@ -4,7 +4,7 @@ import styles from "./HitterRankList.module.css";
 export default function HitterRankList({ hitterRanking, currentIndex }) {
 	return (
 		<table className={styles.hitter__rank_table}>
-			<caption className={styles.hitter__rank_caption}>타자 순위</caption>
+			<caption className={styles.hitter__rank_caption}>타자</caption>
 
 			<thead className={styles.hitter__rank_thead}>
 				<tr>

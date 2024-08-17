@@ -1,0 +1,11 @@
+.pitcher {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.pitcher__info {
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+	margin: 0 auto 2em;
+}
