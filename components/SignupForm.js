@@ -127,7 +127,7 @@ export default function SignupForm() {
 
 			<div className={styles.social__login}>
 				<a
-					href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code&state=ZGkN4xGZK2O1KGDgHxH-WYgirXDWuxo8DL7kc1gEnG4%3D`}
+					href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}
 				>
 					<Image
 						className={styles.social__kakao}

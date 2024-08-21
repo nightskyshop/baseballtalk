@@ -59,7 +59,9 @@ export default function LoginForm() {
 			<hr className={styles.hr} />
 
 			<div className={styles.social__login}>
-				<a href={`http://localhost:8080/login/kakao`}>
+				<a
+					href={`${KAKAO_API_URI}/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`}
+				>
 					<Image
 						className={styles.social__kakao}
 						src="/images/kakao_login_image.png"

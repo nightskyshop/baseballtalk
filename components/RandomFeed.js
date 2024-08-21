@@ -1,13 +1,23 @@
+import * as echarts from "echarts";
+import ReactEcharts from "echarts-for-react";
 import { useEffect, useState } from "react";
 import styles from "./RandomFeed.module.css";
 import axios from "axios";
+import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
 
 export default function RandomFeed() {
 	const [teams, setTeams] = useState();
 	const [hitter, setHitter] = useState();
 	const [pitcher, setPitcher] = useState();
 
-	const getTeams = async () => {};
+	const [teamAvgOption, setTeamAvgOption] = useState();
+	const [teamEraOption, setTeamEraOption] = useState();
+
+	const getTeams = async () => {
+		const { data } = await axios.get(`/team`);
+
+		setTeams(data);
+	};
 
 	const getRandomHitter = async () => {
 		const { data } = await axios.get(`/hitter/random`);
@@ -27,13 +37,99 @@ export default function RandomFeed() {
 		getRandomPitcher();
 	}, []);
 
+	useEffect(() => {
+		if (teams) {
+			const avgOption = {
+				title: {
+					show: true,
+					text: "팀 타율",
+				},
+				xAxis: {
+					type: "category",
+					data: teams.map((team) => team.teamname),
+				},
+				yAxis: {
+					type: "value",
+					min:
+						Math.min.apply(
+							null,
+							teams.map((team) => (team.avg / 1000).toFixed(3))
+						) - 0.01,
+				},
+				grid: {
+					top: 40,
+					bottom: 20,
+					left: "10%",
+					right: "10%",
+				},
+				bar: {
+					indicator: [{ name: "타율" }],
+				},
+				series: [
+					{
+						type: "bar",
+						data: teams.map((team) => team.avg / 1000),
+					},
+				],
+			};
+
+			setTeamAvgOption(avgOption);
+
+			const eraOption = {
+				title: {
+					show: true,
+					text: "팀 평균자책점",
+				},
+				xAxis: {
+					type: "category",
+					data: teams.map((team) => team.teamname),
+				},
+				yAxis: {
+					type: "value",
+					min:
+						Math.min.apply(
+							null,
+							teams.map((team) => team.era)
+						) - 0.5,
+					inverse: true,
+				},
+				grid: {
+					top: 40,
+					bottom: 20,
+					left: "10%",
+					right: "10%",
+				},
+				bar: {
+					indicator: [{ name: "평균자책점" }],
+				},
+				series: [
+					{
+						type: "bar",
+						data: teams.map((team) => team.era),
+					},
+				],
+			};
+
+			setTeamEraOption(eraOption);
+		}
+	}, [teams]);
+
+	console.log(teamEraOption);
+
 	return (
 		<div>
 			<h1>랜덤 피드</h1>
 
 			<div className={styles.randomfeed__grid}>
 				<div className={`${styles.randomfeed__card} ${styles.all__team}`}>
-					전체 팀
+					{teamEraOption ? (
+						<ReactEcharts
+							option={teamEraOption}
+							style={{ width: "100%", height: "100%" }}
+						/>
+					) : (
+						<div>로딩중...</div>
+					)}
 				</div>
 
 				<div className={`${styles.randomfeed__card} ${styles.random__hitter}`}>
@@ -95,7 +191,14 @@ export default function RandomFeed() {
 				</div>
 
 				<div className={`${styles.randomfeed__card} ${styles.random__team}`}>
-					랜덤 팀
+					{teamAvgOption ? (
+						<ReactEcharts
+							option={teamAvgOption}
+							style={{ width: "100%", height: "100%" }}
+						/>
+					) : (
+						<div>로딩중...</div>
+					)}
 				</div>
 			</div>
 		</div>

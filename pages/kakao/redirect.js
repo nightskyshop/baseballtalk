@@ -11,7 +11,7 @@ export default function KakaoLogin() {
 	const { code } = router.query;
 
 	const sendCode = async () => {
-		const { data } = await axios.get(`/kakao/${code}`);
+		const { data } = await axios.get(`/login/kakao?code=${code}`);
 
 		localStorage.setItem("accessToken", data.accessToken);
 		localStorage.setItem("tokenExpiresIn", data.tokenExpiresIn);

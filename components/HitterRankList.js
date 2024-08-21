@@ -38,7 +38,9 @@ export default function HitterRankList({ hitterRanking, currentIndex }) {
 							</Link>
 						</td>
 						<td>{hitter.team.teamname}</td>
-						<td>{hitter.name}</td>
+						<td>
+							<Link href={`/hitter/${hitter.id}`}>{hitter.name}</Link>
+						</td>
 						<td>{(hitter.avg / 1000).toFixed(3)}</td>
 						<td>{(hitter.slg / 1000).toFixed(3)}</td>
 						<td>{(hitter.obp / 1000).toFixed(3)}</td>

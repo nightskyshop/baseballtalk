@@ -37,7 +37,9 @@ export default function PitcherRankList({ pitcherRanking, currentIndex }) {
 							</Link>
 						</td>
 						<td>{pitcher.team.teamname}</td>
-						<td>{pitcher.name}</td>
+						<td>
+							<Link href={`/pitcher/${pitcher.id}`}>{pitcher.name}</Link>
+						</td>
 						<td>{pitcher.era?.toFixed(2)}</td>
 						<td>{pitcher.inning}</td>
 						<td>{pitcher.win}</td>
