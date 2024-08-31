@@ -19,9 +19,7 @@ export async function getServerSideProps(context) {
 		const res = await axios.get(`/team/${id}`);
 		team = res.data;
 
-		const posts_res = await axios.get(
-			`http://localhost:8080/post/team/${id}?pageNo=0&pageSize=5`
-		);
+		const posts_res = await axios.get(`/post/team/${id}?pageNo=0&pageSize=5`);
 		default_posts = posts_res.data.content;
 		totalPages = posts_res.data.totalPages;
 	} catch {

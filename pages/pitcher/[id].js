@@ -52,8 +52,8 @@ export default function PitcherDetail({ pitcher, max }) {
 			indicator: [
 				{ name: "ERA", max: 0.333, min: 0.125 },
 				{ name: "WHIP", max: 1, min: 0.4 },
-				{ name: "승리", max: 10 },
-				{ name: "이닝", max: 144 },
+				{ name: "승리", max: max.maxWin },
+				{ name: "이닝", max: max.maxInning },
 			],
 		},
 		series: [

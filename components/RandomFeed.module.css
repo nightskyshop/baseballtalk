@@ -57,3 +57,22 @@
 .random__team {
 	grid-area: d;
 }
+
+@media (max-width: 935px) {
+	.randomfeed__grid {
+		grid-template-areas:
+			"a a"
+			"b c"
+			"d d";
+	}
+}
+
+@media (max-width: 630px) {
+	.randomfeed__grid {
+		grid-template-areas:
+			"a"
+			"b"
+			"c"
+			"d";
+	}
+}

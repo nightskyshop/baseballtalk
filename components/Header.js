@@ -42,6 +42,7 @@ export default function Header() {
 		window.addEventListener("resize", () => {
 			if (window.innerWidth < 615) {
 				setHamberger(true);
+				setNav(false);
 			} else {
 				setHamberger(false);
 				setNav(true);

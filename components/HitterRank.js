@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./HitterRank.module.css";
+import Link from "next/link";
 
 export default function HitterRank({ hitterRanking }) {
 	console.log(hitterRanking);
@@ -23,15 +24,19 @@ export default function HitterRank({ hitterRanking }) {
 					<tr key={index}>
 						<th scope="row">{index + 1}.</th>
 						<td>
-							<img
-								width={40}
-								height={52}
-								src={hitter.image}
-								className={styles.hitter__rank_image}
-							/>
+							<Link href={`/hitter/${hitter.id}`}>
+								<img
+									width={40}
+									height={52}
+									src={hitter.image}
+									className={styles.hitter__rank_image}
+								/>
+							</Link>
 						</td>
 						<td>{hitter.team.teamname}</td>
-						<td>{hitter.name}</td>
+						<td>
+							<Link href={`/hitter/${hitter.id}`}>{hitter.name}</Link>
+						</td>
 						<td>{(hitter.avg / 1000).toFixed(3)}</td>
 					</tr>
 				))}

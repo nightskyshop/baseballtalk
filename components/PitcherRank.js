@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./PitcherRank.module.css";
+import Link from "next/link";
 
 export default function PitcherRank({ pitcherRanking }) {
 	console.log(pitcherRanking);
@@ -23,15 +24,19 @@ export default function PitcherRank({ pitcherRanking }) {
 					<tr key={index}>
 						<th scope="row">{index + 1}.</th>
 						<td>
-							<img
-								width={40}
-								height={52}
-								src={pitcher.image}
-								className={styles.pitcher__rank_image}
-							/>
+							<Link href={`/pitcher/${pitcher.id}`}>
+								<img
+									width={40}
+									height={52}
+									src={pitcher.image}
+									className={styles.pitcher__rank_image}
+								/>
+							</Link>
 						</td>
 						<td>{pitcher.team.teamname}</td>
-						<td>{pitcher.name}</td>
+						<td>
+							<Link href={`/pitcher/${pitcher.id}`}>{pitcher.name}</Link>
+						</td>
 						<td>{pitcher.era}</td>
 					</tr>
 				))}
