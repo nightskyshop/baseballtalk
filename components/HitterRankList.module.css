@@ -4,6 +4,7 @@
 	border-spacing: 0.5em;
 	margin: 0 auto;
 	width: 100%;
+	overflow-x: scroll;
 }
 
 .hitter__rank_caption {
@@ -12,6 +13,13 @@
 	color: var(--clr-blue);
 	text-align: left;
 	margin-bottom: 0.5em;
+}
+
+.hitter__rank_thead,
+.hitter__rank_tbody,
+.hitter__rank_tbody {
+	min-width: 400px;
+	width: 100%;
 }
 
 .hitter__rank_thead th,

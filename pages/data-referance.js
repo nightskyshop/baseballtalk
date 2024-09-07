@@ -8,6 +8,7 @@ import axios from "axios";
 import RankList from "@/components/RankList";
 import Feed from "@/components/Feed";
 import SearchForm from "@/components/SearchForm";
+import RandomFeed from "@/components/RandomFeed";
 
 export async function getServerSideProps() {
 	const { data: teamRanking } = await axios.get(`/team`);
@@ -40,7 +41,7 @@ export default function DataReferance({
 
 			<SearchForm />
 
-			<Feed />
+			<RandomFeed />
 
 			<RankList
 				defaultHitterRanking={hitterRanking.content}

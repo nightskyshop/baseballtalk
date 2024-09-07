@@ -1,24 +1,11 @@
 .team__info {
-    display: flex;
-    margin-bottom: 1em;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1em;
 }
 
 .team__name {
-    font-size: var(--fs-h1);
-    margin: auto .5em auto .3em;
-    word-break: break-all;
-}
-
-.team__text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.team__rank {
-    font-size: var(--fs-h4);
-}
-
-.team__wlt {
-    font-size: var(--fs-h4);
+	font-size: var(--fs-h1);
+	margin: auto 0.5em auto 0;
+	word-break: break-all;
 }

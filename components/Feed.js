@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import getUser from "@/lib/getUser";
-import MyFeed from "./MyFeed";
 import RandomFeed from "./RandomFeed";
 
 export default function Feed() {
@@ -15,8 +14,6 @@ export default function Feed() {
 
 	return (
 		<div>
-			{user ? <MyFeed user={user} /> : null}
-
 			<RandomFeed />
 		</div>
 	);

@@ -1,107 +1,109 @@
 .form {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 90px 130px 300px;
-  max-width: 700px;
-  margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 90px 130px 300px;
+	max-width: 600px;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .form__header {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--clr-dark);
-  padding-bottom: 1em;
-  margin-bottom: 2em;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid var(--clr-dark);
+	padding-bottom: 1em;
+	margin-bottom: 2em;
 }
 
 .form__header h1 {
-  font-size: var(--fs-h2);
-  color: var(--clr-blue);
-  margin: auto 0;
+	font-size: var(--fs-h2);
+	color: var(--clr-blue);
+	margin: auto 0;
 }
 
 .form__header button {
-  margin: auto 0;
-  min-width: 50px;
-  height: 30px;
-  color: var(--clr-light);
-  background-color: var(--clr-blue);
-  border-radius: 15px;
-  font-size: var(--fs-input);
-  text-align: center;
-  cursor: pointer;
+	margin: auto 0;
+	min-width: 50px;
+	height: 30px;
+	color: var(--clr-light);
+	background-color: var(--clr-blue);
+	border-radius: 15px;
+	font-size: var(--fs-input);
+	text-align: center;
+	cursor: pointer;
 }
 
 .form__team {
-  padding: 1em 1.5em;
-  border: 1px solid var(--clr-gray);
-  border-radius: 10px;
-  margin-bottom: 1em;
+	padding: 1em 1.5em;
+	border: 1px solid var(--clr-gray);
+	border-radius: 10px;
+	margin-bottom: 1em;
 }
 
 .form__selects {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5em;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.5em;
 }
 
 .form__select {
-  position: relative;
-  width: 100%;
-  color: var(--clr-gray);
-  opacity: 0.5;
-  border-bottom: 1px solid var(--clr-gray);
+	position: relative;
+	width: 100%;
+	color: var(--clr-gray);
+	opacity: 0.5;
+	border-bottom: 1px solid var(--clr-gray);
 }
 
 .form__select:nth-child(1) {
-  margin-right: 1em;
+	margin-right: 1em;
 }
 
 .form__select select {
-  width: 100%;
-  padding: 0.5em;
-  font-size: var(--fs-input);
-  -o-appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+	width: 100%;
+	padding: 0.5em;
+	font-size: var(--fs-input);
+	-o-appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 .form__select_btn {
-  position: absolute;
-  top: 30%;
-  right: 10px;
+	position: absolute;
+	top: 30%;
+	right: 10px;
 }
 
 .form input,
 .form textarea {
-  font-size: var(--fs-input);
+	font-size: var(--fs-input);
 }
 
 .form__title {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0.5em;
-  border-bottom: 1px solid rgba(120, 120, 120, 0.7);
-  color: var(--clr-dark);
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.5em;
+	border-bottom: 1px solid rgba(120, 120, 120, 0.7);
+	color: var(--clr-dark);
 }
 
 .form__content_box {
-  border: 1px solid var(--clr-dark);
-  border-radius: 15px;
-  padding: 0.6em 1em;
+	border: 1px solid var(--clr-dark);
+	border-radius: 15px;
+	padding: 0.6em 1em;
+	margin-bottom: 1em;
 }
 
 .form__content {
-  width: 100%;
-  height: 100%;
-  word-break: break-all;
-  resize: none;
+	width: 100%;
+	height: 100%;
+	word-break: break-all;
+	resize: none;
 }
 
 .form__title::placeholder,
 .form__content::placeholder {
-  font-size: var(--fs-input);
-  color: var(--clr-gray);
-  opacity: 0.5;
+	font-size: var(--fs-input);
+	color: var(--clr-gray);
+	opacity: 0.5;
 }

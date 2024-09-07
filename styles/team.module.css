@@ -1,20 +1,20 @@
 .team {
-    max-width: 700px;
-    margin: 0 auto;
+	max-width: 770px;
+	margin: 0 auto;
 }
 
 .team__postlist {
-    margin-top: 1.5em;
+	margin-top: 1.5em;
 }
 
 .team__postlist > a {
-    display: block;
-    width: 50px;
-    margin-left: auto;
-    margin-bottom: 1em;
-    padding: .25em .5em;
-    border-radius: 15px;
-    text-align: center;
-    background-color: var(--clr-blue);
-    color: var(--clr-light);
+	display: block;
+	width: 50px;
+	margin-left: auto;
+	margin-bottom: 1em;
+	padding: 0.25em 0.5em;
+	border-radius: 15px;
+	text-align: center;
+	background-color: var(--clr-blue);
+	color: var(--clr-light);
 }
