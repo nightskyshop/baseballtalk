@@ -107,3 +107,29 @@
 	color: var(--clr-gray);
 	opacity: 0.5;
 }
+
+.searchForm {
+	max-width: 600px;
+	margin: 0 auto 2em;
+	border: 1px solid var(--clr-dark);
+	border-radius: 10px;
+}
+
+.searchForm__input {
+	width: calc(100% - 2em);
+	box-sizing: border-box;
+	font-size: var(--fs-h4);
+	padding: 0.5em;
+}
+
+.searchForm__icon {
+	font-size: var(--fs-h4);
+	cursor: pointer;
+}
+
+.ranking {
+	max-width: 600px;
+	margin: 0 auto;
+	position: relative;
+	top: -1em;
+}

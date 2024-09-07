@@ -2,12 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import getUser from "@/lib/getUser";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
 	const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
 
-	// const router = useRouter();
-	// router.push("/post");
+	const router = useRouter();
+
+	useEffect(() => {
+		router.push("/post");
+	}, []);
 
 	return (
 		<div>

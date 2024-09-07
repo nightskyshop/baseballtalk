@@ -11,6 +11,9 @@ import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import uuid from "react-uuid";
 import { useEffect, useState } from "react";
+import HitterRankList from "./HitterRankList";
+import Pagination from "./Pagination";
+import PitcherRankList from "./PitcherRankList";
 
 export default function PostForm() {
 	const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
@@ -18,6 +21,16 @@ export default function PostForm() {
 	const params = useSearchParams();
 
 	const [teams, setTeams] = useState([]);
+	const [hitterData, setHitterData] = useState([]);
+	const [hitterTotalPages, setHitterTotalPages] = useState();
+	const [pitcherData, setPitcherData] = useState([]);
+	const [pitcherTotalPages, setPitcherTotalPages] = useState();
+
+	const [hitterPageNo, setHitterPageNo] = useState(0);
+	const [pitcherPageNo, setPitcherPageNo] = useState(0);
+
+	const [q, setQ] = useState();
+
 	const update = params.get("update");
 	const id = params.get("id");
 	const default_team = params.get("team");
@@ -97,9 +110,69 @@ export default function PostForm() {
 		}
 	};
 
+	const getSearch = async (input) => {
+		const {
+			data: { content: hitterDataSearch, totalPages: hitterTotalPagesSearch },
+		} = await axios.get(`/hitter/search?searchParam=${input}&pageNo=0`);
+		setHitterData(hitterDataSearch);
+		setHitterTotalPages(hitterTotalPagesSearch);
+
+		const {
+			data: { content: pitcherDataSearch, totalPages: pitcherTotalPagesSearch },
+		} = await axios.get(`/pitcher/search?searchParam=${input}&pageNo=0`);
+		setPitcherData(pitcherDataSearch);
+		setPitcherTotalPages(pitcherTotalPagesSearch);
+	};
+
+	const handleSearch = async (e) => {
+		e.preventDefault();
+		const form = e.currentTarget;
+		const input = form.elements.namedItem("input").value;
+
+		setQ(input);
+
+		await getSearch(input);
+	};
+
+	const getNextHitter = async () => {
+		const {
+			data: { content: data },
+		} = await axios.get(
+			`/hitter/search?pageNo=${hitterPageNo}&searchParam=${q}`
+		);
+
+		setHitterData(data);
+	};
+
+	const getNextPitcher = async () => {
+		const {
+			data: { content: data },
+		} = await axios.get(
+			`/pitcher/search?pageNo=${pitcherPageNo}&searchParam=${q}`
+		);
+
+		setPitcherData(data);
+	};
+
+	const handleHitterPageChange = ({ selected }) => {
+		setHitterPageNo(selected);
+	};
+
+	const handlePitcherPageChange = ({ selected }) => {
+		setPitcherPageNo(selected);
+	};
+
 	useEffect(() => {
 		getTeams();
 	}, []);
+
+	useEffect(() => {
+		getNextHitter();
+	}, [hitterPageNo, q]);
+
+	useEffect(() => {
+		getNextPitcher();
+	}, [pitcherPageNo, q]);
 
 	return (
 		<>
@@ -180,9 +253,61 @@ export default function PostForm() {
 						defaultValue={default_content ? default_content : ""}
 					/>
 				</div>
+
+				<div></div>
 			</form>
 
-			<form className={styles.search__form}></form>
+			{/* <form onSubmit={handleSearch} className={styles.searchForm}>
+				<input
+					className={styles.searchForm__input}
+					type="text"
+					name="input"
+					placeholder="선수를 검색해주세요"
+				/>
+
+				<button>
+					<FontAwesomeIcon
+						className={styles.searchForm__icon}
+						icon={faMagnifyingGlass}
+					/>
+				</button>
+			</form>
+
+			<div className={styles.ranking}>
+				{hitterData ? (
+					hitterData.length >= 1 ? (
+						<>
+							<HitterRankList
+								hitterRanking={hitterData}
+								currentIndex={hitterPageNo}
+							/>
+
+							<Pagination
+								pageCount={hitterTotalPages}
+								onPageChange={handleHitterPageChange}
+								currentPage={hitterPageNo}
+							/>
+						</>
+					) : null
+				) : null}
+
+				{pitcherData ? (
+					pitcherData.length >= 1 ? (
+						<>
+							<PitcherRankList
+								pitcherRanking={pitcherData}
+								currentIndex={pitcherPageNo}
+							/>
+
+							<Pagination
+								pageCount={pitcherTotalPages}
+								onPageChange={handlePitcherPageChange}
+								currentPage={pitcherPageNo}
+							/>
+						</>
+					) : null
+				) : null}
+			</div> */}
 		</>
 	);
 }
