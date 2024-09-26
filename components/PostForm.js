@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import HitterRankList from "./HitterRankList";
 import Pagination from "./Pagination";
 import PitcherRankList from "./PitcherRankList";
+import HitterPostList from "./HitterPostList";
+import PitcherPostList from "./PitcherPostList";
 
 export default function PostForm() {
 	const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
@@ -28,6 +30,9 @@ export default function PostForm() {
 
 	const [hitterPageNo, setHitterPageNo] = useState(0);
 	const [pitcherPageNo, setPitcherPageNo] = useState(0);
+
+	const [displayHitter, setDisplayHitter] = useState([]);
+	const [displayPitcher, setDisplayPitcher] = useState([]);
 
 	const [q, setQ] = useState();
 
@@ -174,6 +179,31 @@ export default function PostForm() {
 		getNextPitcher();
 	}, [pitcherPageNo, q]);
 
+	const addHitter = (hitter) => {
+		if (
+			!displayHitter.includes(hitter) &&
+			displayHitter.length + displayPitcher.length <= 4
+		) {
+			setDisplayHitter((prevDisplayHitter) => [...prevDisplayHitter, hitter]);
+		}
+	};
+
+	const addPitcher = (pitcher) => {
+		if (
+			!displayPitcher.includes(pitcher) &&
+			displayHitter.length + displayPitcher.length <= 4
+		) {
+			setDisplayPitcher((prevDisplayPitcher) => [
+				...prevDisplayPitcher,
+				pitcher,
+			]);
+		}
+	};
+
+	console.log(displayHitter);
+	console.log(displayPitcher);
+	console.log(displayHitter.length + displayPitcher.length);
+
 	return (
 		<>
 			<form onSubmit={handleSubmit} className={styles.form}>
@@ -253,11 +283,19 @@ export default function PostForm() {
 						defaultValue={default_content ? default_content : ""}
 					/>
 				</div>
-
-				<div></div>
 			</form>
 
-			{/* <form onSubmit={handleSearch} className={styles.searchForm}>
+			<div className={styles.displayPlayer}>
+				{displayHitter.map((hitter) => (
+					<div key={hitter.id}>{hitter.name}</div>
+				))}
+
+				{displayPitcher.map((pitcher) => (
+					<div key={pitcher.id}>{pitcher.name}</div>
+				))}
+			</div>
+
+			<form onSubmit={handleSearch} className={styles.searchForm}>
 				<input
 					className={styles.searchForm__input}
 					type="text"
@@ -277,9 +315,10 @@ export default function PostForm() {
 				{hitterData ? (
 					hitterData.length >= 1 ? (
 						<>
-							<HitterRankList
+							<HitterPostList
 								hitterRanking={hitterData}
 								currentIndex={hitterPageNo}
+								addHitter={addHitter}
 							/>
 
 							<Pagination
@@ -294,9 +333,10 @@ export default function PostForm() {
 				{pitcherData ? (
 					pitcherData.length >= 1 ? (
 						<>
-							<PitcherRankList
+							<PitcherPostList
 								pitcherRanking={pitcherData}
 								currentIndex={pitcherPageNo}
+								addPitcher={addPitcher}
 							/>
 
 							<Pagination
@@ -307,7 +347,7 @@ export default function PostForm() {
 						</>
 					) : null
 				) : null}
-			</div> */}
+			</div>
 		</>
 	);
 }

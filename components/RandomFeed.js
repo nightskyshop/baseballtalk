@@ -44,6 +44,9 @@ export default function RandomFeed() {
 					show: true,
 					text: "팀 타율",
 				},
+				tooltip: {
+					trigger: "item",
+				},
 				xAxis: {
 					type: "category",
 					data: teams.map((team) => team.teamname),
@@ -79,6 +82,9 @@ export default function RandomFeed() {
 				title: {
 					show: true,
 					text: "팀 평균자책점",
+				},
+				tooltip: {
+					trigger: "item",
 				},
 				xAxis: {
 					type: "category",
