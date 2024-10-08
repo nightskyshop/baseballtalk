@@ -56,9 +56,7 @@ export default function Reaction({ post, chat_count }) {
 
 	const getLiked = async () => {
 		await axios
-			.get(
-				`http://localhost:8080/like?user_id=${user.data.id}&type=0&post_id=${post.id}&chat_id=0`
-			)
+			.get(`/like?user_id=${user.data.id}&type=0&post_id=${post.id}&chat_id=0`)
 			.then((res) => setLiked(res.data));
 	};
 

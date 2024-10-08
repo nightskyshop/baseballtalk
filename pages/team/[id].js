@@ -48,9 +48,7 @@ export default function TeamDetail({ team, default_posts, totalPages }) {
 	const getPosts = async () => {
 		const {
 			data: { content },
-		} = await axios.get(
-			`http://localhost:8080/post/team/${id}?pageNo=${pageNo}&pageSize=5`
-		);
+		} = await axios.get(`/post/team/${id}?pageNo=${pageNo}&pageSize=5`);
 		setPosts(content);
 	};
 
