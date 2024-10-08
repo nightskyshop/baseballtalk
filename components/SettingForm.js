@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import getUser from "@/lib/getUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faPen } from "@fortawesome/free-solid-svg-icons";
 import styles from "./SettingForm.module.css";
 import ProfileImage from "./ProfileImage";
 import { useEffect, useState } from "react";
@@ -21,6 +21,7 @@ export default function SettingForm() {
 		const username = form.elements.namedItem("username").value;
 		const email = form.elements.namedItem("email").value;
 		const introduce = form.elements.namedItem("introduce").value;
+		const team = form.elements.namedItem("team").value;
 		let image = form.elements.namedItem("image").value;
 
 		if (!image.startsWith("http")) {
@@ -35,6 +36,7 @@ export default function SettingForm() {
 						username,
 						email,
 						introduce,
+						team,
 						image,
 					},
 					{
@@ -135,6 +137,24 @@ export default function SettingForm() {
 
 				<p>소개글</p>
 				<input defaultValue={user.data.introduce} name="introduce" />
+
+				<p>팀</p>
+				<div className={styles.userInfo__team}>
+					<select name="team" defaultValue={user.data.team}>
+						<option value="">------</option>
+						<option vlaue="LG Twins">LG Twins</option>
+						<option vlaue="KT Wiz">KT Wiz</option>
+						<option vlaue="SSG Landers">SSG Landers</option>
+						<option vlaue="NC Dinos">NC Dinos</option>
+						<option vlaue="Doosan Bears">Doosan Bears</option>
+						<option vlaue="KIA Tigers">KIA Tigers</option>
+						<option vlaue="Lotte Giants">Lotte Giants</option>
+						<option vlaue="Samsung Lions">Samsung Lions</option>
+						<option vlaue="Hanwha Eagles">Hanwha Eagles</option>
+						<option vlaue="Kiwoom Heros">Kiwoom Heros</option>
+					</select>
+					<FontAwesomeIcon icon={faCaretDown} />
+				</div>
 
 				<button>저장</button>
 			</form>
