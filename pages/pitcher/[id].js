@@ -3,6 +3,7 @@ import ReactEcharts from "echarts-for-react";
 import axios from "axios";
 import Head from "next/head";
 import styles from "@/styles/pitcher.module.css";
+import PitcherChart from "@/components/PitcherChart";
 
 export async function getServerSideProps(context) {
 	const id = context.params["id"];
@@ -17,66 +18,14 @@ export async function getServerSideProps(context) {
 		};
 	}
 
-	const { data: max } = await axios.get("/maxData");
-
 	return {
 		props: {
 			pitcher,
-			max,
 		},
 	};
 }
 
-export default function PitcherDetail({ pitcher, max }) {
-	const data = [
-		pitcher.era.toFixed(2),
-		pitcher.whip.toFixed(2),
-		pitcher.win,
-		pitcher.inning,
-	];
-	const maxValues = [0.333, 1, max.maxWin, max.maxInning];
-
-	const option = {
-		title: {
-			text: pitcher.name,
-		},
-		legend: {
-			show: true,
-			data: [pitcher.name],
-		},
-		tooltip: {
-			trigger: "item",
-			formatter: `${pitcher.name}<br>ERA: ${pitcher.era}<br>WHIP: ${pitcher.whip}<br>승리: ${pitcher.win}<br>이닝: ${pitcher.inning}`,
-		},
-		radar: {
-			indicator: [
-				{ name: "ERA", max: 0.333, min: 0.125 },
-				{ name: "WHIP", max: 1, min: 0.4 },
-				{ name: "승리", max: max.maxWin },
-				{ name: "이닝", max: max.maxInning },
-			],
-		},
-		series: [
-			{
-				name: pitcher.name,
-				type: "radar",
-				data: [
-					{
-						value: data.map((value, index) => {
-							if (index == 0 || index == 1) {
-								return Math.min(1 / value, maxValues[index]);
-							} else {
-								return Math.min(value, maxValues[index]);
-							}
-						}),
-
-						name: pitcher.name,
-					},
-				],
-			},
-		],
-	};
-
+export default function PitcherDetail({ pitcher }) {
 	return (
 		<div className={styles.pitcher}>
 			<Head>
@@ -113,7 +62,8 @@ export default function PitcherDetail({ pitcher, max }) {
 				</div>
 			</div>
 
-			<ReactEcharts option={option} />
+			{/* <ReactEcharts option={option} /> */}
+			<PitcherChart pitcher={pitcher} />
 		</div>
 	);
 }

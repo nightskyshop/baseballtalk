@@ -1,6 +1,7 @@
 import {
 	faCaretDown,
 	faMagnifyingGlass,
+	faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
@@ -11,11 +12,11 @@ import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import uuid from "react-uuid";
 import { useEffect, useState } from "react";
-import HitterRankList from "./HitterRankList";
 import Pagination from "./Pagination";
-import PitcherRankList from "./PitcherRankList";
 import HitterPostList from "./HitterPostList";
 import PitcherPostList from "./PitcherPostList";
+import HitterChart from "./HitterChart";
+import PitcherChart from "./PitcherChart";
 
 export default function PostForm() {
 	const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
@@ -33,6 +34,7 @@ export default function PostForm() {
 
 	const [displayHitter, setDisplayHitter] = useState([]);
 	const [displayPitcher, setDisplayPitcher] = useState([]);
+	const [isMax, setIsMax] = useState(false);
 
 	const [q, setQ] = useState();
 
@@ -48,7 +50,15 @@ export default function PostForm() {
 		setTeams(t.data);
 	};
 
-	const createPost = async (title, content, team, category, author) => {
+	const createPost = async (
+		title,
+		content,
+		team,
+		category,
+		author,
+		hitterList,
+		pitcherList
+	) => {
 		if (!update) {
 			await axios
 				.post(
@@ -59,6 +69,8 @@ export default function PostForm() {
 						team,
 						category,
 						author,
+						hitterList,
+						pitcherList,
 					},
 					{
 						headers: {
@@ -102,6 +114,8 @@ export default function PostForm() {
 		const content = form.elements.namedItem("content").value;
 		const team = form.elements.namedItem("team").value;
 		const category = form.elements.namedItem("category").value;
+		const hitterList = displayHitter.map((hitter) => hitter.id);
+		const pitcherList = displayPitcher.map((pitcher) => pitcher.id);
 
 		if (
 			title.trim() == "" ||
@@ -111,7 +125,15 @@ export default function PostForm() {
 		) {
 			window.alert("모든 항목을 입력해주세요.");
 		} else {
-			await createPost(title, content, team, category, user.data.id);
+			await createPost(
+				title,
+				content,
+				team,
+				category,
+				user.data.id,
+				hitterList,
+				pitcherList
+			);
 		}
 	};
 
@@ -180,33 +202,54 @@ export default function PostForm() {
 	}, [pitcherPageNo, q]);
 
 	const addHitter = (hitter) => {
-		if (
-			!displayHitter.includes(hitter) &&
-			displayHitter.length + displayPitcher.length <= 4
-		) {
-			setDisplayHitter((prevDisplayHitter) => [...prevDisplayHitter, hitter]);
+		if (displayHitter.length + displayPitcher.length <= 4) {
+			if (!displayHitter.includes(hitter)) {
+				setDisplayHitter((prevDisplayHitter) => [...prevDisplayHitter, hitter]);
+			}
+			setIsMax(false);
+		} else {
+			setIsMax(true);
+		}
+	};
+
+	const handleHitterDeleteClick = (hitter) => {
+		if (displayHitter.includes(hitter)) {
+			setDisplayHitter((prevDisplayHitter) =>
+				prevDisplayHitter.filter((element) => element !== hitter)
+			);
 		}
 	};
 
 	const addPitcher = (pitcher) => {
-		if (
-			!displayPitcher.includes(pitcher) &&
-			displayHitter.length + displayPitcher.length <= 4
-		) {
-			setDisplayPitcher((prevDisplayPitcher) => [
-				...prevDisplayPitcher,
-				pitcher,
-			]);
+		if (displayHitter.length + displayPitcher.length <= 4) {
+			if (!displayPitcher.includes(pitcher)) {
+				setDisplayPitcher((prevDisplayPitcher) => [
+					...prevDisplayPitcher,
+					pitcher,
+				]);
+			}
+			setIsMax(false);
+		} else {
+			setIsMax(true);
 		}
 	};
 
-	console.log(displayHitter);
-	console.log(displayPitcher);
-	console.log(displayHitter.length + displayPitcher.length);
+	const handlePitcherDeleteClick = (pitcher) => {
+		if (displayPitcher.includes(pitcher)) {
+			setDisplayPitcher((prevDisplayPitcher) =>
+				prevDisplayPitcher.filter((element) => element !== pitcher)
+			);
+		}
+	};
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} className={styles.form}>
+			<form
+				onSubmit={handleSubmit}
+				className={styles.form}
+				id={styles.form}
+				name="form"
+			>
 				<div className={styles.form__header}>
 					<h1>게시판 글쓰기</h1>
 					<button>등록</button>
@@ -285,69 +328,125 @@ export default function PostForm() {
 				</div>
 			</form>
 
-			<div className={styles.displayPlayer}>
-				{displayHitter.map((hitter) => (
-					<div key={hitter.id}>{hitter.name}</div>
-				))}
+			{!update ? (
+				<>
+					<div className={styles.displayPlayer} id={styles.form}>
+						{displayHitter.length >= 1 ? (
+							<>
+								<h1>타자</h1>
 
-				{displayPitcher.map((pitcher) => (
-					<div key={pitcher.id}>{pitcher.name}</div>
-				))}
-			</div>
+								<div className={styles.displayPlayer__hitter}>
+									{displayHitter.map((hitter) => (
+										<div
+											key={hitter.id}
+											className={styles.displayPlayer__container}
+										>
+											<HitterChart hitter={hitter} />
+											<button
+												className={styles.displayPlayer__btn}
+												onClick={() => handleHitterDeleteClick(hitter)}
+											>
+												<FontAwesomeIcon icon={faX} />
+											</button>
+										</div>
+									))}
+								</div>
+							</>
+						) : null}
 
-			<form onSubmit={handleSearch} className={styles.searchForm}>
-				<input
-					className={styles.searchForm__input}
-					type="text"
-					name="input"
-					placeholder="선수를 검색해주세요"
-				/>
+						{displayPitcher.length >= 1 ? (
+							<>
+								<h1>투수</h1>
 
-				<button>
-					<FontAwesomeIcon
-						className={styles.searchForm__icon}
-						icon={faMagnifyingGlass}
-					/>
-				</button>
-			</form>
+								<div className={styles.displayPlayer__pitcher}>
+									{displayPitcher.map((pitcher) => (
+										<div
+											key={pitcher.id}
+											className={styles.displayPlayer__container}
+										>
+											<PitcherChart pitcher={pitcher} />
+											<button
+												className={styles.displayPlayer__btn}
+												onClick={() => handlePitcherDeleteClick(pitcher)}
+											>
+												<FontAwesomeIcon icon={faX} />
+											</button>
+										</div>
+									))}
+								</div>
+							</>
+						) : null}
+					</div>
 
-			<div className={styles.ranking}>
-				{hitterData ? (
-					hitterData.length >= 1 ? (
-						<>
-							<HitterPostList
-								hitterRanking={hitterData}
-								currentIndex={hitterPageNo}
-								addHitter={addHitter}
+					<p className={styles.searchFormInfo}>
+						최대 추가 가능한 선수는 5명입니다. <br />
+						{isMax ? (
+							<b style={{ color: "red" }}>현재 추가 가능한 최대 선수입니다.</b>
+						) : null}
+					</p>
+
+					<form
+						onSubmit={handleSearch}
+						className={styles.searchForm}
+						id={styles.searchForm}
+						name="searchForm"
+					>
+						<input
+							className={styles.searchForm__input}
+							type="text"
+							name="input"
+							placeholder="선수를 검색해주세요"
+						/>
+
+						<button>
+							<FontAwesomeIcon
+								className={styles.searchForm__icon}
+								icon={faMagnifyingGlass}
 							/>
+						</button>
+					</form>
 
-							<Pagination
-								pageCount={hitterTotalPages}
-								onPageChange={handleHitterPageChange}
-								currentPage={hitterPageNo}
-							/>
-						</>
-					) : null
-				) : null}
+					<div className={styles.ranking}>
+						{hitterData ? (
+							hitterData.length >= 1 ? (
+								<>
+									<HitterPostList
+										hitterRanking={hitterData}
+										currentIndex={hitterPageNo}
+										addHitter={addHitter}
+									/>
 
-				{pitcherData ? (
-					pitcherData.length >= 1 ? (
-						<>
-							<PitcherPostList
-								pitcherRanking={pitcherData}
-								currentIndex={pitcherPageNo}
-								addPitcher={addPitcher}
-							/>
+									<Pagination
+										pageCount={hitterTotalPages}
+										onPageChange={handleHitterPageChange}
+										currentPage={hitterPageNo}
+									/>
+								</>
+							) : null
+						) : null}
 
-							<Pagination
-								pageCount={pitcherTotalPages}
-								onPageChange={handlePitcherPageChange}
-								currentPage={pitcherPageNo}
-							/>
-						</>
-					) : null
-				) : null}
-			</div>
+						{pitcherData ? (
+							pitcherData.length >= 1 ? (
+								<>
+									<PitcherPostList
+										pitcherRanking={pitcherData}
+										currentIndex={pitcherPageNo}
+										addPitcher={addPitcher}
+									/>
+
+									<Pagination
+										pageCount={pitcherTotalPages}
+										onPageChange={handlePitcherPageChange}
+										currentPage={pitcherPageNo}
+									/>
+								</>
+							) : null
+						) : null}
+					</div>
+				</>
+			) : (
+				<p className={styles.cantUpdate}>선수 데이터는 수정할 수 없습니다</p>
+			)}
 		</>
 	);
 }

@@ -11,6 +11,8 @@ import axios from "axios";
 import ProfileImage from "./ProfileImage.js";
 import Link from "next/link.js";
 import { useRouter } from "next/router.js";
+import PitcherChart from "./PitcherChart.js";
+import HitterChart from "./HitterChart.js";
 
 export default function Post({
 	post,
@@ -96,7 +98,6 @@ export default function Post({
 					-<p className={styles.post__category}>{post.category}</p>
 				</div>
 				<h1 className={styles.post__title}>{post.title}</h1>
-
 				<div className={styles.post__author}>
 					<Link
 						href={`/user/${post.author.id}`}
@@ -118,6 +119,7 @@ export default function Post({
 							{String(post.createdAt[4]).padStart(2, "0")}
 						</p>
 					</div>
+
 					{user ? (
 						user.data.id == post.author.id ? (
 							<button onClick={handleDropdownClick} onBlur={handleDropdownBlur}>
@@ -149,11 +151,39 @@ export default function Post({
 						</button>
 					</div>
 				</div>
-
 				<hr />
 
-				<p className={styles.post__content}>{post.content}</p>
+				{post.hitterList?.length >= 1 ? (
+					<>
+						<div className={styles.displayPlayer__hitter}>
+							{post.hitterList.map((hitter) => (
+								<div
+									key={hitter.id}
+									className={styles.displayPlayer__container}
+								>
+									<HitterChart hitter={hitter} />
+								</div>
+							))}
+						</div>
+					</>
+				) : null}
 
+				{post.picherList?.length >= 1 ? (
+					<>
+						<div className={styles.displayPlayer__pitcher}>
+							{post.picherList.map((pitcher) => (
+								<div
+									key={pitcher.id}
+									className={styles.displayPlayer__container}
+								>
+									<PitcherChart pitcher={pitcher} />
+								</div>
+							))}
+						</div>
+					</>
+				) : null}
+
+				<p className={styles.post__content}>{post.content}</p>
 				<Reaction post={post} chat_count={chats.length} />
 			</div>
 

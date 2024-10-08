@@ -113,6 +113,38 @@
 	max-width: 600px;
 }
 
+.displayPlayer__hitter {
+	display: grid;
+	grid-auto-rows: 300px;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.displayPlayer__pitcher {
+	display: grid;
+	grid-auto-rows: 300px;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.displayPlayer__container {
+	position: relative;
+}
+
+.displayPlayer__btn {
+	cursor: pointer;
+	position: absolute;
+	top: 0px;
+	right: 30px;
+}
+
+.searchFormInfo {
+	max-width: 600px;
+	width: 100%;
+	margin: 0 auto 0.5em;
+	font-size: var(--fs-h4);
+	color: var(--clr-gray);
+	opacity: 0.7;
+}
+
 .searchForm {
 	max-width: 600px;
 	margin: 0 auto 2em;
@@ -137,4 +169,12 @@
 	margin: 0 auto;
 	position: relative;
 	top: -1em;
+}
+
+.cantUpdate {
+	margin: 0 auto;
+	max-width: 600px;
+	font-size: var(--fs-h4);
+	color: var(--clr-gray);
+	opacity: 0.7;
 }
