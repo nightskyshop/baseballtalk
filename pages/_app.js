@@ -13,25 +13,16 @@ config.autoAddCss = false;
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }) {
-  if (typeof window !== "undefined") {
-    if (
-      localStorage.getItem("tokenExpiresIn") &&
-      localStorage.getItem("tokenExpiresIn") < Date.now()
-    ) {
-      localStorage.removeItem("tokenExpiresIn");
-      localStorage.removeItem("accessToken");
-    }
-  }
-  return (
-    <ProjectProvider value={{ prefix }}>
-      <QueryClientProvider client={queryClient}>
-        <Header />
-        <main className={default_styles.main}>
-          <div className={default_styles.main__box}>
-            <Component {...pageProps} />
-          </div>
-        </main>
-      </QueryClientProvider>
-    </ProjectProvider>
-  );
+	return (
+		<ProjectProvider value={{ prefix }}>
+			<QueryClientProvider client={queryClient}>
+				<Header />
+				<main className={default_styles.main}>
+					<div className={default_styles.main__box}>
+						<Component {...pageProps} />
+					</div>
+				</main>
+			</QueryClientProvider>
+		</ProjectProvider>
+	);
 }
