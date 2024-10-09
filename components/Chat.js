@@ -3,7 +3,11 @@ import styles from "./Chat.module.css";
 import ProfileImage from "./ProfileImage";
 import getUser from "@/lib/getUser.js";
 import { useQuery } from "@tanstack/react-query";
-import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import {
+	faCheck,
+	faEllipsisVertical,
+	faX,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -37,12 +41,6 @@ export default function Chat({ chat, index }) {
 
 		setIsUpdating(true);
 		setDropdown(false);
-	};
-
-	const handleUpdateBlur = () => {
-		setTimeout(() => {
-			setIsUpdating(false);
-		}, 100);
 	};
 
 	const handleDeleteClick = async (e) => {
@@ -86,7 +84,15 @@ export default function Chat({ chat, index }) {
 	const handleKeyDown = (e) => {
 		if (e.keyCode == 13 && e.shiftKey) {
 			e.preventDefault();
+		} else if (e.keyCode == 13) {
+			e.preventDefault();
+			e.currentTarget.closest("form").submit();
 		}
+	};
+
+	const handleCancelClick = (e) => {
+		setIsUpdating(false);
+		setDropdown(false);
 	};
 
 	return (
@@ -119,13 +125,20 @@ export default function Chat({ chat, index }) {
 							onChange={handleResizeHeight}
 							onKeyDown={handleKeyDown}
 							onFocus={handleResizeHeight}
-							onBlur={handleUpdateBlur}
 							autoFocus
 							defaultValue={chat.content}
 							name="content"
 						/>
-						<button className={styles.chat__form_button}>
+
+						<button className={styles.chat__form_submit}>
 							<FontAwesomeIcon icon={faCheck} />
+						</button>
+
+						<button
+							className={styles.chat__form_cancel}
+							onClick={handleCancelClick}
+						>
+							<FontAwesomeIcon icon={faX} />
 						</button>
 					</form>
 				)}
