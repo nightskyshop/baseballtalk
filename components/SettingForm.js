@@ -87,6 +87,7 @@ export default function SettingForm() {
 
 	const handleImageChange = async (e) => {
 		const file = e.target.files[0];
+		console.log(e.target.multiple);
 		const base64Image = await FiletoBase64(file);
 		setProfileImage(base64Image);
 	};
@@ -123,6 +124,7 @@ export default function SettingForm() {
 							onChange={handleImageChange}
 							type="file"
 							accept="image/*"
+							multiple={false}
 						/>
 					</div>
 				</div>
