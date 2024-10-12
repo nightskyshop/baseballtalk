@@ -3,8 +3,6 @@ import styles from "./PitcherRank.module.css";
 import Link from "next/link";
 
 export default function PitcherRank({ pitcherRanking }) {
-	console.log(pitcherRanking);
-
 	return (
 		<table className={styles.pitcher__rank_table}>
 			<caption className={styles.pitcher__rank_caption}>투수 순위</caption>

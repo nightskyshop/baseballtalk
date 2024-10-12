@@ -3,8 +3,6 @@ import styles from "./HitterRank.module.css";
 import Link from "next/link";
 
 export default function HitterRank({ hitterRanking }) {
-	console.log(hitterRanking);
-
 	return (
 		<table className={styles.hitter__rank_table}>
 			<caption className={styles.hitter__rank_caption}>타자 순위</caption>

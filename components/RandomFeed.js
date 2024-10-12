@@ -120,8 +120,6 @@ export default function RandomFeed() {
 		}
 	}, [teams]);
 
-	console.log(teamEraOption);
-
 	return (
 		<div>
 			<div className={styles.randomfeed__grid}>

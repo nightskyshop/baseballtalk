@@ -53,8 +53,6 @@ export default function SettingForm() {
 					}
 				})
 				.catch((error) => {
-					console.log(error);
-					console.log(error.response.status);
 					if (error.response.status == 413) {
 						setError("profileImg");
 					}
@@ -96,7 +94,6 @@ export default function SettingForm() {
 
 	const handleImageChange = async (e) => {
 		const file = e.target.files[0];
-		console.log(e.target.multiple);
 		const base64Image = await FiletoBase64(file);
 		setProfileImage(base64Image);
 	};
@@ -106,9 +103,6 @@ export default function SettingForm() {
 			setProfileImage(user.data.image);
 		}
 	}, [user]);
-
-	console.log(error);
-	console.log(error == "profileImg");
 
 	return (
 		<div className={styles.setting}>

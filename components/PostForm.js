@@ -203,9 +203,6 @@ export default function PostForm() {
 
 	const addHitter = (hitter) => {
 		if (displayHitter.length + displayPitcher.length <= 4) {
-			console.log(!displayHitter.includes(hitter));
-			console.log(displayHitter);
-			console.log(hitter);
 			setDisplayHitter((prevDisplayHitter) => [...prevDisplayHitter, hitter]);
 			setIsMax(false);
 		} else {
