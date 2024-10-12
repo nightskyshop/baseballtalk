@@ -13,6 +13,7 @@ export default function SettingForm() {
 	const user = useQuery({ queryKey: ["user"], queryFn: getUser }).data;
 	const router = useRouter();
 	const [profileImage, setProfileImage] = useState("");
+	const [error, setError] = useState("");
 
 	const handleUserInfoSubmit = async (e) => {
 		e.preventDefault();
@@ -47,7 +48,15 @@ export default function SettingForm() {
 				)
 				.then((res) => {
 					if (res.status == 200) {
+						setError("");
 						router.push("/user-profile");
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+					console.log(error.response.status);
+					if (error.response.status == 413) {
+						setError("profileImg");
 					}
 				});
 		}
@@ -98,6 +107,9 @@ export default function SettingForm() {
 		}
 	}, [user]);
 
+	console.log(error);
+	console.log(error == "profileImg");
+
 	return (
 		<div className={styles.setting}>
 			<form
@@ -128,6 +140,12 @@ export default function SettingForm() {
 						/>
 					</div>
 				</div>
+
+				{error == "profileImg" ? (
+					<p className={styles.profileImg__error}>
+						이미지의 크기가 최대 한도를 넘어섰습니다
+					</p>
+				) : null}
 
 				<p>이메일 정보</p>
 				<input

@@ -63,7 +63,7 @@ export default function Post({
 	const handleDropdownBlur = () => {
 		setTimeout(() => {
 			setDropdown(false);
-		}, 100);
+		}, 500);
 	};
 
 	const handleDeleteClick = async (e) => {
