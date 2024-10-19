@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function LoginForm() {
 	const KAKAO_API_URI = process.env.NEXT_PUBLIC_KAKAO_API_URI;
@@ -11,12 +12,27 @@ export default function LoginForm() {
 
 	const router = useRouter();
 
+	const [error, setError] = useState("");
+
 	const login = async (email, password) => {
-		await axios.post("/auth/login", { email, password }).then((res) => {
-			localStorage.setItem("accessToken", res.data.accessToken);
-			localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
-			router.push("/");
-		});
+		await axios
+			.post("/auth/login", { email, password })
+			.then((res) => {
+				if (res.status == 200) {
+					setError("");
+					localStorage.setItem("accessToken", res.data.accessToken);
+					localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
+					router.push("/");
+				}
+			})
+			.catch((err) => {
+				console.log(err.response);
+				if (err.response.status == 400) {
+					setError(err.response.data.message);
+				} else if (err.response.status == 401) {
+					setError(err.response.data.message);
+				}
+			});
 	};
 
 	const handleSubmit = async (e) => {
@@ -52,6 +68,8 @@ export default function LoginForm() {
 					name="password"
 					className={styles.login__password}
 				/>
+
+				<p className={styles.error}>{error}</p>
 
 				<button>로그인</button>
 			</form>

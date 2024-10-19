@@ -56,6 +56,12 @@
 	cursor: pointer;
 }
 
+.error {
+	font-size: var(--fs-h4);
+	color: var(--clr-point);
+	opacity: 0.7;
+}
+
 .hr {
 	width: 70%;
 	min-width: 30px;

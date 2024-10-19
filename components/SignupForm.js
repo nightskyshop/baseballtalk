@@ -17,6 +17,7 @@ export default function SignupForm() {
 	const [signuped, setSignuped] = useState(false);
 	const [emailCache, setEmailCache] = useState("");
 	const [passwordCache, setPasswordCache] = useState("");
+	const [error, setError] = useState("");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -41,8 +42,18 @@ export default function SignupForm() {
 			await axios
 				.post("/auth/signup", { id: 0, username, team, email, password })
 				.then((res) => {
+					console.log(res);
 					if (res.status == 201) {
+						setError("");
 						setSignuped(true);
+					} else if (res.status == 208) {
+						setError(res.data.message);
+					}
+				})
+				.catch((err) => {
+					console.log(err.response);
+					if (err.response.status == 400) {
+						setError(err.response.data.message);
 					}
 				});
 
@@ -119,6 +130,8 @@ export default function SignupForm() {
 					name="password_check"
 					className={styles.signup__password_check}
 				/>
+
+				<p className={styles.error}>{error}</p>
 
 				<button>회원가입</button>
 			</form>
