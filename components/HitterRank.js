@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function HitterRank({ hitterRanking }) {
 	return (
 		<table className={styles.hitter__rank_table}>
-			<caption className={styles.hitter__rank_caption}>타자 순위</caption>
+			<caption className={styles.hitter__rank_caption}>HITTER RANK</caption>
 
 			<thead className={styles.hitter__rank_thead}>
 				<tr>

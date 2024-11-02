@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function PitcherRank({ pitcherRanking }) {
 	return (
 		<table className={styles.pitcher__rank_table}>
-			<caption className={styles.pitcher__rank_caption}>투수 순위</caption>
+			<caption className={styles.pitcher__rank_caption}>PITCHER RANK</caption>
 
 			<thead className={styles.pitcher__rank_thead}>
 				<tr>
