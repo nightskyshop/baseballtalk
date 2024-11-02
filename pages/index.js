@@ -18,8 +18,6 @@ export default function Home() {
 			<Head>
 				<title>BaseballTalk</title>
 			</Head>
-
-			<h1>Initial Setting</h1>
 		</div>
 	);
 }
