@@ -35,19 +35,11 @@ export default function Post({
 
 	const createChat = async (content) => {
 		await axios
-			.post(
-				"/chat",
-				{
-					content,
-					post: post.id,
-					author: user.data.id,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-					},
-				}
-			)
+			.post("/chat", {
+				content,
+				post: post.id,
+				author: user.data.id,
+			})
 			.then((res) => {
 				if (res.status == 201) {
 					getChats();
@@ -70,13 +62,7 @@ export default function Post({
 		e.preventDefault();
 
 		if (post) {
-			await axios
-				.delete(`/post/${post.id}`, {
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-					},
-				})
-				.then(() => router.push("/post"));
+			await axios.delete(`/post/${post.id}`).then(() => router.push("/post"));
 		}
 	};
 

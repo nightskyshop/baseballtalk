@@ -61,48 +61,38 @@ export default function PostForm() {
 	) => {
 		if (!update) {
 			await axios
-				.post(
-					"/post",
-					{
-						title,
-						content,
-						team,
-						category,
-						author,
-						hitterList,
-						pitcherList,
-					},
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-						},
-					}
-				)
+				.post("/post", {
+					title,
+					content,
+					team,
+					category,
+					author,
+					hitterList,
+					pitcherList,
+				})
 				.then((res) => {
 					res.status == 201
 						? router.push(`/team/${team}`)
 						: window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
+				})
+				.catch((err) => {
+					window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
 				});
 		} else {
 			await axios
-				.patch(
-					`/post/${id}`,
-					{
-						title,
-						content,
-						team,
-						category,
-					},
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-						},
-					}
-				)
+				.patch(`/post/${id}`, {
+					title,
+					content,
+					team,
+					category,
+				})
 				.then((res) => {
 					res.status == 200
 						? router.push(`/post/${id}`)
 						: window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
+				})
+				.catch((err) => {
+					window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
 				});
 		}
 	};

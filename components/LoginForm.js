@@ -20,12 +20,21 @@ export default function LoginForm() {
 			.then((res) => {
 				if (res.status == 200) {
 					setError("");
+
 					localStorage.setItem("accessToken", res.data.accessToken);
 					localStorage.setItem("tokenExpiresIn", res.data.tokenExpiresIn);
-					router.push("/");
+					sessionStorage.setItem("refreshToken", res.data.refreshToken);
+					sessionStorage.setItem(
+						"tokenExpiresIn",
+						res.data.refreshTokenExpiresIn
+					);
+
+					router.push("/post");
+					router.reload();
 				}
 			})
 			.catch((err) => {
+				console.log(err);
 				console.log(err.response);
 				if (err.response.status == 400) {
 					setError(err.response.data.message);

@@ -5,30 +5,25 @@ import styles from "@/styles/redirect.module.css";
 import Head from "next/head";
 
 export default function KakaoLogin() {
-	const [ok, setOk] = useState(false);
 	const router = useRouter();
 
-	const { code } = router.query;
-
-	const sendCode = async () => {
-		const { data } = await axios.get(`/login/kakao?code=${code}`);
-
-		localStorage.setItem("accessToken", data.accessToken);
-		localStorage.setItem("tokenExpiresIn", data.tokenExpiresIn);
-		setOk(true);
-	};
-
 	useEffect(() => {
-		if (code) {
-			sendCode();
-		}
-	}, [code]);
+		const fragment = window.location.hash.substring(1); // '#'을 제외한 fragment 부분
+		const params = new URLSearchParams(fragment);
 
-	useEffect(() => {
-		if (ok) {
-			router.push("/");
-		}
-	}, [ok]);
+		// 토큰 추출
+		const accessToken = params.get("access_token");
+		const tokenExpiresIn = params.get("token_expires_in");
+		const refreshToken = params.get("refresh_token");
+		const refreshTokenExpiresIn = params.get("refresh_token_expires_in");
+
+		localStorage.setItem("accessToken", accessToken);
+		localStorage.setItem("tokenExpiresIn", tokenExpiresIn);
+		sessionStorage.setItem("refreshToken", refreshToken);
+		sessionStorage.setItem("tokenExpiresIn", refreshTokenExpiresIn);
+
+		router.push("/");
+	}, []);
 
 	return (
 		<div className={styles.login__redirect}>

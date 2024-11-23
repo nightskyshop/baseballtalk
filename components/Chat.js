@@ -47,11 +47,7 @@ export default function Chat({ chat, index }) {
 		e.preventDefault();
 
 		if (chat && user) {
-			await axios.delete(`/chat/${chat.id}`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-				},
-			});
+			await axios.delete(`/chat/${chat.id}`);
 		}
 		router.reload();
 	};
@@ -67,15 +63,7 @@ export default function Chat({ chat, index }) {
 		} else if (content.trim() == "") {
 			alert("내용을 작성해주세요.");
 		} else {
-			await axios.patch(
-				`/chat/${chat.id}`,
-				{ content },
-				{
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-					},
-				}
-			);
+			await axios.patch(`/chat/${chat.id}`, { content });
 		}
 
 		router.reload();

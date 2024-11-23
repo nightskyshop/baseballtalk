@@ -31,21 +31,13 @@ export default function SettingForm() {
 
 		if (user && localStorage.getItem("accessToken")) {
 			await axios
-				.patch(
-					`/user/${user.data.id}`,
-					{
-						username,
-						email,
-						introduce,
-						team,
-						image,
-					},
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-						},
-					}
-				)
+				.patch(`/user/${user.data.id}`, {
+					username,
+					email,
+					introduce,
+					team,
+					image,
+				})
 				.then((res) => {
 					if (res.status == 200) {
 						setError("");
@@ -72,18 +64,10 @@ export default function SettingForm() {
 			window.alert("비밀번호와 비밀번호 확인의 값이 다릅니다.");
 		} else if (localStorage.getItem("accessToken")) {
 			await axios
-				.patch(
-					"/user/password",
-					{
-						oldPassword,
-						newPassword: password,
-					},
-					{
-						headers: {
-							Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-						},
-					}
-				)
+				.patch("/user/password", {
+					oldPassword,
+					newPassword: password,
+				})
 				.then((res) => {
 					if (res.status == 200) {
 						router.push("/user-profile");
