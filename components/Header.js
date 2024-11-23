@@ -58,7 +58,7 @@ export default function Header() {
 		<header className={styles.header__border}>
 			<div className={styles.header}>
 				<div className={styles.header__logo}>
-					<Link href="/">
+					<Link href="/post">
 						<Logo />
 					</Link>
 				</div>
