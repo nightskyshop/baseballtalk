@@ -36,6 +36,8 @@ export default function PostForm() {
 	const [displayPitcher, setDisplayPitcher] = useState([]);
 	const [isMax, setIsMax] = useState(false);
 
+	const [requesting, setRequesting] = useState(false);
+
 	const [q, setQ] = useState();
 
 	const update = params.get("update");
@@ -59,6 +61,7 @@ export default function PostForm() {
 		hitterList,
 		pitcherList
 	) => {
+		setRequesting(true);
 		if (!update) {
 			await axios
 				.post("/post", {
@@ -71,11 +74,13 @@ export default function PostForm() {
 					pitcherList,
 				})
 				.then((res) => {
+					setRequesting(false);
 					res.status == 201
 						? router.push(`/team/${team}`)
 						: window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
 				})
 				.catch((err) => {
+					setRequesting(false);
 					window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
 				});
 		} else {
@@ -87,11 +92,13 @@ export default function PostForm() {
 					category,
 				})
 				.then((res) => {
+					setRequesting(false);
 					res.status == 200
 						? router.push(`/post/${id}`)
 						: window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
 				})
 				.catch((err) => {
+					setRequesting(false);
 					window.alert("문제가 생겼습니다. 잠시후 시도해주세요.");
 				});
 		}
@@ -240,7 +247,7 @@ export default function PostForm() {
 			>
 				<div className={styles.form__header}>
 					<h1>게시판 글쓰기</h1>
-					<button>등록</button>
+					<button disabled={requesting}>등록</button>
 				</div>
 
 				<div className={styles.form__team}>
